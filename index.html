@@ -10,44 +10,48 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --pulse:      #10B981;
-    --ignite:     #3B82F6;
-    --change:     #F43F5E;
-    --accelerate: #8B5CF6;
-    --scale:      #F59E0B;
-    --sherpa:     #14B8A6;
-    --operate:    #06B6D4;
-    --governance: #EC4899;
+    /* Insentra standard colour system, semantic roles.
+       Phases: Insentra Orange, shaded light to deep along the journey.
+       Craft layers (Change, Sherpa): Insentra Purple.
+       Governance: Insentra Teal. */
+    --pulse:      #F7A24E;   /* phase 1, light orange */
+    --ignite:     #F4842F;   /* phase 2 */
+    --change:     #62419A;   /* craft layer, Insentra purple */
+    --accelerate: #F37237;   /* phase 3, core Insentra orange */
+    --scale:      #D9581F;   /* phase 4 (Scale + Operate), deeper */
+    --sherpa:     #8360BE;   /* craft layer, lighter purple */
+    --operate:    #B23F17;   /* phase 5 (Orchestrate), deepest burnt */
+    --governance: #00B4D8;   /* Insentra teal */
   }
 
-  /* Dark (default) */
+  /* Dark (default), warm Insentra charcoal */
   [data-theme="dark"] {
-    --bg:        #0A0A0B;
-    --bg-2:      #101014;
-    --panel:     #16161C;
-    --panel-2:   #1C1C24;
-    --border:    #26262F;
-    --border-2:  #33333F;
-    --ink:       #F5F6F8;
-    --ink-soft:  #B7BAC4;
-    --ink-mute:  #7B7F8C;
-    --hero-glow: 0.16;
-    --shadow:    0 24px 60px rgba(0,0,0,.55);
+    --bg:        #1B1A17;
+    --bg-2:      #201E1A;
+    --panel:     #26241F;
+    --panel-2:   #2E2B25;
+    --border:    #3A362F;
+    --border-2:  #47423A;
+    --ink:       #FCFCFB;
+    --ink-soft:  #C7C3BA;
+    --ink-mute:  #928D82;
+    --hero-glow: 0.18;
+    --shadow:    0 24px 60px rgba(0,0,0,.5);
   }
 
-  /* Light */
+  /* Light, warm Insentra off-white */
   [data-theme="light"] {
-    --bg:        #F4F5F8;
-    --bg-2:      #FFFFFF;
+    --bg:        #F7F6F2;
+    --bg-2:      #FCFCFB;
     --panel:     #FFFFFF;
-    --panel-2:   #F7F8FB;
-    --border:    #E4E6EC;
-    --border-2:  #D3D6DF;
-    --ink:       #14151A;
-    --ink-soft:  #454A57;
-    --ink-mute:  #7A8092;
-    --hero-glow: 0.10;
-    --shadow:    0 18px 44px rgba(20,24,40,.12);
+    --panel-2:   #F4F2EC;
+    --border:    #E6E3DA;
+    --border-2:  #D8D4C8;
+    --ink:       #2E2C27;
+    --ink-soft:  #55514A;
+    --ink-mute:  #86816F;
+    --hero-glow: 0.12;
+    --shadow:    0 18px 44px rgba(46,44,39,.12);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -110,9 +114,9 @@
   .hero::before {
     content: ""; position: absolute; inset: -20% -10% auto -10%; height: 420px;
     background:
-      radial-gradient(600px 300px at 20% 0%, rgba(16,185,129,var(--hero-glow)), transparent 60%),
-      radial-gradient(600px 320px at 55% 10%, rgba(139,92,246,var(--hero-glow)), transparent 60%),
-      radial-gradient(600px 300px at 88% 0%, rgba(6,182,212,var(--hero-glow)), transparent 60%);
+      radial-gradient(600px 300px at 20% 0%, rgba(243,114,55,var(--hero-glow)), transparent 60%),
+      radial-gradient(600px 320px at 55% 10%, rgba(98,65,154,var(--hero-glow)), transparent 60%),
+      radial-gradient(600px 300px at 88% 0%, rgba(0,180,216,var(--hero-glow)), transparent 60%);
     pointer-events: none;
   }
   .hero .wrap { position: relative; }
