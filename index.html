@@ -10,48 +10,62 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Insentra standard colour system, semantic roles.
-       Phases: Insentra Orange, shaded light to deep along the journey.
-       Craft layers (Change, Sherpa): Insentra Purple.
-       Governance: Insentra Teal. */
-    --pulse:      #F7A24E;   /* phase 1, light orange */
-    --ignite:     #F4842F;   /* phase 2 */
-    --change:     #62419A;   /* craft layer, Insentra purple */
-    --accelerate: #F37237;   /* phase 3, core Insentra orange */
-    --scale:      #D9581F;   /* phase 4 (Scale + Operate), deeper */
-    --sherpa:     #8360BE;   /* craft layer, lighter purple */
-    --operate:    #B23F17;   /* phase 5 (Orchestrate), deepest burnt */
-    --governance: #00B4D8;   /* Insentra teal */
+    /* Insentra web colour system (dark defaults). Phase accents for the five
+       journey phases + Governance; brand orange for the two craft layers. */
+    --pulse:      #34B27A;   /* phase-1 Pulse */
+    --ignite:     #4E79B8;   /* phase-2 Ignite */
+    --change:     #F26522;   /* craft layer, Insentra brand orange */
+    --accelerate: #8577CE;   /* phase-3 Accelerate */
+    --scale:      #1FA8A0;   /* phase-4 Scale (Scale + Operate) */
+    --sherpa:     #F26522;   /* craft layer, Insentra brand orange */
+    --operate:    #4FB0D4;   /* phase-5 Operate (Orchestrate) */
+    --governance: #B06AA6;   /* phase-6 Governance */
   }
 
-  /* Dark (default), warm Insentra charcoal */
+  /* Dark (default). Cool navy surfaces from the Insentra web colour system. */
   [data-theme="dark"] {
-    --bg:        #1B1A17;
-    --bg-2:      #201E1A;
-    --panel:     #26241F;
-    --panel-2:   #2E2B25;
-    --border:    #3A362F;
-    --border-2:  #47423A;
-    --ink:       #FCFCFB;
-    --ink-soft:  #C7C3BA;
-    --ink-mute:  #928D82;
+    --pulse:      #34B27A;
+    --ignite:     #4E79B8;
+    --change:     #F26522;
+    --accelerate: #8577CE;
+    --scale:      #1FA8A0;
+    --sherpa:     #F26522;
+    --operate:    #4FB0D4;
+    --governance: #B06AA6;
+    --bg:        #07090F;   /* bg */
+    --bg-2:      #121520;   /* surface */
+    --panel:     #121520;   /* surface */
+    --panel-2:   #1A1E2D;   /* surface-raised */
+    --border:    #334155;   /* border */
+    --border-2:  #5A7391;   /* border-strong */
+    --ink:       #F1F5F9;   /* text */
+    --ink-soft:  #BEC8D7;   /* text-2 */
+    --ink-mute:  #9AAABB;   /* text-3 */
     --hero-glow: 0.18;
-    --shadow:    0 24px 60px rgba(0,0,0,.5);
+    --shadow:    0 24px 60px rgba(0,0,0,.55);
   }
 
-  /* Light, warm Insentra off-white */
+  /* Light. Verified light-mode pairs from the same system. */
   [data-theme="light"] {
-    --bg:        #F7F6F2;
-    --bg-2:      #FCFCFB;
-    --panel:     #FFFFFF;
-    --panel-2:   #F4F2EC;
-    --border:    #E6E3DA;
-    --border-2:  #D8D4C8;
-    --ink:       #2E2C27;
-    --ink-soft:  #55514A;
-    --ink-mute:  #86816F;
+    --pulse:      #1B7A46;
+    --ignite:     #3A5A8C;
+    --change:     #C04A14;
+    --accelerate: #5E52B0;
+    --scale:      #0E7C78;
+    --sherpa:     #C04A14;
+    --operate:    #2C6F8C;
+    --governance: #8A4A80;
+    --bg:        #F5F4F0;   /* bg */
+    --bg-2:      #FFFFFF;   /* surface */
+    --panel:     #FFFFFF;   /* surface */
+    --panel-2:   #E9E3D9;   /* surface-raised */
+    --border:    #D8D5CE;   /* border */
+    --border-2:  #948E80;   /* border-strong */
+    --ink:       #111111;   /* text */
+    --ink-soft:  #505050;   /* text-2 */
+    --ink-mute:  #646464;   /* text-3 */
     --hero-glow: 0.12;
-    --shadow:    0 18px 44px rgba(46,44,39,.12);
+    --shadow:    0 18px 44px rgba(17,17,17,.10);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -114,9 +128,9 @@
   .hero::before {
     content: ""; position: absolute; inset: -20% -10% auto -10%; height: 420px;
     background:
-      radial-gradient(600px 300px at 20% 0%, rgba(243,114,55,var(--hero-glow)), transparent 60%),
-      radial-gradient(600px 320px at 55% 10%, rgba(98,65,154,var(--hero-glow)), transparent 60%),
-      radial-gradient(600px 300px at 88% 0%, rgba(0,180,216,var(--hero-glow)), transparent 60%);
+      radial-gradient(600px 300px at 20% 0%, rgba(242,101,34,var(--hero-glow)), transparent 60%),
+      radial-gradient(600px 320px at 55% 10%, rgba(133,119,206,var(--hero-glow)), transparent 60%),
+      radial-gradient(600px 300px at 88% 0%, rgba(79,176,212,var(--hero-glow)), transparent 60%);
     pointer-events: none;
   }
   .hero .wrap { position: relative; }
