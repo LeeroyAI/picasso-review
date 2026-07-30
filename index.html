@@ -395,12 +395,76 @@
   }
   .foot b { color: var(--ink-soft); }
 
+  /* ---------- Block label ---------- */
+  .block-label { font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 16px; }
+
+  /* ---------- Learning loop ---------- */
+  .loop { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 6px; }
+  .loop .stage {
+    position: relative; background: var(--panel-2); border: 1px solid var(--border);
+    border-top: 3px solid var(--letter); border-radius: 14px; padding: 15px 13px 16px;
+  }
+  .loop .stage .n { font-size: 11px; font-weight: 800; color: var(--letter); letter-spacing: .1em; }
+  .loop .stage h4 { font-size: 14px; font-weight: 800; margin: 6px 0 6px; letter-spacing: -.01em; }
+  .loop .stage p { font-size: 11.5px; color: var(--ink-soft); font-weight: 500; line-height: 1.46; }
+  .loop .stage::after {
+    content: "\2192"; position: absolute; right: -10px; top: 50%; transform: translateY(-50%);
+    color: var(--ink-mute); font-weight: 800; font-size: 15px; z-index: 3;
+  }
+  .loop .stage:last-child::after { content: "\21BA"; color: var(--pulse); }
+  .loop-return {
+    margin-top: 18px; text-align: center; font-size: 13.5px; color: var(--ink-soft); font-weight: 600;
+    max-width: 68ch; margin-left: auto; margin-right: auto; line-height: 1.5;
+  }
+  .loop-return b { color: var(--ink); }
+
+  /* ---------- Four capabilities ---------- */
+  .caps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .cap {
+    background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--letter);
+    border-radius: 14px; padding: 18px 18px 20px;
+  }
+  .cap .tag { font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--letter); }
+  .cap h4 { font-size: 16.5px; font-weight: 800; margin: 8px 0 7px; letter-spacing: -.01em; }
+  .cap p { font-size: 12.5px; color: var(--ink-soft); font-weight: 500; line-height: 1.5; }
+
+  /* ---------- Five modes ---------- */
+  .modes { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .mode {
+    background: var(--panel-2); border: 1px solid var(--border); border-bottom: 3px solid var(--letter);
+    border-radius: 12px; padding: 14px 14px 15px;
+  }
+  .mode.on { background: color-mix(in srgb, var(--letter) 10%, var(--panel-2)); border-color: color-mix(in srgb, var(--letter) 45%, var(--border)); }
+  .mode h5 { font-size: 14.5px; font-weight: 800; color: var(--letter); margin-bottom: 5px; }
+  .mode p { font-size: 11.5px; color: var(--ink-soft); font-weight: 500; line-height: 1.46; }
+  .mode .link { display: block; margin-top: 9px; font-size: 8.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--letter); }
+
+  /* ---------- Measure strip ---------- */
+  .measure {
+    background: linear-gradient(120deg, color-mix(in srgb, var(--governance) 12%, var(--bg-2)), var(--bg-2));
+    border: 1px solid var(--border); border-radius: 26px; padding: 40px 38px; box-shadow: var(--shadow);
+  }
+  .measure .not { font-size: clamp(21px, 2.8vw, 30px); font-weight: 800; color: var(--ink); margin-bottom: 8px; letter-spacing: -.015em; }
+  .measure .not b { color: var(--governance); }
+  .measure .sub { color: var(--ink-soft); font-weight: 500; margin-bottom: 24px; max-width: 58ch; font-size: 15px; }
+  .measure ul.better { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 11px 28px; }
+  .measure ul.better li { position: relative; padding-left: 25px; font-size: 13.5px; color: var(--ink-soft); font-weight: 500; line-height: 1.4; }
+  .measure ul.better li::before { content: "\2713"; position: absolute; left: 0; top: 0; color: var(--pulse); font-weight: 900; }
+  .measure .core { margin-top: 24px; font-style: italic; font-size: 14.5px; color: var(--ink); font-weight: 600; border-top: 1px solid var(--border); padding-top: 18px; }
+  .measure .core b { font-style: normal; color: var(--governance); }
+
   /* ---------- Responsive ---------- */
   @media (max-width: 900px) {
     .journey-grid { grid-template-columns: repeat(2, 1fr); }
     .spotlight-grid { grid-template-columns: 1fr; }
     .why-grid { grid-template-columns: 1fr; gap: 18px; }
     .node { min-height: 0; }
+    .loop { grid-template-columns: repeat(2, 1fr); }
+    .loop .stage::after { display: none; }
+    .caps { grid-template-columns: repeat(2, 1fr); }
+    .modes { grid-template-columns: repeat(2, 1fr); }
+    .measure ul.better { grid-template-columns: 1fr; }
+    .measure { padding: 32px 24px; }
   }
   @media (max-width: 560px) {
     .wrap { padding: 0 18px; }
@@ -414,6 +478,9 @@
     .beat .mark { width: 40px; height: 40px; font-size: 16px; }
     .spine::before { left: 18px; }
     .n-close { margin-left: 0; }
+    .loop { grid-template-columns: 1fr; }
+    .caps { grid-template-columns: 1fr; }
+    .modes { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -563,13 +630,59 @@
         <div class="mark">🛡️</div>
         <div class="body">
           <div class="who"><span class="name">AI Governance</span><span class="role">The ground beneath every step</span></div>
-          <p>Under all of it sits one steady foundation. Trust, controls and responsible AI holding the whole picture together. You move fast precisely because the ground is solid. Confidence, not caution, at every step.</p>
+          <p>Under all of it sits one steady foundation. Trust, controls and responsible AI holding the whole picture together. You move fast precisely because the ground is solid. Real confidence at every step.</p>
         </div>
       </div>
 
     </div>
 
     <p class="n-close">From the first Pulse to the running system, you are supported the whole way. <b>This is the difference between AI by numbers and AI like Picasso.</b></p>
+  </section>
+
+  <!-- ===== THE ENGINE: HUMAN-LED LEARNING LOOP ===== -->
+  <section class="section wrap">
+    <div class="sec-head">
+      <div class="sec-tag">The engine beneath the journey</div>
+      <h2>A human-led learning loop.</h2>
+      <p>In PICASSO, people get more important, not less. Every run creates evidence. Every piece of evidence sharpens the next run. Capability compounds, and your organisation gets better at absorbing whatever the frontier brings next.</p>
+    </div>
+
+    <div class="loop">
+      <div class="stage" style="--letter:var(--pulse)"><div class="n">01</div><h4>Better work</h4><p>Good people working to a higher standard, with AI in the loop.</p></div>
+      <div class="stage" style="--letter:var(--ignite)"><div class="n">02</div><h4>Evidence</h4><p>The work throws off proof of what actually improved.</p></div>
+      <div class="stage" style="--letter:var(--change)"><div class="n">03</div><h4>A stronger run</h4><p>That evidence sharpens the next run, the real unit of AI work.</p></div>
+      <div class="stage" style="--letter:var(--accelerate)"><div class="n">04</div><h4>A smarter harness</h4><p>Repeatable runs harden into a harness others can trust.</p></div>
+      <div class="stage" style="--letter:var(--sherpa)"><div class="n">05</div><h4>Captured judgement</h4><p>Judgement gets captured, not trapped in one person's head.</p></div>
+      <div class="stage" style="--letter:var(--operate)"><div class="n">06</div><h4>Owned capability</h4><p>Captured judgement becomes capability the whole business owns.</p></div>
+    </div>
+
+    <p class="loop-return">And back to the top, sharper every cycle. <b>The frontier keeps moving.</b> Your ability to keep learning is the advantage no tool can hand you.</p>
+  </section>
+
+  <!-- ===== THE PEOPLE MAKE IT WORK ===== -->
+  <section class="section wrap">
+    <div class="sec-head">
+      <div class="sec-tag">The people make it work</div>
+      <h2>Craft lives in people, not just models.</h2>
+      <p>PICASSO is people-first by design. Two things carry the whole journey: a baseline every person brings, and a ladder of capability your organisation grows into.</p>
+    </div>
+
+    <h3 class="block-label">The baseline every person brings</h3>
+    <div class="caps">
+      <div class="cap" style="--letter:var(--ignite)"><div class="tag">Ask well</div><h4>Specify the work</h4><p>State the goal, the audience, the constraints and what good looks like. This is work specification, not prompt decoration.</p></div>
+      <div class="cap" style="--letter:var(--accelerate)"><div class="tag">Plan the work</div><h4>Design the workflow</h4><p>Break the job into stages. Decide what AI does, what the human does and what must not be delegated at all.</p></div>
+      <div class="cap" style="--letter:var(--scale)"><div class="tag">Check the output</div><h4>Verify to a standard</h4><p>Slow down enough to test truth, evidence and fit. Looks right is never a review standard.</p></div>
+      <div class="cap" style="--letter:var(--governance)"><div class="tag">Own the decision</div><h4>Keep the judgement</h4><p>AI assists. The human owns the risk, the ethics and the outcome. Judgement stays with people.</p></div>
+    </div>
+
+    <h3 class="block-label" style="margin-top:38px">The ladder capability grows into</h3>
+    <div class="modes">
+      <div class="mode" style="--letter:var(--pulse)"><h5>Use</h5><p>Work with AI safely and well in your own day to day.</p></div>
+      <div class="mode" style="--letter:var(--ignite)"><h5>Build</h5><p>Turn repeated work into reusable skills and templates.</p></div>
+      <div class="mode" style="--letter:var(--scale)"><h5>Operate</h5><p>Keep live runs healthy. Monitor, handle exceptions, watch for drift.</p></div>
+      <div class="mode on" style="--letter:var(--operate)"><h5>Orchestrate</h5><p>Design how work flows across people, agents, data and approvals.<span class="link">Powers the O</span></p></div>
+      <div class="mode" style="--letter:var(--governance)"><h5>Lead</h5><p>Decide what gets built, funded, governed, scaled or stopped.</p></div>
+    </div>
   </section>
 
   <!-- ===== CRAFT SPOTLIGHT ===== -->
@@ -595,6 +708,25 @@
         <p>Not a spec thrown over the wall. Our engineers sit inside your team and do the hard climb to production alongside you: the integration, the edge cases, the last mile that decides whether AI ships or stalls.</p>
         <div class="quote">You don't hand them a spec and wait. <b>You climb together.</b></div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== MEASURE BETTER WORK ===== -->
+  <section class="section wrap">
+    <div class="measure">
+      <div class="not">Usage is not adoption. <b>Better work is.</b></div>
+      <p class="sub">A dashboard of logins and prompt counts says nothing about whether the work improved. PICASSO measures the things that actually compound.</p>
+      <ul class="better">
+        <li>Repeated runs getting measurably better</li>
+        <li>Outputs more grounded in real evidence</li>
+        <li>Review cycles shorter without adding risk</li>
+        <li>Common errors falling, not repeating</li>
+        <li>Skills reused instead of prompts reinvented</li>
+        <li>Agents stopping at the right point</li>
+        <li>Customer promises safer, board claims better evidenced</li>
+        <li>People deciding better with better context</li>
+      </ul>
+      <p class="core">If you cannot measure AI impact, it is just another tool. <b>PICASSO is built to measure it.</b></p>
     </div>
   </section>
 
