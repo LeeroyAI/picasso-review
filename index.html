@@ -144,7 +144,7 @@
   .glyph:hover .ch { transform: translateY(-6px); }
   .glyph .lbl {
     font-size: clamp(9px, 1vw, 12px); font-weight: 700; letter-spacing: .04em;
-    color: var(--ink-soft); text-align: center; white-space: nowrap;
+    color: var(--ink-soft); text-align: center; white-space: normal; max-width: 92px; margin: 0 auto;
   }
   .glyph .lbl b { color: var(--letter); display: block; font-weight: 800; }
   .glyph.craft .ch::after {
@@ -445,9 +445,9 @@
         <div class="glyph"       style="--letter:var(--ignite)"><span class="ch">I</span><span class="lbl">AI<b>Ignite</b></span></div>
         <div class="glyph craft" style="--letter:var(--change)"><span class="ch">C</span><span class="lbl">AI<b>Change</b></span></div>
         <div class="glyph"       style="--letter:var(--accelerate)"><span class="ch">A</span><span class="lbl">AI<b>Accelerate</b></span></div>
-        <div class="glyph"       style="--letter:var(--scale)"><span class="ch">S</span><span class="lbl">AI<b>Scale</b></span></div>
+        <div class="glyph"       style="--letter:var(--scale)"><span class="ch">S</span><span class="lbl">AI<b>Scale + Operate</b></span></div>
         <div class="glyph craft" style="--letter:var(--sherpa)"><span class="ch">S</span><span class="lbl">AI<b>Sherpa</b></span></div>
-        <div class="glyph"       style="--letter:var(--operate)"><span class="ch">O</span><span class="lbl">AI<b>Operate</b></span></div>
+        <div class="glyph"       style="--letter:var(--operate)"><span class="ch">O</span><span class="lbl">AI<b>Orchestrate</b></span></div>
       </div>
 
       <h1>The <span class="grad">Picasso</span> of AI.</h1>
@@ -462,7 +462,7 @@
     <div class="sec-head">
       <div class="sec-tag">The framework</div>
       <h2>Seven elements, painted as one journey.</h2>
-      <p>The five proven phases stay intact. Two new craft layers get woven through, so the model reads PICASSO and the difference shows on the canvas: change and craft, not just deployment by numbers.</p>
+      <p>Your proven phases stay intact. Scale and Operate join under one S where they belong. Two craft layers get woven through, and Orchestrate designs how the whole system moves. The model reads PICASSO, and the difference shows on the canvas.</p>
     </div>
 
     <div class="journey">
@@ -471,9 +471,9 @@
         <div class="node"       style="--letter:var(--ignite)"><div class="step">Step 02</div><span class="badge">Prove</span><h3><span class="k">I</span> · AI Ignite</h3><p>Spark the first win. Turn the art of the possible into a working proof.</p></div>
         <div class="node craft" style="--letter:var(--change)"><div class="step">Step 03</div><span class="badge">Enable</span><h3><span class="k">C</span> · AI Change</h3><p>Bring the org with you: sponsorship, comms, champions, adoption behaviours.</p></div>
         <div class="node"       style="--letter:var(--accelerate)"><div class="step">Step 04</div><span class="badge">Build</span><h3><span class="k">A</span> · AI Accelerate</h3><p>Move from pilot to production. Ship real capability at pace, engineered to last.</p></div>
-        <div class="node"       style="--letter:var(--scale)"><div class="step">Step 05</div><span class="badge">Expand</span><h3><span class="k">S</span> · AI Scale</h3><p>Multiply what works. Extend across teams, workflows and business units.</p></div>
+        <div class="node"       style="--letter:var(--scale)"><div class="step">Step 05</div><span class="badge">Grow + Run</span><h3><span class="k">S</span> · AI Scale + Operate</h3><p>Multiply what works, then keep it healthy. Extend across teams, then monitor, tune and sustain the value once it is live.</p></div>
         <div class="node craft" style="--letter:var(--sherpa)"><div class="step">Step 06</div><span class="badge">Embed</span><h3><span class="k">S</span> · AI Sherpa</h3><p>Forward-deployed engineers embedded in your team, doing the hard climb to production.</p></div>
-        <div class="node"       style="--letter:var(--operate)"><div class="step">Step 07</div><span class="badge">Run</span><h3><span class="k">O</span> · AI Operate</h3><p>Keep it healthy. Monitor, optimise and compound value once it is live.</p></div>
+        <div class="node"       style="--letter:var(--operate)"><div class="step">Step 07</div><span class="badge">Orchestrate</span><h3><span class="k">O</span> · AI Orchestrate</h3><p>Design how work moves across people, agents, data, tools and approvals. Authority, evidence and handoff, engineered.</p></div>
       </div>
 
       <div class="canvas-band">
@@ -538,8 +538,8 @@
       <div class="beat" style="--letter:var(--scale)">
         <div class="mark">S</div>
         <div class="body">
-          <div class="who"><span class="name">AI Scale</span><span class="role">We multiply what works</span></div>
-          <p>What proves itself once, we make work everywhere. Across teams, workflows and business units, still measured against the targets you set at Pulse. You stop running experiments and start running a capability. The wins compound.</p>
+          <div class="who"><span class="name">AI Scale + Operate</span><span class="role">We grow it and keep it running</span></div>
+          <p>What proves itself once, we make work everywhere. Across teams, workflows and business units, still measured against the targets you set at Pulse. Then we keep it healthy: monitored, tuned and improving long after go-live. You stop running experiments and start running a capability you can trust.</p>
         </div>
       </div>
 
@@ -554,8 +554,8 @@
       <div class="beat" style="--letter:var(--operate)">
         <div class="mark">O</div>
         <div class="body">
-          <div class="who"><span class="name">AI Operate</span><span class="role">We stay once it is live</span></div>
-          <p>When it goes live, we do not disappear. We watch it, tune it and keep it healthy. Value keeps building instead of fading. You are never left holding something you cannot maintain.</p>
+          <div class="who"><span class="name">AI Orchestrate</span><span class="role">We design how it all moves</span></div>
+          <p>This is where it all comes together. We design how work flows across your people, agents, data, tools and approvals. Every trigger, every review, every stop point and escalation, mapped. This is more than automating steps. We engineer the authority, the evidence and the handoff, so it runs as one orchestrated system your people can rely on.</p>
         </div>
       </div>
 
