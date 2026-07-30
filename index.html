@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,64 +9,149 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+  /* ============================================================
+     Insentra web colour system. Tokens pasted from the
+     insentra-web-color-system skill. Colour comes from these
+     tokens, not from ad hoc hex. Dark is the default.
+     ============================================================ */
   :root {
-    /* Insentra web colour system (dark defaults). Phase accents for the five
-       journey phases + Governance; brand orange for the two craft layers. */
-    --pulse:      #34B27A;   /* phase-1 Pulse */
-    --ignite:     #4E79B8;   /* phase-2 Ignite */
-    --change:     #F26522;   /* craft layer, Insentra brand orange */
-    --accelerate: #8577CE;   /* phase-3 Accelerate */
-    --scale:      #1FA8A0;   /* phase-4 Scale (Scale + Operate) */
-    --sherpa:     #F26522;   /* craft layer, Insentra brand orange */
-    --operate:    #4FB0D4;   /* phase-5 Operate (Orchestrate) */
-    --governance: #B06AA6;   /* phase-6 Governance */
-  }
-
-  /* Dark (default). Cool navy surfaces from the Insentra web colour system. */
-  [data-theme="dark"] {
-    --pulse:      #34B27A;
-    --ignite:     #4E79B8;
-    --change:     #F26522;
-    --accelerate: #8577CE;
-    --scale:      #1FA8A0;
-    --sherpa:     #F26522;
-    --operate:    #4FB0D4;
-    --governance: #B06AA6;
-    --bg:        #07090F;   /* bg */
-    --bg-2:      #121520;   /* surface */
-    --panel:     #121520;   /* surface */
-    --panel-2:   #1A1E2D;   /* surface-raised */
-    --border:    #334155;   /* border */
-    --border-2:  #5A7391;   /* border-strong */
-    --ink:       #F1F5F9;   /* text */
-    --ink-soft:  #BEC8D7;   /* text-2 */
-    --ink-mute:  #9AAABB;   /* text-3 */
+    --color-bg:             7 9 15;
+    --color-surface:        18 21 32;
+    --color-surface-raised: 26 30 45;
+    --color-sidebar:        13 16 27;
+    --color-input:          12 14 22;
+    --color-border:         51 65 85;
+    --color-border-strong:  90 115 145;
+    --color-text:           241 245 249;
+    --color-text-2:         190 200 215;
+    --color-text-3:         154 170 187;
+    --color-text-muted:     154 170 187;
+    --color-text-disabled:  71 85 105;
+    --color-brand:          242 101 34;
+    --color-brand-hover:    220 88 22;
+    --color-brand-light:    255 140 66;
+    --color-brand-fg:       255 255 255;
+    --color-ink-on-fill:    10 10 10;
+    --color-success:        16 185 129;
+    --color-warning:        245 158 11;
+    --color-warning-fg:     40 26 3;
+    --color-danger:         239 68 68;
+    --color-info:           59 130 246;
+    --color-ring:           242 101 34;
+    /* Phase accents: Pulse, Ignite, Accelerate, Scale, Operate, Governance */
+    --color-phase-1: 52 178 122;  --color-phase-2: 78 121 184;  --color-phase-3: 133 119 206;
+    --color-phase-4: 31 168 160;  --color-phase-5: 79 176 212;  --color-phase-6: 176 106 166;
+    --font-sans: 'Montserrat', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     --hero-glow: 0.18;
-    --shadow:    0 24px 60px rgba(0,0,0,.55);
+    --shadow: 0 24px 60px rgba(0,0,0,.55);
   }
 
-  /* Light. Verified light-mode pairs from the same system. */
-  [data-theme="light"] {
-    --pulse:      #1B7A46;
-    --ignite:     #3A5A8C;
-    --change:     #C04A14;
-    --accelerate: #5E52B0;
-    --scale:      #0E7C78;
-    --sherpa:     #C04A14;
-    --operate:    #2C6F8C;
-    --governance: #8A4A80;
-    --bg:        #F5F4F0;   /* bg */
-    --bg-2:      #FFFFFF;   /* surface */
-    --panel:     #FFFFFF;   /* surface */
-    --panel-2:   #E9E3D9;   /* surface-raised */
-    --border:    #D8D5CE;   /* border */
-    --border-2:  #948E80;   /* border-strong */
-    --ink:       #111111;   /* text */
-    --ink-soft:  #505050;   /* text-2 */
-    --ink-mute:  #646464;   /* text-3 */
+  /* Light mode, forced by a .light class on any ancestor */
+  .light {
+    --color-bg:             245 244 240;
+    --color-surface:        255 255 255;
+    --color-surface-raised: 233 227 217;
+    --color-sidebar:        250 248 244;
+    --color-input:          255 255 255;
+    --color-border:         216 213 206;
+    --color-border-strong:  148 142 128;
+    --color-text:           17 17 17;
+    --color-text-2:         80 80 80;
+    --color-text-3:         100 100 100;
+    --color-text-muted:     130 130 130;
+    --color-text-disabled:  180 180 180;
+    --color-brand:          192 74 20;
+    --color-brand-hover:    160 62 16;
+    --color-brand-light:    242 101 34;
+    --color-brand-fg:       255 255 255;
+    --color-ink-on-fill:    255 255 255;
+    --color-success:        15 118 110;
+    --color-warning:        180 83 9;
+    --color-warning-fg:     255 255 255;
+    --color-danger:         185 28 28;
+    --color-info:           29 78 216;
+    --color-ring:           192 74 20;
+    --color-phase-1: 27 122 70;   --color-phase-2: 58 90 140;   --color-phase-3: 94 82 176;
+    --color-phase-4: 14 124 120;  --color-phase-5: 44 111 140;  --color-phase-6: 138 74 128;
     --hero-glow: 0.12;
-    --shadow:    0 18px 44px rgba(17,17,17,.10);
+    --shadow: 0 18px 44px rgba(17,17,17,.10);
   }
+
+  /* Light mode by OS preference, unless .dark forces dark */
+  @media (prefers-color-scheme: light) {
+    :root:not(.dark) {
+      --color-bg:245 244 240; --color-surface:255 255 255; --color-surface-raised:233 227 217;
+      --color-sidebar:250 248 244; --color-input:255 255 255; --color-border:216 213 206;
+      --color-border-strong:148 142 128; --color-text:17 17 17; --color-text-2:80 80 80;
+      --color-text-3:100 100 100; --color-text-muted:130 130 130; --color-text-disabled:180 180 180;
+      --color-brand:192 74 20; --color-brand-hover:160 62 16; --color-brand-light:242 101 34;
+      --color-brand-fg:255 255 255; --color-ink-on-fill:255 255 255; --color-success:15 118 110;
+      --color-warning:180 83 9; --color-warning-fg:255 255 255; --color-danger:185 28 28;
+      --color-info:29 78 216; --color-ring:192 74 20;
+      --color-phase-1:27 122 70; --color-phase-2:58 90 140; --color-phase-3:94 82 176;
+      --color-phase-4:14 124 120; --color-phase-5:44 111 140; --color-phase-6:138 74 128;
+      --hero-glow:0.12; --shadow:0 18px 44px rgba(17,17,17,.10);
+    }
+  }
+
+  /* Dark mode, forced by a .dark class, wins over the OS */
+  .dark {
+    --color-bg:7 9 15; --color-surface:18 21 32; --color-surface-raised:26 30 45;
+    --color-sidebar:13 16 27; --color-input:12 14 22; --color-border:51 65 85;
+    --color-border-strong:90 115 145; --color-text:241 245 249; --color-text-2:190 200 215;
+    --color-text-3:154 170 187; --color-text-muted:154 170 187; --color-text-disabled:71 85 105;
+    --color-brand:242 101 34; --color-brand-hover:220 88 22; --color-brand-light:255 140 66;
+    --color-brand-fg:255 255 255; --color-ink-on-fill:10 10 10; --color-success:16 185 129;
+    --color-warning:245 158 11; --color-warning-fg:40 26 3; --color-danger:239 68 68;
+    --color-info:59 130 246; --color-ring:242 101 34;
+    --color-phase-1:52 178 122; --color-phase-2:78 121 184; --color-phase-3:133 119 206;
+    --color-phase-4:31 168 160; --color-phase-5:79 176 212; --color-phase-6:176 106 166;
+    --hero-glow:0.18; --shadow:0 24px 60px rgba(0,0,0,.55);
+  }
+
+  /* Bridge: this mockup's semantic variable names resolve from the tokens above,
+     so every colour on the page is driven by the system, in both modes. */
+  :root {
+    --bg:         rgb(var(--color-bg));
+    --bg-2:       rgb(var(--color-surface));
+    --panel:      rgb(var(--color-surface));
+    --panel-2:    rgb(var(--color-surface-raised));
+    --border:     rgb(var(--color-border));
+    --border-2:   rgb(var(--color-border-strong));
+    --ink:        rgb(var(--color-text));
+    --ink-soft:   rgb(var(--color-text-2));
+    --ink-mute:   rgb(var(--color-text-3));
+    --pulse:      rgb(var(--color-phase-1));
+    --ignite:     rgb(var(--color-phase-2));
+    --accelerate: rgb(var(--color-phase-3));
+    --scale:      rgb(var(--color-phase-4));
+    --operate:    rgb(var(--color-phase-5));
+    --governance: rgb(var(--color-phase-6));
+    --change:     rgb(var(--color-brand));
+    --sherpa:     rgb(var(--color-brand));
+  }
+
+  :focus-visible { outline: 2px solid rgb(var(--color-ring)); outline-offset: 2px; }
+
+  /* Utility classes from the system preamble, present for portable markup. */
+  .bg-bg{background-color:rgb(var(--color-bg))} .bg-surface{background-color:rgb(var(--color-surface))}
+  .bg-surface-raised{background-color:rgb(var(--color-surface-raised))} .bg-sidebar{background-color:rgb(var(--color-sidebar))}
+  .bg-input{background-color:rgb(var(--color-input))}
+  .border-strong{border-color:rgb(var(--color-border-strong))} .border-stroke{border-color:rgb(var(--color-border))}
+  .border-stroke\/60{border-color:rgb(var(--color-border) / .60)} .border-stroke\/40{border-color:rgb(var(--color-border) / .40)}
+  .text-text{color:rgb(var(--color-text))} .text-text-2{color:rgb(var(--color-text-2))}
+  .text-text-3{color:rgb(var(--color-text-3))} .text-ink-on-fill{color:rgb(var(--color-ink-on-fill))}
+  .bg-brand{background-color:rgb(var(--color-brand))} .text-brand{color:rgb(var(--color-brand))}
+  .text-brand-fg{color:rgb(var(--color-brand-fg))} .border-brand{border-color:rgb(var(--color-brand))}
+  .bg-brand\/10{background-color:rgb(var(--color-brand) / .10)} .bg-brand\/15{background-color:rgb(var(--color-brand) / .15)}
+  .hover\:bg-brand-hover:hover{background-color:rgb(var(--color-brand-hover))}
+  .text-success{color:rgb(var(--color-success))} .text-warning{color:rgb(var(--color-warning))}
+  .text-danger{color:rgb(var(--color-danger))} .text-info{color:rgb(var(--color-info))}
+  .bg-success\/15{background-color:rgb(var(--color-success) / .15)} .border-success\/30{border-color:rgb(var(--color-success) / .30)}
+  .bg-danger\/15{background-color:rgb(var(--color-danger) / .15)} .border-danger\/30{border-color:rgb(var(--color-danger) / .30)}
+  .text-phase-1{color:rgb(var(--color-phase-1))} .text-phase-2{color:rgb(var(--color-phase-2))}
+  .text-phase-3{color:rgb(var(--color-phase-3))} .text-phase-4{color:rgb(var(--color-phase-4))}
+  .text-phase-5{color:rgb(var(--color-phase-5))} .text-phase-6{color:rgb(var(--color-phase-6))}
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -128,9 +213,9 @@
   .hero::before {
     content: ""; position: absolute; inset: -20% -10% auto -10%; height: 420px;
     background:
-      radial-gradient(600px 300px at 20% 0%, rgba(242,101,34,var(--hero-glow)), transparent 60%),
-      radial-gradient(600px 320px at 55% 10%, rgba(133,119,206,var(--hero-glow)), transparent 60%),
-      radial-gradient(600px 300px at 88% 0%, rgba(79,176,212,var(--hero-glow)), transparent 60%);
+      radial-gradient(600px 300px at 20% 0%, rgb(var(--color-brand) / var(--hero-glow)), transparent 60%),
+      radial-gradient(600px 320px at 55% 10%, rgb(var(--color-phase-3) / var(--hero-glow)), transparent 60%),
+      radial-gradient(600px 300px at 88% 0%, rgb(var(--color-phase-5) / var(--hero-glow)), transparent 60%);
     pointer-events: none;
   }
   .hero .wrap { position: relative; }
@@ -784,23 +869,26 @@
     var icon = document.getElementById('themeIcon');
     var label = document.getElementById('themeLabel');
 
-    // Respect system preference on first load
-    try {
-      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-        root.setAttribute('data-theme', 'light');
-      }
-    } catch (e) {}
+    // Dark is the default. OS preference drives the initial mode via CSS.
+    // The toggle forces a mode with the .light / .dark classes the system uses.
+    function isLight() {
+      if (root.classList.contains('light')) return true;
+      if (root.classList.contains('dark')) return false;
+      try { return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches; }
+      catch (e) { return false; }
+    }
 
     function sync() {
-      var light = root.getAttribute('data-theme') === 'light';
+      var light = isLight();
       icon.textContent = light ? '☀️' : '🌙';
       label.textContent = light ? 'Light' : 'Dark';
     }
     sync();
 
     btn.addEventListener('click', function () {
-      var light = root.getAttribute('data-theme') === 'light';
-      root.setAttribute('data-theme', light ? 'dark' : 'light');
+      var light = isLight();
+      root.classList.remove('light', 'dark');
+      root.classList.add(light ? 'dark' : 'light');
       sync();
     });
   })();
