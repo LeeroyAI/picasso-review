@@ -125,13 +125,13 @@
   .whyc .themes { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
   .whyc .theme { font-size:10px; font-weight:800; letter-spacing:.03em; text-transform:uppercase; color:var(--ink); background:var(--panel-2); border:1px solid var(--border); border-radius:999px; padding:5px 11px; }
 
-  .loop { display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin-top:26px; }
+  .loop { display:grid; grid-template-columns:repeat(6,1fr); gap:18px; margin-top:26px; }
   .lstage { position:relative; background:var(--panel); border:1px solid var(--border); border-top:3px solid var(--letter); border-radius:14px; padding:16px 15px 17px; box-shadow:var(--shadow); }
   .lstage .ln { font-size:11px; font-weight:800; color:var(--letter); letter-spacing:.1em; }
   .lstage h4 { font-size:14.5px; font-weight:800; margin:6px 0 6px; letter-spacing:-.01em; }
   .lstage p { font-size:11.5px; color:var(--ink-soft); font-weight:500; line-height:1.45; }
-  .lstage::after { content:"\2192"; position:absolute; right:-9px; top:50%; transform:translateY(-50%); color:var(--ink-mute); font-weight:800; font-size:15px; z-index:3; }
-  .lstage:last-child::after { content:"\21BA"; color:var(--change); }
+  .lstage::after { content:"\276F"; position:absolute; right:-16px; top:50%; transform:translateY(-50%); width:26px; height:26px; display:grid; place-items:center; font-size:12px; font-weight:900; color:rgb(var(--color-brand-fg)); background:linear-gradient(135deg, var(--letter), color-mix(in srgb, var(--letter) 55%, var(--accelerate))); border-radius:50%; box-shadow:0 5px 14px color-mix(in srgb, var(--letter) 42%, transparent); z-index:5; }
+  .lstage:last-child::after { content:"\21BA"; background:linear-gradient(135deg, var(--change), var(--accelerate)); }
   .loop-note { margin-top:22px; background:linear-gradient(120deg, color-mix(in srgb, var(--change) 12%, var(--bg-2)), color-mix(in srgb, var(--accelerate) 10%, var(--bg-2))); border:1px solid var(--border); border-radius:18px; padding:22px 26px; font-size:16px; font-weight:600; color:var(--ink); line-height:1.5; }
   .loop-note b { color:var(--change); font-weight:800; }
 
@@ -235,17 +235,17 @@
   .hub-top h3 { font-size:clamp(22px,2.6vw,30px); font-weight:800; letter-spacing:-.015em; margin-bottom:8px; }
   .hub-top p { font-size:15px; color:var(--ink-soft); font-weight:500; line-height:1.6; max-width:none; }
   .hub-top p b { color:var(--ink); font-weight:700; }
-  .hub-pipe { display:flex; flex-wrap:wrap; align-items:stretch; gap:10px; margin:6px 0 28px; }
-  .hub-pipe .pstep { flex:1 1 150px; background:var(--panel-2); border:1px solid var(--border); border-radius:13px; padding:14px 15px; position:relative; }
-  .hub-pipe .pstep .pn { font-size:8.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--change); }
-  .hub-pipe .pstep .pt { font-size:13.5px; font-weight:800; margin-top:4px; letter-spacing:-.01em; }
-  .hub-pipe .pstep .pd { font-size:11px; color:var(--ink-soft); font-weight:500; line-height:1.4; margin-top:5px; }
+  .hub-pipe { display:flex; flex-wrap:wrap; align-items:stretch; gap:36px; margin:6px 0 30px; }
+  .pstep { position:relative; flex:1 1 160px; background:var(--panel); border:1px solid var(--border); border-radius:15px; padding:17px 17px 18px; box-shadow:var(--shadow); }
+  .pstep .pnum { width:30px; height:30px; border-radius:9px; display:grid; place-items:center; font-size:13px; font-weight:900; color:rgb(var(--color-brand-fg)); background:linear-gradient(135deg, var(--change), var(--accelerate)); box-shadow:0 5px 14px color-mix(in srgb, var(--change) 40%, transparent); margin-bottom:11px; }
+  .pstep .pn { font-size:8.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--change); }
+  .pstep .pt { font-size:14.5px; font-weight:800; margin-top:3px; letter-spacing:-.01em; }
+  .pstep .pd { font-size:11.5px; color:var(--ink-soft); font-weight:500; line-height:1.45; margin-top:6px; }
+  .pstep:not(:last-child)::after { content:"\276F"; position:absolute; right:-31px; top:50%; transform:translateY(-50%); width:26px; height:26px; display:grid; place-items:center; font-size:12px; font-weight:900; color:rgb(var(--color-brand-fg)); background:linear-gradient(135deg, var(--change), var(--accelerate)); border-radius:50%; box-shadow:0 5px 14px color-mix(in srgb, var(--change) 40%, transparent); z-index:5; }
   .hub-h { font-size:12px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-mute); margin:6px 0 14px; }
-  .assets { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
-  .asset { background:var(--panel-2); border:1px solid var(--border); border-radius:13px; padding:15px 15px; }
-  .asset .an { font-size:8.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--change); }
-  .asset .at { font-size:13.5px; font-weight:800; margin-top:4px; letter-spacing:-.01em; line-height:1.3; }
-  .asset .ad { font-size:11px; color:var(--ink-soft); font-weight:500; line-height:1.45; margin-top:6px; }
+  /* Asset library uses the expandable tile pattern, sized ~4 per row */
+  .frow.assets4 .tile { flex:1 1 250px; }
+  .frow.assets4 .tile.open { flex-basis:100%; }
   .hub-why { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:24px; }
   .hwc { border:1px solid var(--border); border-left:3px solid var(--change); border-radius:14px; padding:18px 20px; background:color-mix(in srgb, var(--change) 5%, var(--panel)); }
   .hwc h4 { font-size:15.5px; font-weight:800; letter-spacing:-.01em; margin-bottom:6px; }
@@ -338,6 +338,7 @@
     .lstage:nth-child(3)::after, .lstage:nth-child(6)::after { display:none; }
     .assets { grid-template-columns:repeat(2,1fr); }
     .hub-why { grid-template-columns:1fr; }
+    .pstep::after { display:none; }
     .console { grid-template-columns:1fr; }
     .para { grid-template-columns:1fr; }
     .shift { grid-template-columns:1fr; } .shift .arrow { transform:rotate(90deg); }
@@ -767,23 +768,117 @@
 
       <div class="hub-h">How it runs, end to end</div>
       <div class="hub-pipe">
-        <div class="pstep"><div class="pn">Input</div><div class="pt">Pulse data</div><div class="pd">Readiness, priorities and maturity baseline from every client.</div></div>
-        <div class="pstep"><div class="pn">Allocate</div><div class="pt">Cohorts</div><div class="pd">People grouped by readiness so enablement fits where they are.</div></div>
-        <div class="pstep"><div class="pn">Generate</div><div class="pt">Phase agendas</div><div class="pd">Delivery agendas, methods and assets built per phase, per cohort.</div></div>
-        <div class="pstep"><div class="pn">Deliver</div><div class="pt">In the field</div><div class="pd">Teams apply proven assets rather than starting from a blank page.</div></div>
-        <div class="pstep"><div class="pn">Learn</div><div class="pt">Evidence back</div><div class="pd">What worked flows back in and sharpens the asset for next time.</div></div>
+        <div class="pstep"><div class="pnum" aria-hidden="true">1</div><div class="pn">Input</div><div class="pt">Pulse data</div><div class="pd">Readiness, priorities and maturity baseline from every client.</div></div>
+        <div class="pstep"><div class="pnum" aria-hidden="true">2</div><div class="pn">Allocate</div><div class="pt">Cohorts</div><div class="pd">People grouped by readiness so enablement fits where they are.</div></div>
+        <div class="pstep"><div class="pnum" aria-hidden="true">3</div><div class="pn">Generate</div><div class="pt">Phase agendas</div><div class="pd">Delivery agendas, methods and assets built per phase, per cohort.</div></div>
+        <div class="pstep"><div class="pnum" aria-hidden="true">4</div><div class="pn">Deliver</div><div class="pt">In the field</div><div class="pd">Teams apply proven assets rather than starting from a blank page.</div></div>
+        <div class="pstep"><div class="pnum" aria-hidden="true">5</div><div class="pn">Learn</div><div class="pt">Evidence back</div><div class="pd">What worked flows back in and sharpens the asset for next time.</div></div>
       </div>
 
       <div class="hub-h">The reusable asset library it codifies</div>
-      <div class="assets">
-        <div class="asset"><div class="an">Reusable</div><div class="at">Operating model patterns</div><div class="ad">Blueprints for how work, agents, data and approvals move across the enterprise.</div></div>
-        <div class="asset"><div class="an">Reusable</div><div class="at">Governance and decision-rights artefacts</div><div class="ad">Policy, controls and ownership models that scale from pilot to production.</div></div>
-        <div class="asset"><div class="an">Reusable</div><div class="at">Champion and adoption toolkits</div><div class="ad">Stakeholder plans, champion playbooks, comms patterns and reinforcement.</div></div>
-        <div class="asset"><div class="an">Reusable</div><div class="at">Executive reporting packs</div><div class="ad">Board-ready views of adoption, capability, readiness, value and risk.</div></div>
-        <div class="asset"><div class="an">Reusable</div><div class="at">Value realisation frameworks</div><div class="ad">Benefits definition, KPI ownership and tracking through to realised value.</div></div>
-        <div class="asset"><div class="an">Reusable</div><div class="at">Readiness assessments</div><div class="ad">Technology, data, process, governance, risk and ownership checks.</div></div>
-        <div class="asset"><div class="an">Reusable</div><div class="at">Lifecycle management approaches</div><div class="ad">Hypercare, monitoring, drift and continuous improvement once live.</div></div>
-        <div class="asset"><div class="an">Driven by</div><div class="at">Pulse-generated delivery agendas</div><div class="ad">Per-cohort, per-phase plans generated straight from Pulse data.</div></div>
+      <div class="frow assets4">
+        <button class="tile" type="button" aria-expanded="false" aria-label="Operating model patterns, tap to expand" style="--letter:var(--operate)">
+          <span class="corner">Click to close ✕</span><span class="badge">Reusable</span>
+          <span class="tname">Operating model patterns</span>
+          <span class="tline">Blueprints for how work, agents, data and approvals move across the enterprise.</span>
+          <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+          <span class="detail">
+            <span class="dcol"><span class="role">Reusable · applied at Orchestrate</span>
+              <span class="dp">Reference designs for the enterprise AI operating model: how work flows across people, agents, processes, data, systems and approvals, where decision rights and ownership sit, how demand is prioritised and how governance forums interact.</span>
+              <span class="dp"><b>Teams adapt the pattern instead of inventing the model.</b> Applied at Orchestrate and tuned per client.</span></span>
+            <span class="side"><span class="sh">What's inside</span><span class="outs"><span class="out">Decision rights map</span><span class="out">Demand intake</span><span class="out">Handoffs</span><span class="out">Escalation paths</span></span></span>
+          </span>
+        </button>
+
+        <button class="tile" type="button" aria-expanded="false" aria-label="Governance and decision-rights artefacts, tap to expand" style="--letter:var(--governance)">
+          <span class="corner">Click to close ✕</span><span class="badge">Reusable</span>
+          <span class="tname">Governance and decision-rights artefacts</span>
+          <span class="tline">Policy, controls and ownership models that scale from pilot to production.</span>
+          <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+          <span class="detail">
+            <span class="dcol"><span class="role">Reusable · rides the Governance canvas</span>
+              <span class="dp">Policy templates, control libraries, responsible-AI checklists, assurance and lifecycle-oversight patterns, and decision-rights maps.</span>
+              <span class="dp"><b>They tighten as maturity grows,</b> tracking the Governance path from Ad hoc to Adaptive, so controls scale as use cases move into production.</span></span>
+            <span class="side"><span class="sh">What's inside</span><span class="outs"><span class="out">Policy set</span><span class="out">Control library</span><span class="out">RACI</span><span class="out">Assurance checklist</span></span></span>
+          </span>
+        </button>
+
+        <button class="tile" type="button" aria-expanded="false" aria-label="Champion and adoption toolkits, tap to expand" style="--letter:var(--change)">
+          <span class="corner">Click to close ✕</span><span class="badge">Reusable</span>
+          <span class="tname">Champion and adoption toolkits</span>
+          <span class="tline">Stakeholder plans, champion playbooks, comms patterns and reinforcement.</span>
+          <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+          <span class="detail">
+            <span class="dcol"><span class="role">Reusable · powers the Change thread</span>
+              <span class="dp">The reusable spine of AI Change: stakeholder and sponsorship plans, champion network playbooks, communication patterns, adoption measures and reinforcement mechanisms.</span>
+              <span class="dp"><b>Deployed so adoption becomes something people choose to do,</b> not something they are told to complete.</span></span>
+            <span class="side"><span class="sh">What's inside</span><span class="outs"><span class="out">Sponsor map</span><span class="out">Champion playbook</span><span class="out">Comms kit</span><span class="out">Reinforcement</span></span></span>
+          </span>
+        </button>
+
+        <button class="tile" type="button" aria-expanded="false" aria-label="Executive reporting packs, tap to expand" style="--letter:var(--accelerate)">
+          <span class="corner">Click to close ✕</span><span class="badge">Reusable</span>
+          <span class="tname">Executive reporting packs</span>
+          <span class="tline">Board-ready views of adoption, capability, readiness, value and risk.</span>
+          <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+          <span class="detail">
+            <span class="dcol"><span class="role">Reusable · fed by the maturity model</span>
+              <span class="dp">Pre-built executive and board views that turn the maturity model and delivery evidence into a story leaders can act on: adoption and capability growth, implementation readiness, realised value, risk and the actions required to sustain progress.</span></span>
+            <span class="side"><span class="sh">What's inside</span><span class="outs"><span class="out">Exec dashboard</span><span class="out">Board pack</span><span class="out">KPI view</span><span class="out">Risk view</span></span></span>
+          </span>
+        </button>
+
+        <button class="tile" type="button" aria-expanded="false" aria-label="Value realisation frameworks, tap to expand" style="--letter:var(--pulse)">
+          <span class="corner">Click to close ✕</span><span class="badge">Reusable</span>
+          <span class="tname">Value realisation frameworks</span>
+          <span class="tline">Benefits definition, KPI ownership and tracking through to realised value.</span>
+          <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+          <span class="detail">
+            <span class="dcol"><span class="role">Reusable · proof, not activity</span>
+              <span class="dp">Benefits definition and mapping, KPI design with named owners, and tracking from baseline to realised value.</span>
+              <span class="dp"><b>Ties operational indicators to business outcomes,</b> so we can prove whether decision-making improved and value scaled, not just whether the tool was used.</span></span>
+            <span class="side"><span class="sh">What's inside</span><span class="outs"><span class="out">Benefits map</span><span class="out">KPI tree</span><span class="out">Tracking model</span></span></span>
+          </span>
+        </button>
+
+        <button class="tile" type="button" aria-expanded="false" aria-label="Readiness assessments, tap to expand" style="--letter:var(--ignite)">
+          <span class="corner">Click to close ✕</span><span class="badge">Reusable</span>
+          <span class="tname">Readiness assessments</span>
+          <span class="tline">Technology, data, process, governance, risk and ownership checks.</span>
+          <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+          <span class="detail">
+            <span class="dcol"><span class="role">Reusable · gate to production</span>
+              <span class="dp">Structured readiness checks across technology, data, process, governance, risk and business ownership.</span>
+              <span class="dp"><b>Run before a solution moves to production,</b> so the controls, engineering disciplines, decision rights and accountable owners are in place first.</span></span>
+            <span class="side"><span class="sh">What's inside</span><span class="outs"><span class="out">Readiness checklist</span><span class="out">Gap analysis</span><span class="out">Go / no-go</span></span></span>
+          </span>
+        </button>
+
+        <button class="tile" type="button" aria-expanded="false" aria-label="Lifecycle management approaches, tap to expand" style="--letter:var(--scale)">
+          <span class="corner">Click to close ✕</span><span class="badge">Reusable</span>
+          <span class="tname">Lifecycle management approaches</span>
+          <span class="tline">Hypercare, monitoring, drift and continuous improvement once live.</span>
+          <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+          <span class="detail">
+            <span class="dcol"><span class="role">Reusable · keeps value healthy</span>
+              <span class="dp">How agentic solutions are kept healthy after go-live: structured hypercare, performance monitoring, drift detection, benefits tracking and continuous improvement.</span>
+              <span class="dp"><b>Keeps value compounding and controls current</b> as the solution and the frontier move.</span></span>
+            <span class="side"><span class="sh">What's inside</span><span class="outs"><span class="out">Hypercare plan</span><span class="out">Monitoring</span><span class="out">Drift watch</span><span class="out">Improvement loop</span></span></span>
+          </span>
+        </button>
+
+        <button class="tile" type="button" aria-expanded="false" aria-label="Pulse-generated delivery agendas, tap to expand" style="--letter:var(--change)">
+          <span class="corner">Click to close ✕</span><span class="badge">Driven by Pulse</span>
+          <span class="tname">Pulse-generated delivery agendas</span>
+          <span class="tline">Per-cohort, per-phase plans generated straight from Pulse data.</span>
+          <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+          <span class="detail">
+            <span class="dcol"><span class="role">The connective tissue</span>
+              <span class="dp">Pulse data allocates cohorts and generates the delivery agenda, methods and assets for each phase, per cohort.</span>
+              <span class="dp"><b>This is how the Hub personalises delivery to where each group actually sits,</b> without starting from a blank page.</span></span>
+            <span class="side"><span class="sh">What's inside</span><span class="outs"><span class="out">Cohort map</span><span class="out">Phase agenda</span><span class="out">Method pack</span></span></span>
+          </span>
+        </button>
       </div>
 
       <div class="hub-why">
