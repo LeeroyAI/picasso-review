@@ -686,27 +686,63 @@
       <p>Three motions people used to feel as separate. Defined together, each carries its own outcome and hands cleanly to the next, so cohort capability actually reaches real-world execution.</p>
     </div>
 
-    <div class="flow">
-      <div class="fcard" style="--letter:var(--change)">
-        <div class="fh"><span class="fn">AI Change</span><span class="r">Conditions</span></div>
-        <p>Creates the organisational conditions: sponsorship, alignment, champions and the behaviours that let capability take hold across the business.</p>
-        <div class="fq">Without the conditions, capability never sticks.</div>
-        <div class="outs"><span class="out">Sponsorship</span><span class="out">Champions</span><span class="out">Behaviour</span></div>
-      </div>
-      <div class="fx">➜</div>
-      <div class="fcard" style="--letter:var(--accelerate)">
-        <div class="fh"><span class="fn">AI Accelerate</span><span class="r">Capability</span></div>
-        <p>Continues each cohort's enablement journey. Deeper skills and applied use cases, month to month, with coaching and reinforcement until capability sticks.</p>
-        <div class="fq">Capability without execution stays theoretical.</div>
-        <div class="outs"><span class="out">Skills</span><span class="out">Use cases</span><span class="out">Reinforcement</span></div>
-      </div>
-      <div class="fx">➜</div>
-      <div class="fcard" style="--letter:var(--sherpa)">
-        <div class="fh"><span class="fn">AI Sherpa</span><span class="r">Execution</span></div>
-        <p>Translates that capability into real-world execution. Embedded practitioners clear blockers, coach owners and transfer ownership to the client.</p>
-        <div class="fq">Execution is where ownership finally lands.</div>
-        <div class="outs"><span class="out">Embedded</span><span class="out">Blockers cleared</span><span class="out">Ownership</span></div>
-      </div>
+    <div class="frow">
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Change, tap to expand" style="--letter:var(--change)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Conditions</span>
+        <span class="tname">AI Change</span>
+        <span class="tline">Creates the organisational conditions: sponsorship, alignment, champions and the behaviours that let capability take hold.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol">
+            <span class="role">Conditions · the change craft</span>
+            <span class="dp">The thread's home. Sponsors, champions and the everyday behaviours that make new capability stick. This is where adoption becomes something people choose to do, not something they are told to complete.</span>
+            <span class="dp"><b>Old change management manages people through a change. Modern change management changes how people behave, by choice.</b> The human is the point, not the risk. We build agency, not compliance. Technology never fails alone. Adoption does.</span>
+          </span>
+          <span class="side">
+            <span class="sh">What it builds</span>
+            <span class="outs"><span class="out">Agency, not compliance</span><span class="out">Habit formation</span><span class="out">Sponsorship</span><span class="out">Champion networks</span><span class="out">Behaviour that outlasts the tool</span></span>
+          </span>
+        </span>
+      </button>
+
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Accelerate, tap to expand" style="--letter:var(--accelerate)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Capability</span>
+        <span class="tname">AI Accelerate</span>
+        <span class="tline">Continues each cohort's enablement journey. Deeper skills and applied use cases, month to month.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol">
+            <span class="role">Capability · build the habit in</span>
+            <span class="dp">Build the new behaviour into the workflow, not around it. The new way becomes the default path, not the extra step people skip under pressure.</span>
+            <span class="dp">Takes the cohorts defined at Pulse and grows real capability month to month, through deeper skills, applied use cases, coaching and reinforcement. <b>Capability compounds cohort by cohort, so it is sustained growth, not a one-off training event.</b></span>
+          </span>
+          <span class="side">
+            <span class="sh">What it builds</span>
+            <span class="outs"><span class="out">Deeper skills</span><span class="out">Applied use cases</span><span class="out">Coaching</span><span class="out">The default path</span><span class="out">Sustained growth</span></span>
+          </span>
+        </span>
+      </button>
+
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Sherpa, tap to expand" style="--letter:var(--sherpa)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Execution</span>
+        <span class="tname">AI Sherpa</span>
+        <span class="tline">Translates capability into real-world execution. Embedded practitioners clear blockers and transfer ownership.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol">
+            <span class="role">Execution · climb together</span>
+            <span class="dp">Forward-deployed engineers, embedded in your team. Not a spec thrown over the wall. Our engineers sit inside your team and do the hard climb to production alongside you: the integration, the edge cases, the last mile that decides whether AI ships or stalls.</span>
+            <span class="dp"><b>Capability transfers into your people through the hard climb. Ownership, not dependency on us.</b> They finish able to do it without us in the room.</span>
+          </span>
+          <span class="side">
+            <span class="sh">What it builds</span>
+            <span class="outs"><span class="out">Embedded practitioners</span><span class="out">Blockers cleared</span><span class="out">Owners coached</span><span class="out">Ownership transferred</span></span>
+          </span>
+        </span>
+      </button>
     </div>
 
     <div class="flow-note"><b>Change creates the conditions. Accelerate continues the enablement. Sherpa translates capability into execution and client ownership.</b> Three motions, one delivery engine, each with a specific outcome.</div>
@@ -920,14 +956,17 @@
     update();
   })();
 
-  /* Expandable tiles: one open at a time, click again to collapse */
+  /* Expandable tiles: one open at a time per row, click again to collapse */
   (function () {
-    var tiles = document.querySelectorAll('.tile');
-    Array.prototype.forEach.call(tiles, function (t) {
-      t.addEventListener('click', function () {
-        var wasOpen = t.classList.contains('open');
-        Array.prototype.forEach.call(tiles, function (x) { x.classList.remove('open'); x.setAttribute('aria-expanded','false'); });
-        if (!wasOpen) { t.classList.add('open'); t.setAttribute('aria-expanded','true'); }
+    var rows = document.querySelectorAll('.frow');
+    Array.prototype.forEach.call(rows, function (row) {
+      var tiles = row.querySelectorAll('.tile');
+      Array.prototype.forEach.call(tiles, function (t) {
+        t.addEventListener('click', function () {
+          var wasOpen = t.classList.contains('open');
+          Array.prototype.forEach.call(tiles, function (x) { x.classList.remove('open'); x.setAttribute('aria-expanded','false'); });
+          if (!wasOpen) { t.classList.add('open'); t.setAttribute('aria-expanded','true'); }
+        });
       });
     });
   })();
