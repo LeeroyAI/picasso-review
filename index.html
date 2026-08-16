@@ -141,27 +141,32 @@
   .legend .sw { width:12px; height:12px; border-radius:4px; }
   .legend .craft-sw { background:linear-gradient(135deg, var(--change), var(--sherpa)); }
 
-  /* Framework flip cards */
-  .fcards { display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:18px; }
-  .flip { -webkit-appearance:none; appearance:none; background:transparent; border:0; padding:0; margin:0; font-family:inherit; color:inherit; cursor:pointer; display:block; width:100%; text-align:left; height:280px; perspective:1500px; }
-  .flip:focus-visible { outline:2px solid rgb(var(--color-ring)); outline-offset:4px; border-radius:22px; }
-  .flip-inner { position:relative; display:block; width:100%; height:100%; transition:transform .6s cubic-bezier(.2,.7,.2,1); transform-style:preserve-3d; }
-  .flip.on .flip-inner { transform:rotateY(180deg); }
-  .flip .face { position:absolute; inset:0; display:flex; flex-direction:column; -webkit-backface-visibility:hidden; backface-visibility:hidden; border:1px solid var(--border); border-left:4px solid var(--letter); border-radius:20px; box-shadow:var(--shadow); padding:22px 24px; overflow:hidden; background:var(--panel); }
-  .flip:hover .front { border-color:var(--letter); }
-  .flip .top { display:flex; align-items:center; gap:12px; }
-  .flip .mk { width:40px; height:40px; border-radius:11px; display:grid; place-items:center; font-size:17px; font-weight:900; color:var(--letter); background:color-mix(in srgb, var(--letter) 16%, var(--bg)); border:2px solid var(--letter); flex-shrink:0; }
-  .flip .name { font-size:18px; font-weight:800; letter-spacing:-.01em; color:var(--letter); }
-  .flip .role { margin-left:auto; font-size:10px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-mute); text-align:right; }
-  .flip .line { font-size:14px; color:var(--ink-soft); font-weight:500; margin-top:15px; line-height:1.55; }
-  .flip .hint { margin-top:auto; font-size:9.5px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-mute); display:inline-flex; align-items:center; gap:7px; }
-  .flip .hint .fi { font-size:14px; color:var(--letter); }
-  .flip .back { transform:rotateY(180deg); background:color-mix(in srgb, var(--letter) 7%, var(--panel)); }
-  .flip .bname { font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--letter); margin-bottom:10px; }
-  .flip .bp { font-size:12.5px; color:var(--ink-soft); font-weight:500; line-height:1.5; }
-  .flip .outs { display:flex; flex-wrap:wrap; gap:7px; margin-top:auto; padding-top:12px; }
-  .flip .out { font-size:9.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--letter); background:color-mix(in srgb, var(--letter) 12%, transparent); border:1px solid color-mix(in srgb, var(--letter) 38%, transparent); border-radius:999px; padding:3px 9px; }
-  .flip.wide { height:220px; grid-column:1 / -1; }
+  /* Framework tiles: horizontal row, click a tile to expand it to large */
+  .frow { display:flex; flex-wrap:wrap; gap:14px; align-items:stretch; }
+  .tile { position:relative; flex:1 1 150px; min-width:150px; background:var(--panel); border:1px solid var(--border); border-top:3px solid var(--letter); border-radius:14px; padding:16px 16px 15px; cursor:pointer; display:flex; flex-direction:column; text-align:left; font-family:inherit; color:inherit; -webkit-appearance:none; appearance:none; transition:box-shadow .22s ease, border-color .22s ease, background .25s ease; }
+  .tile:hover { border-color:var(--letter); box-shadow:0 12px 26px color-mix(in srgb, var(--letter) 20%, transparent); }
+  .tile:focus-visible { outline:2px solid rgb(var(--color-ring)); outline-offset:3px; }
+  .tile .badge { align-self:flex-start; font-size:8.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--letter); background:color-mix(in srgb, var(--letter) 15%, transparent); border:1px solid color-mix(in srgb, var(--letter) 40%, transparent); border-radius:999px; padding:3px 8px; margin-bottom:10px; }
+  .tile .tname { font-size:14.5px; font-weight:800; letter-spacing:-.01em; margin-bottom:8px; }
+  .tile .tname .k { color:var(--letter); }
+  .tile .tline { font-size:11.5px; color:var(--ink-soft); font-weight:500; line-height:1.45; }
+  .tile .thint { margin-top:auto; padding-top:12px; font-size:8.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute); display:inline-flex; align-items:center; gap:6px; }
+  .tile .thint .fi { color:var(--letter); font-size:11px; }
+  .tile .corner { position:absolute; top:14px; right:16px; font-size:8.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-mute); display:none; }
+  .tile .detail { display:none; }
+  .tile.open { flex-basis:100%; background:color-mix(in srgb, var(--letter) 6%, var(--panel)); box-shadow:0 20px 44px color-mix(in srgb, var(--letter) 20%, transparent); padding:24px 26px 26px; }
+  .tile.open .tline, .tile.open .thint { display:none; }
+  .tile.open .corner { display:block; }
+  .tile.open .badge { font-size:9.5px; margin-bottom:12px; }
+  .tile.open .tname { font-size:23px; margin-bottom:16px; }
+  .tile.open .detail { display:grid; grid-template-columns:1.7fr 1fr; gap:26px; align-items:start; animation:tfade .35s ease both; }
+  .tile.open .detail .dcol { display:flex; flex-direction:column; }
+  @keyframes tfade { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+  .tile.open .detail .role { font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--letter); margin-bottom:9px; }
+  .tile.open .detail .dp { font-size:14px; color:var(--ink-soft); font-weight:500; line-height:1.6; }
+  .tile.open .detail .outs { display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start; }
+  .tile.open .detail .out { font-size:9.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--letter); background:color-mix(in srgb, var(--letter) 12%, transparent); border:1px solid color-mix(in srgb, var(--letter) 38%, transparent); border-radius:999px; padding:4px 11px; }
+  @media (max-width:640px) { .tile.open .detail { grid-template-columns:1fr; gap:16px; } }
 
   /* Delivery engine interlock */
   .flow { display:grid; grid-template-columns:1fr auto 1fr auto 1fr; align-items:stretch; gap:12px; }
@@ -286,7 +291,8 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior:auto; }
     .knob::after { animation:none; }
-    .rail-fill, .knob, .bfill, .cell, .flip-inner { transition:none; }
+    .rail-fill, .knob, .bfill, .cell, .tile { transition:none; }
+    .tile.open .detail { animation:none; }
   }
 </style>
 </head>
@@ -354,113 +360,92 @@
   <section class="section wrap">
     <div class="sec-head">
       <div class="sec-tag">The framework</div>
-      <h2>Seven elements. Tap any tile for the detail.</h2>
+      <h2>Seven elements. Tap any tile to open it.</h2>
       <p>The proven phases hold, each now defined by what it produces. Governance is the canvas beneath. Change is the thread through.</p>
     </div>
 
-    <div class="fcards">
-      <button class="flip" type="button" aria-expanded="false" aria-label="AI Pulse, tap to flip for detail" style="--letter:var(--pulse)">
-        <span class="flip-inner">
-          <span class="face front">
-            <span class="top"><span class="mk">P</span><span class="name">AI Pulse</span><span class="role">Readiness + value</span></span>
-            <span class="line">Readiness, opportunity and value, now ingesting discovery a client has already done.</span>
-            <span class="hint">Tap for detail <span class="fi" aria-hidden="true">⟳</span></span>
-          </span>
-          <span class="face back">
-            <span class="bname">AI Pulse</span>
-            <span class="bp">Assesses readiness, opportunity and where value can be created, and now ingests and structures discovery a client has already produced. Pulse data drives cohort allocation, sets the maturity baseline and feeds the AIM Hub the inputs for every later phase.</span>
-            <span class="outs"><span class="out">Ingests existing discovery</span><span class="out">Cohort allocation</span><span class="out">Readiness baseline</span></span>
-          </span>
+    <div class="frow">
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Pulse, tap to expand" style="--letter:var(--pulse)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Discover</span>
+        <span class="tname"><span class="k">P</span> · AI Pulse</span>
+        <span class="tline">Readiness, opportunity and value, now ingesting discovery a client has already done.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol"><span class="role">Readiness + value</span><span class="dp">Assesses readiness, opportunity and where value can be created, and now ingests and structures discovery a client has already produced. Pulse data drives cohort allocation, sets the maturity baseline and feeds the AIM Hub the inputs for every later phase.</span></span>
+          <span class="outs"><span class="out">Ingests existing discovery</span><span class="out">Cohort allocation</span><span class="out">Readiness baseline</span></span>
         </span>
       </button>
 
-      <button class="flip" type="button" aria-expanded="false" aria-label="AI Ignite, tap to flip for detail" style="--letter:var(--ignite)">
-        <span class="flip-inner">
-          <span class="face front">
-            <span class="top"><span class="mk">I</span><span class="name">AI Ignite</span><span class="role">Strategy to proof</span></span>
-            <span class="line">Strategy to proof. Tangible value fast, momentum for broader adoption.</span>
-            <span class="hint">Tap for detail <span class="fi" aria-hidden="true">⟳</span></span>
-          </span>
-          <span class="face back">
-            <span class="bname">AI Ignite</span>
-            <span class="bp">Moves from strategy to proof. Helps organisations demonstrate tangible value quickly and create the momentum broader adoption needs.</span>
-            <span class="outs"><span class="out">First proof</span><span class="out">Early momentum</span></span>
-          </span>
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Ignite, tap to expand" style="--letter:var(--ignite)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Prove</span>
+        <span class="tname"><span class="k">I</span> · AI Ignite</span>
+        <span class="tline">Strategy to proof. Tangible value fast, momentum for broader adoption.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol"><span class="role">Strategy to proof</span><span class="dp">Moves from strategy to proof. Helps organisations demonstrate tangible value quickly and create the momentum broader adoption needs.</span></span>
+          <span class="outs"><span class="out">First proof</span><span class="out">Early momentum</span></span>
         </span>
       </button>
 
-      <button class="flip" type="button" aria-expanded="false" aria-label="AI Change, tap to flip for detail" style="--letter:var(--change)">
-        <span class="flip-inner">
-          <span class="face front">
-            <span class="top"><span class="mk">C</span><span class="name">AI Change</span><span class="role">Organisational change</span></span>
-            <span class="line">Sponsorship, champions, comms and the behaviours adoption needs.</span>
-            <span class="hint">Tap for detail <span class="fi" aria-hidden="true">⟳</span></span>
-          </span>
-          <span class="face back">
-            <span class="bname">AI Change</span>
-            <span class="bp">A dedicated change capability: executive sponsorship, stakeholder alignment, champion networks, communications, behavioural adoption and reinforcement. It creates the conditions cohort enablement and new solutions need to succeed.</span>
-            <span class="outs"><span class="out">Active sponsorship</span><span class="out">Champion networks</span><span class="out">Sustained behaviour change</span></span>
-          </span>
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Change, tap to expand" style="--letter:var(--change)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Enable</span>
+        <span class="tname"><span class="k">C</span> · AI Change</span>
+        <span class="tline">Sponsorship, champions, comms and the behaviours adoption needs.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol"><span class="role">Organisational change</span><span class="dp">A dedicated change capability: executive sponsorship, stakeholder alignment, champion networks, communications, behavioural adoption and reinforcement. It creates the conditions cohort enablement and new solutions need to succeed.</span></span>
+          <span class="outs"><span class="out">Active sponsorship</span><span class="out">Champion networks</span><span class="out">Sustained behaviour change</span></span>
         </span>
       </button>
 
-      <button class="flip" type="button" aria-expanded="false" aria-label="AI Accelerate, tap to flip for detail" style="--letter:var(--accelerate)">
-        <span class="flip-inner">
-          <span class="face front">
-            <span class="top"><span class="mk">A</span><span class="name">AI Accelerate</span><span class="role">Cohort enablement</span></span>
-            <span class="line">Continues Ignite month to month. Grows real capability in each cohort.</span>
-            <span class="hint">Tap for detail <span class="fi" aria-hidden="true">⟳</span></span>
-          </span>
-          <span class="face back">
-            <span class="bname">AI Accelerate</span>
-            <span class="bp">Continues the Ignite motion month to month. Takes the cohorts from Pulse and grows real capability through deeper skills, applied use cases, coaching and reinforcement. Distinct from Change: Accelerate builds capability, Change builds the conditions.</span>
-            <span class="outs"><span class="out">Month to month</span><span class="out">Applied use cases</span><span class="out">Sustained capability growth</span></span>
-          </span>
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Accelerate, tap to expand" style="--letter:var(--accelerate)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Continue</span>
+        <span class="tname"><span class="k">A</span> · AI Accelerate</span>
+        <span class="tline">Continues Ignite month to month. Grows real capability in each cohort.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol"><span class="role">Cohort enablement</span><span class="dp">Continues the Ignite motion month to month. Takes the cohorts from Pulse and grows real capability through deeper skills, applied use cases, coaching and reinforcement. Distinct from Change: Accelerate builds capability, Change builds the conditions.</span></span>
+          <span class="outs"><span class="out">Month to month</span><span class="out">Applied use cases</span><span class="out">Sustained capability growth</span></span>
         </span>
       </button>
 
-      <button class="flip" type="button" aria-expanded="false" aria-label="AI Scale and Operate, tap to flip for detail" style="--letter:var(--scale)">
-        <span class="flip-inner">
-          <span class="face front">
-            <span class="top"><span class="mk">S</span><span class="name">AI Scale + Operate</span><span class="role">Agentic solutions</span></span>
-            <span class="line">Identify, build and run agentic solutions, with hypercare and lifecycle.</span>
-            <span class="hint">Tap for detail <span class="fi" aria-hidden="true">⟳</span></span>
-          </span>
-          <span class="face back">
-            <span class="bname">AI Scale + Operate</span>
-            <span class="bp">Owns the identification, creation and management of agentic software solutions. Shape and engineer, move to production with structured hypercare, then run them: performance, ownership, lifecycle controls, benefits tracking and continuous improvement.</span>
-            <span class="outs"><span class="out">Agentic solutions</span><span class="out">Hypercare</span><span class="out">Lifecycle + benefits</span></span>
-          </span>
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Scale and Operate, tap to expand" style="--letter:var(--scale)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Build + Run</span>
+        <span class="tname"><span class="k">S</span> · AI Scale + Operate</span>
+        <span class="tline">Identify, build and run agentic solutions, with hypercare and lifecycle.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol"><span class="role">Agentic solutions</span><span class="dp">Owns the identification, creation and management of agentic software solutions. Shape and engineer, move to production with structured hypercare, then run them: performance, ownership, lifecycle controls, benefits tracking and continuous improvement.</span></span>
+          <span class="outs"><span class="out">Agentic solutions</span><span class="out">Hypercare</span><span class="out">Lifecycle + benefits</span></span>
         </span>
       </button>
 
-      <button class="flip" type="button" aria-expanded="false" aria-label="AI Sherpa, tap to flip for detail" style="--letter:var(--sherpa)">
-        <span class="flip-inner">
-          <span class="face front">
-            <span class="top"><span class="mk">S</span><span class="name">AI Sherpa</span><span class="role">Embedded delivery</span></span>
-            <span class="line">Embedded practitioners translating capability into real execution.</span>
-            <span class="hint">Tap for detail <span class="fi" aria-hidden="true">⟳</span></span>
-          </span>
-          <span class="face back">
-            <span class="bname">AI Sherpa</span>
-            <span class="bp">Embedded delivery on the Forward Deployed Engineer model. Practitioners inside the client team apply cohort learning to real work, clear blockers, coach owners and support the build and adoption of agentic solutions. Independence, not dependency.</span>
-            <span class="outs"><span class="out">Embedded practitioners</span><span class="out">Blockers cleared</span><span class="out">Ownership transferred</span></span>
-          </span>
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Sherpa, tap to expand" style="--letter:var(--sherpa)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Embed</span>
+        <span class="tname"><span class="k">S</span> · AI Sherpa</span>
+        <span class="tline">Embedded practitioners translating capability into real execution.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol"><span class="role">Embedded delivery</span><span class="dp">Embedded delivery on the Forward Deployed Engineer model. Practitioners inside the client team apply cohort learning to real work, clear blockers, coach owners and support the build and adoption of agentic solutions. Independence, not dependency.</span></span>
+          <span class="outs"><span class="out">Embedded practitioners</span><span class="out">Blockers cleared</span><span class="out">Ownership transferred</span></span>
         </span>
       </button>
 
-      <button class="flip wide" type="button" aria-expanded="false" aria-label="AI Orchestrate, tap to flip for detail" style="--letter:var(--operate)">
-        <span class="flip-inner">
-          <span class="face front">
-            <span class="top"><span class="mk">O</span><span class="name">AI Orchestrate</span><span class="role">The enterprise operating model</span></span>
-            <span class="line">The enterprise operating model. How work moves across people, agents, data, systems and approvals, where decision rights sit, how demand is prioritised and performance reported.</span>
-            <span class="hint">Tap for detail <span class="fi" aria-hidden="true">⟳</span></span>
-          </span>
-          <span class="face back">
-            <span class="bname">AI Orchestrate</span>
-            <span class="bp">The capability tying everything together. How work moves across people, AI agents, business processes, data, systems and approvals. Where ownership and decision rights sit, how demand is prioritised, how governance forums interact and how performance is reported. Increasingly, this is where mature organisations want practical guidance, and where long-term value is either unlocked or constrained.</span>
-            <span class="outs"><span class="out">Operating model</span><span class="out">Decision rights</span><span class="out">Demand + prioritisation</span><span class="out">Performance reporting</span></span>
-          </span>
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Orchestrate, tap to expand" style="--letter:var(--operate)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Conduct</span>
+        <span class="tname"><span class="k">O</span> · AI Orchestrate</span>
+        <span class="tline">The enterprise operating model. Decision rights, demand, reporting.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol"><span class="role">The enterprise operating model</span><span class="dp">The capability tying everything together. How work moves across people, AI agents, business processes, data, systems and approvals. Where ownership and decision rights sit, how demand is prioritised, how governance forums interact and how performance is reported. Increasingly, this is where mature organisations want practical guidance, and where long-term value is either unlocked or constrained.</span></span>
+          <span class="outs"><span class="out">Operating model</span><span class="out">Decision rights</span><span class="out">Demand + prioritisation</span><span class="out">Performance reporting</span></span>
         </span>
       </button>
     </div>
@@ -696,13 +681,16 @@
     update();
   })();
 
-  /* Flip tiles */
+  /* Expandable tiles: one open at a time, click again to collapse */
   (function () {
-    var cards = document.querySelectorAll('.flip');
-    Array.prototype.forEach.call(cards, function (btn) {
-      btn.addEventListener('click', function () {
-        var on = btn.classList.toggle('on');
-        btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+    var tiles = document.querySelectorAll('.tile');
+    Array.prototype.forEach.call(tiles, function (t) {
+      t.addEventListener('click', function () {
+        var wasOpen = t.classList.contains('open');
+        Array.prototype.forEach.call(tiles, function (x) {
+          x.classList.remove('open'); x.setAttribute('aria-expanded', 'false');
+        });
+        if (!wasOpen) { t.classList.add('open'); t.setAttribute('aria-expanded', 'true'); }
       });
     });
   })();
