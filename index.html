@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="PICASSO: the AI Momentum operating position. From discovering AI opportunities to building the capability, governance, operating model and behaviours to sustain AI at scale. Concept for reaction.">
+<meta name="description" content="PICASSO: the next iteration of AI Momentum. Why we are here, what we learnt, and how the AIM Hub backplane turns capability into repeatable delivery. Concept for reaction.">
 <title>PICASSO · The operating position</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  /* Insentra web colour system. Colour comes from tokens. Dark is default. */
+  /* Insentra web colour system. Colour comes from tokens. */
   :root {
     --color-bg:7 9 15; --color-surface:18 21 32; --color-surface-raised:26 30 45;
     --color-sidebar:13 16 27; --color-input:12 14 22; --color-border:51 65 85; --color-border-strong:90 115 145;
@@ -64,11 +64,11 @@
     --scale:rgb(var(--color-phase-4)); --operate:rgb(var(--color-phase-5)); --governance:rgb(var(--color-phase-6));
     --change:rgb(var(--color-brand)); --sherpa:rgb(var(--color-brand)); --brand:rgb(var(--color-brand));
   }
-  :focus-visible { outline:2px solid rgb(var(--color-ring)); outline-offset:2px; }
+  :focus-visible { outline:2px solid rgb(var(--color-ring)); outline-offset:3px; }
   * { box-sizing:border-box; margin:0; padding:0; }
   html { scroll-behavior:smooth; }
   body { font-family:var(--font-sans); background:var(--bg); color:var(--ink); line-height:1.55; -webkit-font-smoothing:antialiased; transition:background .3s ease, color .3s ease; overflow-x:hidden; }
-  .wrap { max-width:1320px; margin:0 auto; padding:0 32px; }
+  .wrap { max-width:1340px; margin:0 auto; padding:0 34px; }
 
   /* Top bar */
   .topbar { position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); }
@@ -83,69 +83,73 @@
   .theme-btn:hover { border-color:var(--accelerate); }
 
   /* Hero */
-  .hero { position:relative; padding:70px 0 54px; overflow:hidden; }
+  .hero { position:relative; padding:66px 0 48px; overflow:hidden; }
   .hero::before { content:""; position:absolute; inset:-20% -10% auto -10%; height:420px; pointer-events:none;
     background:
-      radial-gradient(600px 300px at 18% 0%, rgb(var(--color-brand) / var(--hero-glow)), transparent 60%),
-      radial-gradient(600px 320px at 55% 10%, rgb(var(--color-phase-3) / var(--hero-glow)), transparent 60%),
-      radial-gradient(600px 300px at 90% 0%, rgb(var(--color-phase-5) / var(--hero-glow)), transparent 60%); }
+      radial-gradient(600px 300px at 16% 0%, rgb(var(--color-brand) / var(--hero-glow)), transparent 60%),
+      radial-gradient(600px 320px at 52% 8%, rgb(var(--color-phase-3) / var(--hero-glow)), transparent 60%),
+      radial-gradient(600px 300px at 88% 0%, rgb(var(--color-phase-5) / var(--hero-glow)), transparent 60%); }
   .hero .wrap { position:relative; }
-  .eyebrow { display:inline-flex; align-items:center; gap:9px; font-size:11.5px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft); border:1px solid var(--border-2); border-radius:999px; padding:6px 14px; margin-bottom:26px; }
+  .eyebrow { display:inline-flex; align-items:center; gap:9px; font-size:11.5px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft); border:1px solid var(--border-2); border-radius:999px; padding:6px 14px; margin-bottom:24px; }
   .eyebrow .dot { width:7px; height:7px; border-radius:50%; background:var(--change); box-shadow:0 0 12px var(--change); }
-  .wordmark { display:flex; flex-wrap:wrap; gap:clamp(4px,1.4vw,16px); margin-bottom:30px; }
+  .wordmark { display:flex; flex-wrap:wrap; gap:clamp(4px,1.4vw,16px); margin-bottom:28px; }
   .glyph { display:flex; flex-direction:column; align-items:center; gap:9px; min-width:60px; }
-  .glyph .ch { font-size:clamp(50px,9.5vw,104px); font-weight:900; line-height:.88; letter-spacing:-.02em; color:var(--letter); text-shadow:0 8px 40px color-mix(in srgb, var(--letter) 45%, transparent); }
+  .glyph .ch { font-size:clamp(48px,9vw,100px); font-weight:900; line-height:.88; letter-spacing:-.02em; color:var(--letter); text-shadow:0 8px 40px color-mix(in srgb, var(--letter) 45%, transparent); }
   .glyph .lbl { font-size:clamp(8.5px,.95vw,11px); font-weight:700; color:var(--ink-soft); text-align:center; max-width:88px; }
   .glyph .lbl b { color:var(--letter); display:block; font-weight:800; }
-  .hero h1 { font-size:clamp(32px,5vw,58px); font-weight:800; letter-spacing:-.02em; line-height:1.03; margin-bottom:18px; max-width:18ch; }
+  .hero h1 { font-size:clamp(32px,5vw,58px); font-weight:800; letter-spacing:-.02em; line-height:1.03; margin-bottom:18px; max-width:20ch; }
   .hero h1 .grad { background:linear-gradient(100deg, var(--change), var(--accelerate), var(--operate)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
-  .hero .sub { font-size:clamp(16px,2vw,21px); color:var(--ink-soft); font-weight:500; max-width:56ch; line-height:1.45; }
+  .hero .sub { font-size:clamp(16px,2vw,21px); color:var(--ink-soft); font-weight:500; max-width:74ch; line-height:1.5; }
   .hero .sub b { color:var(--ink); font-weight:700; }
-  .hero-note { margin-top:30px; display:inline-flex; align-items:center; gap:12px; font-size:12.5px; color:var(--ink-mute); font-weight:500; }
+  .hero-note { margin-top:28px; display:inline-flex; align-items:center; gap:12px; font-size:12.5px; color:var(--ink-mute); font-weight:500; }
   .hero-note span { width:26px; height:1px; background:var(--border-2); }
 
-  /* Section scaffolding */
-  .section { padding:56px 0; }
-  .sec-head { margin-bottom:36px; max-width:64ch; }
+  /* Section scaffolding, wide by default */
+  .section { padding:54px 0; }
+  .sec-head { margin-bottom:34px; max-width:960px; }
+  .sec-head.wide { max-width:none; }
   .sec-tag { font-size:11px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:var(--change); margin-bottom:12px; }
-  .sec-head h2 { font-size:clamp(24px,3.4vw,37px); font-weight:800; letter-spacing:-.015em; line-height:1.12; }
-  .sec-head p { margin-top:14px; color:var(--ink-soft); font-size:16px; font-weight:500; line-height:1.5; }
+  .sec-head h2 { font-size:clamp(25px,3.6vw,40px); font-weight:800; letter-spacing:-.015em; line-height:1.1; }
+  .sec-head p { margin-top:14px; color:var(--ink-soft); font-size:17px; font-weight:500; line-height:1.55; max-width:100ch; }
   .grad-ink { background:linear-gradient(100deg, var(--change), var(--accelerate), var(--operate)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
 
-  /* The shift: from -> to */
-  .shift { display:grid; grid-template-columns:1fr auto 1fr; align-items:stretch; gap:20px; }
-  .shift .col { background:var(--panel); border:1px solid var(--border); border-radius:20px; padding:26px 26px; box-shadow:var(--shadow); position:relative; overflow:hidden; }
+  /* WHY: two-up + learning loop */
+  .why2 { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  .whyc { background:var(--panel); border:1px solid var(--border); border-radius:20px; padding:28px 30px; box-shadow:var(--shadow); }
+  .whyc.signal { border-left:4px solid var(--accelerate); }
+  .whyc.learnt { border-left:4px solid var(--pulse); }
+  .whyc .k { font-size:11px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; margin-bottom:11px; }
+  .whyc.signal .k { color:var(--accelerate); } .whyc.learnt .k { color:var(--pulse); }
+  .whyc h3 { font-size:22px; font-weight:800; letter-spacing:-.01em; margin-bottom:10px; }
+  .whyc p { font-size:14.5px; color:var(--ink-soft); font-weight:500; line-height:1.6; }
+  .whyc .themes { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+  .whyc .theme { font-size:10px; font-weight:800; letter-spacing:.03em; text-transform:uppercase; color:var(--ink); background:var(--panel-2); border:1px solid var(--border); border-radius:999px; padding:5px 11px; }
+
+  .loop { display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin-top:26px; }
+  .lstage { position:relative; background:var(--panel); border:1px solid var(--border); border-top:3px solid var(--letter); border-radius:14px; padding:16px 15px 17px; box-shadow:var(--shadow); }
+  .lstage .ln { font-size:11px; font-weight:800; color:var(--letter); letter-spacing:.1em; }
+  .lstage h4 { font-size:14.5px; font-weight:800; margin:6px 0 6px; letter-spacing:-.01em; }
+  .lstage p { font-size:11.5px; color:var(--ink-soft); font-weight:500; line-height:1.45; }
+  .lstage::after { content:"\2192"; position:absolute; right:-9px; top:50%; transform:translateY(-50%); color:var(--ink-mute); font-weight:800; font-size:15px; z-index:3; }
+  .lstage:last-child::after { content:"\21BA"; color:var(--change); }
+  .loop-note { margin-top:22px; background:linear-gradient(120deg, color-mix(in srgb, var(--change) 12%, var(--bg-2)), color-mix(in srgb, var(--accelerate) 10%, var(--bg-2))); border:1px solid var(--border); border-radius:18px; padding:22px 26px; font-size:16px; font-weight:600; color:var(--ink); line-height:1.5; }
+  .loop-note b { color:var(--change); font-weight:800; }
+
+  /* The shift */
+  .shift { display:grid; grid-template-columns:1fr auto 1fr; align-items:stretch; gap:22px; }
+  .shift .col { background:var(--panel); border:1px solid var(--border); border-radius:20px; padding:28px 30px; box-shadow:var(--shadow); position:relative; overflow:hidden; }
   .shift .col.to { border-left:4px solid var(--change); }
-  .shift .col.to::after { content:""; position:absolute; top:-40px; right:-40px; width:180px; height:180px; background:radial-gradient(circle, rgb(var(--color-brand) / .22), transparent 70%); pointer-events:none; }
+  .shift .col.to::after { content:""; position:absolute; top:-40px; right:-40px; width:200px; height:200px; background:radial-gradient(circle, rgb(var(--color-brand) / .18), transparent 70%); pointer-events:none; }
   .shift .k { font-size:10.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; margin-bottom:10px; color:var(--ink-mute); }
   .shift .col.to .k { color:var(--change); }
-  .shift h3 { font-size:19px; font-weight:800; letter-spacing:-.01em; margin-bottom:8px; }
-  .shift p { font-size:13.5px; color:var(--ink-soft); font-weight:500; line-height:1.55; }
-  .shift .arrow { display:grid; place-items:center; font-size:26px; color:var(--change); font-weight:900; }
+  .shift h3 { font-size:20px; font-weight:800; letter-spacing:-.01em; margin-bottom:8px; }
+  .shift p { font-size:14.5px; color:var(--ink-soft); font-weight:500; line-height:1.6; }
+  .shift .arrow { display:grid; place-items:center; font-size:28px; color:var(--change); font-weight:900; }
 
-  /* Framework rails + legend (overview grid replaced by flip cards) */
-  .band { margin-top:12px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; border-radius:16px; padding:15px 20px; }
-  .band .ic { width:38px; height:38px; border-radius:10px; display:grid; place-items:center; font-size:19px; flex-shrink:0; }
-  .band .tt { flex:1; min-width:220px; }
-  .band .tag { font-size:9.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-mute); }
-  .band h4 { font-size:14px; font-weight:800; }
-  .band p { font-size:12px; color:var(--ink-soft); font-weight:500; margin-top:2px; }
-  .band.thread { background:linear-gradient(100deg, color-mix(in srgb, var(--change) 18%, var(--panel-2)), var(--panel-2)); border:1px solid color-mix(in srgb, var(--change) 40%, var(--border)); }
-  .band.thread .ic { background:color-mix(in srgb, var(--change) 22%, transparent); border:1px solid color-mix(in srgb, var(--change) 45%, transparent); }
-  .band.thread h4 { color:var(--change); }
-  .band.canvas { background:linear-gradient(100deg, color-mix(in srgb, var(--governance) 18%, var(--panel-2)), var(--panel-2)); border:1px solid color-mix(in srgb, var(--governance) 40%, var(--border)); }
-  .band.canvas .ic { background:color-mix(in srgb, var(--governance) 22%, transparent); border:1px solid color-mix(in srgb, var(--governance) 45%, transparent); }
-  .band.canvas h4 { color:var(--governance); }
-  .legend { display:flex; gap:20px; flex-wrap:wrap; margin-top:20px; }
-  .legend div { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft); font-weight:600; }
-  .legend .sw { width:12px; height:12px; border-radius:4px; }
-  .legend .craft-sw { background:linear-gradient(135deg, var(--change), var(--sherpa)); }
-
-  /* Framework tiles: horizontal row, click a tile to expand it to large */
+  /* Framework tiles: row, click to expand large */
   .frow { display:flex; flex-wrap:wrap; gap:14px; align-items:stretch; }
   .tile { position:relative; flex:1 1 150px; min-width:150px; background:var(--panel); border:1px solid var(--border); border-top:3px solid var(--letter); border-radius:14px; padding:16px 16px 15px; cursor:pointer; display:flex; flex-direction:column; text-align:left; font-family:inherit; color:inherit; -webkit-appearance:none; appearance:none; transition:box-shadow .22s ease, border-color .22s ease, background .25s ease; }
   .tile:hover { border-color:var(--letter); box-shadow:0 12px 26px color-mix(in srgb, var(--letter) 20%, transparent); }
-  .tile:focus-visible { outline:2px solid rgb(var(--color-ring)); outline-offset:3px; }
   .tile .badge { align-self:flex-start; font-size:8.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--letter); background:color-mix(in srgb, var(--letter) 15%, transparent); border:1px solid color-mix(in srgb, var(--letter) 40%, transparent); border-radius:999px; padding:3px 8px; margin-bottom:10px; }
   .tile .tname { font-size:14.5px; font-weight:800; letter-spacing:-.01em; margin-bottom:8px; }
   .tile .tname .k { color:var(--letter); }
@@ -154,52 +158,106 @@
   .tile .thint .fi { color:var(--letter); font-size:11px; }
   .tile .corner { position:absolute; top:14px; right:16px; font-size:8.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-mute); display:none; }
   .tile .detail { display:none; }
-  .tile.open { flex-basis:100%; background:color-mix(in srgb, var(--letter) 6%, var(--panel)); box-shadow:0 20px 44px color-mix(in srgb, var(--letter) 20%, transparent); padding:24px 26px 26px; }
+  .tile.open { flex-basis:100%; background:color-mix(in srgb, var(--letter) 6%, var(--panel)); box-shadow:0 20px 44px color-mix(in srgb, var(--letter) 20%, transparent); padding:26px 30px 28px; }
   .tile.open .tline, .tile.open .thint { display:none; }
   .tile.open .corner { display:block; }
   .tile.open .badge { font-size:9.5px; margin-bottom:12px; }
-  .tile.open .tname { font-size:23px; margin-bottom:16px; }
-  .tile.open .detail { display:grid; grid-template-columns:1.7fr 1fr; gap:26px; align-items:start; animation:tfade .35s ease both; }
-  .tile.open .detail .dcol { display:flex; flex-direction:column; }
+  .tile.open .tname { font-size:24px; margin-bottom:18px; }
+  .tile.open .detail { display:grid; grid-template-columns:1.9fr 1fr; gap:30px; align-items:start; animation:tfade .35s ease both; }
   @keyframes tfade { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
-  .tile.open .detail .role { font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--letter); margin-bottom:9px; }
-  .tile.open .detail .dp { font-size:14px; color:var(--ink-soft); font-weight:500; line-height:1.6; }
+  .tile.open .detail .dcol { display:flex; flex-direction:column; }
+  .tile.open .detail .role { font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--letter); margin-bottom:10px; }
+  .tile.open .detail .dp { font-size:14.5px; color:var(--ink-soft); font-weight:500; line-height:1.62; }
+  .tile.open .detail .dp + .dp { margin-top:11px; }
+  .tile.open .detail .dp b { color:var(--ink); font-weight:700; }
+  .tile.open .detail .side { }
+  .tile.open .detail .sh { font-size:9.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute); margin-bottom:9px; }
   .tile.open .detail .outs { display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start; }
   .tile.open .detail .out { font-size:9.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--letter); background:color-mix(in srgb, var(--letter) 12%, transparent); border:1px solid color-mix(in srgb, var(--letter) 38%, transparent); border-radius:999px; padding:4px 11px; }
-  @media (max-width:640px) { .tile.open .detail { grid-template-columns:1fr; gap:16px; } }
+  @media (max-width:760px) { .tile.open .detail { grid-template-columns:1fr; gap:18px; } }
 
-  /* Delivery engine interlock */
-  .flow { display:grid; grid-template-columns:1fr auto 1fr auto 1fr; align-items:stretch; gap:12px; }
-  .fcard { background:var(--panel); border:1px solid var(--border); border-top:3px solid var(--letter); border-radius:16px; padding:20px 20px; box-shadow:var(--shadow); }
-  .fcard .fh { display:flex; align-items:center; gap:9px; margin-bottom:8px; }
-  .fcard .fn { font-size:15.5px; font-weight:800; color:var(--letter); letter-spacing:-.01em; }
+  /* Expandable rails: Change thread + Governance canvas */
+  .railx { border:1px solid var(--border); border-radius:18px; overflow:hidden; margin-top:14px; box-shadow:var(--shadow); }
+  .railx.thread { background:linear-gradient(100deg, color-mix(in srgb, var(--change) 12%, var(--panel)), var(--panel)); border-color:color-mix(in srgb, var(--change) 36%, var(--border)); --letter:var(--change); }
+  .railx.canvas { background:linear-gradient(100deg, color-mix(in srgb, var(--governance) 12%, var(--panel)), var(--panel)); border-color:color-mix(in srgb, var(--governance) 36%, var(--border)); --letter:var(--governance); }
+  .rxhead { width:100%; display:flex; align-items:center; gap:16px; padding:18px 22px; background:transparent; border:0; cursor:pointer; text-align:left; font-family:inherit; color:inherit; }
+  .rxic { width:40px; height:40px; border-radius:11px; display:grid; place-items:center; font-size:20px; flex-shrink:0; background:color-mix(in srgb, var(--letter) 20%, transparent); border:1px solid color-mix(in srgb, var(--letter) 45%, transparent); }
+  .rxtt { flex:1; }
+  .rxtag { display:block; font-size:9.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-mute); }
+  .rxname { display:block; font-size:16px; font-weight:800; color:var(--letter); letter-spacing:-.01em; margin:1px 0 3px; }
+  .rxsum { display:block; font-size:12.5px; color:var(--ink-soft); font-weight:500; line-height:1.5; }
+  .rxplus { margin-left:auto; width:30px; height:30px; border-radius:50%; display:grid; place-items:center; font-size:20px; font-weight:800; color:var(--letter); border:1.5px solid color-mix(in srgb, var(--letter) 45%, transparent); transition:transform .3s ease; flex-shrink:0; }
+  .railx.open .rxplus { transform:rotate(45deg); }
+  .rxdetail { display:none; padding:4px 22px 24px 78px; }
+  .railx.open .rxdetail { display:block; animation:tfade .35s ease both; }
+  .rxgrid { display:grid; grid-template-columns:1.4fr 1fr; gap:26px; align-items:start; }
+  .rxdetail .dp { font-size:14px; color:var(--ink-soft); font-weight:500; line-height:1.62; }
+  .rxdetail .dp + .dp { margin-top:11px; }
+  .rxdetail .dp b { color:var(--ink); font-weight:700; }
+  .rxdetail .sh { font-size:9.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute); margin-bottom:10px; }
+  .rxmap { display:flex; flex-direction:column; gap:8px; }
+  .rxmap .row { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:10px; }
+  .rxmap .no { font-size:11.5px; font-weight:700; color:var(--ink-mute); text-decoration:line-through; text-decoration-color:color-mix(in srgb, var(--color-danger) 65%, transparent); }
+  .rxmap .ar { color:var(--letter); font-weight:900; }
+  .rxmap .yes { font-size:12px; font-weight:800; color:var(--ink); }
+  .rxladder { display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:7px; margin-top:4px; }
+  .rxladder .st { position:relative; background:var(--panel-2); border:1px solid var(--border); border-radius:9px; padding:9px 10px; }
+  .rxladder .st .n { font-size:8px; font-weight:800; letter-spacing:.1em; color:var(--ink-mute); text-transform:uppercase; }
+  .rxladder .st .s { font-size:11px; font-weight:800; margin-top:2px; letter-spacing:-.01em; }
+  .rxladder .st::after { content:"\2192"; position:absolute; right:-7px; top:50%; transform:translateY(-50%); color:var(--ink-mute); font-weight:800; font-size:11px; z-index:3; }
+  .rxladder .st:last-child::after { display:none; }
+  .rxladder .st.peak { background:color-mix(in srgb, var(--letter) 12%, var(--panel-2)); border-color:color-mix(in srgb, var(--letter) 45%, var(--border)); }
+  .rxladder .st.peak .s { color:var(--letter); }
+
+  .legend { display:flex; gap:20px; flex-wrap:wrap; margin-top:20px; }
+  .legend div { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft); font-weight:600; }
+  .legend .sw { width:12px; height:12px; border-radius:4px; }
+  .legend .craft-sw { background:linear-gradient(135deg, var(--change), var(--sherpa)); }
+
+  /* Delivery engine */
+  .flow { display:grid; grid-template-columns:1fr auto 1fr auto 1fr; align-items:stretch; gap:14px; }
+  .fcard { background:var(--panel); border:1px solid var(--border); border-top:3px solid var(--letter); border-radius:18px; padding:24px 24px; box-shadow:var(--shadow); }
+  .fcard .fh { display:flex; align-items:center; gap:9px; margin-bottom:9px; }
+  .fcard .fn { font-size:17px; font-weight:800; color:var(--letter); letter-spacing:-.01em; }
   .fcard .r { font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-mute); }
-  .fcard p { font-size:12px; color:var(--ink-soft); font-weight:500; line-height:1.5; }
-  .fcard .outs { display:flex; flex-wrap:wrap; gap:6px; margin-top:11px; }
+  .fcard p { font-size:13.5px; color:var(--ink-soft); font-weight:500; line-height:1.55; }
+  .fcard .fq { margin-top:12px; font-size:12px; font-weight:700; color:var(--ink); border-top:1px solid var(--border); padding-top:11px; }
+  .fcard .outs { display:flex; flex-wrap:wrap; gap:7px; margin-top:12px; }
   .fcard .out { font-size:9px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--letter); background:color-mix(in srgb, var(--letter) 12%, transparent); border:1px solid color-mix(in srgb, var(--letter) 38%, transparent); border-radius:999px; padding:2px 8px; }
-  .flow .fx { display:grid; place-items:center; font-size:22px; font-weight:900; color:var(--ink-mute); }
-  .flow-note { margin-top:20px; background:linear-gradient(120deg, color-mix(in srgb, var(--change) 12%, var(--bg-2)), color-mix(in srgb, var(--accelerate) 10%, var(--bg-2))); border:1px solid var(--border); border-radius:18px; padding:20px 24px; font-size:14.5px; font-weight:600; color:var(--ink); line-height:1.5; }
+  .flow .fx { display:grid; place-items:center; font-size:24px; font-weight:900; color:var(--ink-mute); }
+  .flow-note { margin-top:22px; background:linear-gradient(120deg, color-mix(in srgb, var(--change) 12%, var(--bg-2)), color-mix(in srgb, var(--accelerate) 10%, var(--bg-2))); border:1px solid var(--border); border-radius:18px; padding:22px 26px; font-size:16px; font-weight:600; color:var(--ink); line-height:1.5; }
   .flow-note b { color:var(--change); font-weight:800; }
 
-  /* AIM Hub */
-  .hub { background:linear-gradient(135deg, color-mix(in srgb, var(--change) 14%, var(--panel)), var(--panel) 55%, color-mix(in srgb, var(--operate) 12%, var(--panel))); border:1px solid var(--border); border-radius:26px; padding:34px 34px; box-shadow:var(--shadow); }
-  .hub-top { display:flex; align-items:center; gap:16px; margin-bottom:22px; flex-wrap:wrap; }
-  .hub-top .ic { width:48px; height:48px; border-radius:13px; display:grid; place-items:center; font-size:24px; background:color-mix(in srgb, var(--change) 22%, transparent); border:1px solid color-mix(in srgb, var(--change) 45%, transparent); }
-  .hub-top h3 { font-size:22px; font-weight:800; letter-spacing:-.015em; }
-  .hub-top p { font-size:13.5px; color:var(--ink-soft); font-weight:500; margin-top:2px; max-width:80ch; }
+  /* AIM Hub, the backplane */
+  .hub { background:linear-gradient(135deg, color-mix(in srgb, var(--change) 13%, var(--panel)), var(--panel) 52%, color-mix(in srgb, var(--operate) 12%, var(--panel))); border:1px solid var(--border); border-radius:28px; padding:38px 38px; box-shadow:var(--shadow); }
+  .hub-top { display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start; margin-bottom:26px; }
+  .hub-top .ic { width:54px; height:54px; border-radius:14px; display:grid; place-items:center; font-size:26px; background:color-mix(in srgb, var(--change) 22%, transparent); border:1px solid color-mix(in srgb, var(--change) 45%, transparent); }
+  .hub-top h3 { font-size:clamp(22px,2.6vw,30px); font-weight:800; letter-spacing:-.015em; margin-bottom:8px; }
+  .hub-top p { font-size:15px; color:var(--ink-soft); font-weight:500; line-height:1.6; max-width:none; }
+  .hub-top p b { color:var(--ink); font-weight:700; }
+  .hub-pipe { display:flex; flex-wrap:wrap; align-items:stretch; gap:10px; margin:6px 0 28px; }
+  .hub-pipe .pstep { flex:1 1 150px; background:var(--panel-2); border:1px solid var(--border); border-radius:13px; padding:14px 15px; position:relative; }
+  .hub-pipe .pstep .pn { font-size:8.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--change); }
+  .hub-pipe .pstep .pt { font-size:13.5px; font-weight:800; margin-top:4px; letter-spacing:-.01em; }
+  .hub-pipe .pstep .pd { font-size:11px; color:var(--ink-soft); font-weight:500; line-height:1.4; margin-top:5px; }
+  .hub-h { font-size:12px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-mute); margin:6px 0 14px; }
   .assets { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
-  .asset { background:var(--panel-2); border:1px solid var(--border); border-radius:13px; padding:14px 14px; }
-  .asset .an { font-size:9px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--change); }
-  .asset .at { font-size:13px; font-weight:800; margin-top:4px; letter-spacing:-.01em; line-height:1.3; }
-  .hub-loop { margin-top:20px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-size:11.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); }
-  .hub-loop .st { background:var(--panel-2); border:1px solid var(--border); border-radius:999px; padding:6px 13px; }
-  .hub-loop .ar { color:var(--change); font-weight:900; }
+  .asset { background:var(--panel-2); border:1px solid var(--border); border-radius:13px; padding:15px 15px; }
+  .asset .an { font-size:8.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--change); }
+  .asset .at { font-size:13.5px; font-weight:800; margin-top:4px; letter-spacing:-.01em; line-height:1.3; }
+  .asset .ad { font-size:11px; color:var(--ink-soft); font-weight:500; line-height:1.45; margin-top:6px; }
+  .hub-why { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:24px; }
+  .hwc { border:1px solid var(--border); border-left:3px solid var(--change); border-radius:14px; padding:18px 20px; background:color-mix(in srgb, var(--change) 5%, var(--panel)); }
+  .hwc h4 { font-size:15.5px; font-weight:800; letter-spacing:-.01em; margin-bottom:6px; }
+  .hwc p { font-size:12.5px; color:var(--ink-soft); font-weight:500; line-height:1.5; }
+  .hub-line { margin-top:26px; border-top:1px solid var(--border); padding-top:22px; font-size:17px; font-weight:700; color:var(--ink); line-height:1.45; }
+  .hub-line b { background:linear-gradient(100deg, var(--change), var(--operate)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
 
-  /* Interactive maturity console */
-  .console { position:relative; display:grid; grid-template-columns:1.55fr 1fr; gap:20px; margin:6px 0 0; }
+  /* Maturity console */
+  .console { position:relative; display:grid; grid-template-columns:1.6fr 1fr; gap:20px; margin:6px 0 0; }
   .card { position:relative; background:color-mix(in srgb, var(--panel) 92%, transparent); border:1px solid var(--border); border-radius:24px; box-shadow:var(--shadow); overflow:hidden; }
   .card::before { content:""; position:absolute; inset:0; border-radius:24px; padding:1px; background:linear-gradient(140deg, rgb(var(--color-brand) / .35), transparent 38%, transparent 62%, rgb(var(--color-phase-5) / .30)); -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; }
-  .axes { padding:24px 26px 20px; display:flex; flex-direction:column; gap:8px; }
+  .axes { padding:24px 28px 20px; display:flex; flex-direction:column; gap:8px; }
   .axes-top { display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:8px; }
   .axes-top .lede { font-size:13px; font-weight:600; color:var(--ink-mute); }
   .axes-top .hint { font-size:10.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute); display:inline-flex; align-items:center; gap:7px; }
@@ -248,51 +306,58 @@
   .next .mv { font-size:13.5px; font-weight:800; color:var(--ink); margin-top:6px; letter-spacing:-.01em; }
   .next .mv b { color:var(--brand); }
   .next .hy { font-size:12px; font-weight:600; color:var(--ink-soft); margin-top:4px; line-height:1.45; }
-  .measure-line { margin-top:20px; font-size:15px; font-weight:600; color:var(--ink-soft); line-height:1.5; max-width:92ch; }
+  .measure-line { margin-top:20px; font-size:16px; font-weight:600; color:var(--ink-soft); line-height:1.5; max-width:110ch; }
   .measure-line b { color:var(--governance); font-weight:800; }
 
   /* Paradigm */
   .para { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
-  .pcard { background:var(--panel); border:1px solid var(--border); border-radius:20px; padding:26px 28px; box-shadow:var(--shadow); }
+  .pcard { background:var(--panel); border:1px solid var(--border); border-radius:20px; padding:28px 30px; box-shadow:var(--shadow); }
   .pcard.sell { border-top:3px solid var(--accelerate); }
   .pcard.deliver { border-top:3px solid var(--operate); }
   .pcard .pk { font-size:10.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; margin-bottom:10px; }
   .pcard.sell .pk { color:var(--accelerate); }
   .pcard.deliver .pk { color:var(--operate); }
-  .pcard h3 { font-size:19px; font-weight:800; letter-spacing:-.01em; margin-bottom:8px; }
-  .pcard p { font-size:13.5px; color:var(--ink-soft); font-weight:500; line-height:1.55; }
-  .para-next { margin-top:22px; background:linear-gradient(120deg, color-mix(in srgb, var(--change) 12%, var(--bg-2)), var(--bg-2)); border:1px solid var(--border); border-radius:20px; padding:26px 30px; }
+  .pcard h3 { font-size:20px; font-weight:800; letter-spacing:-.01em; margin-bottom:8px; }
+  .pcard p { font-size:14px; color:var(--ink-soft); font-weight:500; line-height:1.6; }
+  .pcard ul { list-style:none; margin-top:14px; display:flex; flex-direction:column; gap:8px; }
+  .pcard li { position:relative; padding-left:22px; font-size:13px; color:var(--ink-soft); font-weight:600; }
+  .pcard.sell li::before { content:"\2192"; position:absolute; left:0; color:var(--accelerate); font-weight:900; }
+  .pcard.deliver li::before { content:"\2192"; position:absolute; left:0; color:var(--operate); font-weight:900; }
+  .para-next { margin-top:22px; background:linear-gradient(120deg, color-mix(in srgb, var(--change) 12%, var(--bg-2)), var(--bg-2)); border:1px solid var(--border); border-radius:20px; padding:28px 32px; }
   .para-next .nk { font-size:11px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--change); margin-bottom:8px; }
-  .para-next p { font-size:clamp(17px,2.1vw,22px); font-weight:700; color:var(--ink); line-height:1.4; max-width:50ch; }
+  .para-next p { font-size:clamp(18px,2.2vw,24px); font-weight:700; color:var(--ink); line-height:1.4; max-width:62ch; }
   .para-next p b { background:linear-gradient(100deg, var(--change), var(--accelerate)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
 
   .foot { padding:30px 0 54px; margin-top:14px; border-top:1px solid var(--border); color:var(--ink-mute); font-size:12px; font-weight:500; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
   .foot b { color:var(--ink-soft); }
   .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 
-  @media (max-width:980px) {
-    .journey-grid { grid-template-columns:repeat(2,1fr); }
-    .elems { grid-template-columns:1fr; }
+  @media (max-width:1000px) {
+    .why2 { grid-template-columns:1fr; }
+    .loop { grid-template-columns:repeat(3,1fr); }
+    .lstage:nth-child(3)::after, .lstage:nth-child(6)::after { display:none; }
     .assets { grid-template-columns:repeat(2,1fr); }
+    .hub-why { grid-template-columns:1fr; }
     .console { grid-template-columns:1fr; }
     .para { grid-template-columns:1fr; }
-    .shift { grid-template-columns:1fr; }
-    .shift .arrow { transform:rotate(90deg); }
-    .flow { grid-template-columns:1fr; }
-    .flow .fx { transform:rotate(90deg); }
+    .shift { grid-template-columns:1fr; } .shift .arrow { transform:rotate(90deg); }
+    .flow { grid-template-columns:1fr; } .flow .fx { transform:rotate(90deg); }
+    .rxgrid { grid-template-columns:1fr; }
+    .rxdetail { padding-left:22px; }
   }
   @media (max-width:560px) {
     .wrap { padding:0 18px; }
     .brand small { display:none; } .pill-mock { display:none; }
-    .journey-grid { grid-template-columns:1fr; }
+    .loop { grid-template-columns:1fr; } .lstage::after { display:none; }
     .assets { grid-template-columns:1fr; }
     .cells { grid-template-columns:repeat(2,1fr); }
+    .hub-pipe .pstep { flex-basis:100%; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior:auto; }
     .knob::after { animation:none; }
-    .rail-fill, .knob, .bfill, .cell, .tile { transition:none; }
-    .tile.open .detail { animation:none; }
+    .rail-fill, .knob, .bfill, .cell, .tile, .rxplus { transition:none; }
+    .tile.open .detail, .railx.open .rxdetail { animation:none; }
   }
 </style>
 </head>
@@ -314,7 +379,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
-      <span class="eyebrow"><span class="dot"></span>The operating position</span>
+      <span class="eyebrow"><span class="dot"></span>The next iteration of AI Momentum</span>
 
       <div class="wordmark">
         <div class="glyph" style="--letter:var(--pulse)"><span class="ch">P</span><span class="lbl">AI<b>Pulse</b></span></div>
@@ -327,41 +392,85 @@
       </div>
 
       <h1>From discovering AI, <span class="grad">to operating it at scale.</span></h1>
-      <p class="sub"><b>The strengths of AI Momentum remain.</b> PICASSO expands the framework to build the capability, governance, operating model and behaviours needed to sustain AI across the enterprise.</p>
+      <p class="sub"><b>PICASSO is not a new framework. It is what AI Momentum learnt.</b> The proven phases hold. We have expanded them to build the capability, governance, operating model and behaviours needed to sustain AI across the enterprise, and an AIM Hub that turns all of it into repeatable delivery.</p>
 
       <div class="hero-note"><span></span>Seven elements. A Governance canvas beneath. A Change thread through. An AIM Hub building the assets behind it.</div>
     </div>
+  </section>
+
+  <!-- WHY WE ARE HERE / WHAT WE LEARNT -->
+  <section class="section wrap">
+    <div class="sec-head">
+      <div class="sec-tag">Why we are here</div>
+      <h2>AI Momentum taught us. <span class="grad-ink">PICASSO is what we learnt.</span></h2>
+      <p>Every engagement is a run. Each run throws off evidence about what customers actually need next. That evidence is what turned AI Momentum into PICASSO. Here is the signal we read from the field, and the pattern we are choosing to get ahead of.</p>
+    </div>
+
+    <div class="why2">
+      <div class="whyc signal">
+        <div class="k">The signal</div>
+        <h3>Customer maturity is outrunning the proposition.</h3>
+        <p>Clients increasingly arrive past discovery. They have already done envisioning, ideation and use case work before they reach us. Their question has moved from "what should we pursue" to "how do we operationalise AI across the organisation, safely, and make it stick."</p>
+        <p>Where the strategic vision runs ahead of the packaged delivery, field teams build local, bespoke solutions to meet demand. That is the gap we are closing.</p>
+      </div>
+      <div class="whyc learnt">
+        <div class="k">What we learnt</div>
+        <h3>The next unlock is operational capability.</h3>
+        <p>The same asks keep surfacing across engagements. Not more discovery outputs, but reusable operational assets: how to run, govern, adopt, measure and sustain AI once the first proof is in.</p>
+        <div class="themes">
+          <span class="theme">Operating models</span>
+          <span class="theme">Governance + decision rights</span>
+          <span class="theme">Adoption + champions</span>
+          <span class="theme">Management reporting</span>
+          <span class="theme">Value realisation</span>
+          <span class="theme">Implementation readiness</span>
+          <span class="theme">Scaling beyond pilots</span>
+          <span class="theme">Lifecycle + ownership</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="loop">
+      <div class="lstage" style="--letter:var(--pulse)"><div class="ln">01</div><h4>Field signal</h4><p>What customers actually ask for in live engagements, captured, not guessed.</p></div>
+      <div class="lstage" style="--letter:var(--ignite)"><div class="ln">02</div><h4>Pattern</h4><p>The recurring themes, named and prioritised across the portfolio.</p></div>
+      <div class="lstage" style="--letter:var(--change)"><div class="ln">03</div><h4>Codify</h4><p>The AIM Hub turns the pattern into reusable assets, methods and accountabilities.</p></div>
+      <div class="lstage" style="--letter:var(--accelerate)"><div class="ln">04</div><h4>Deliver</h4><p>Field teams apply the same proven assets instead of reinventing per engagement.</p></div>
+      <div class="lstage" style="--letter:var(--scale)"><div class="ln">05</div><h4>Evidence</h4><p>Every delivery proves what works and surfaces what to sharpen next.</p></div>
+      <div class="lstage" style="--letter:var(--operate)"><div class="ln">06</div><h4>Iterate</h4><p>The framework improves. PICASSO is the current cut, and the loop keeps running.</p></div>
+    </div>
+
+    <div class="loop-note">This is the feedback cycle. <b>AI Momentum did not stand still.</b> PICASSO is the next iteration of that learning, and the AIM Hub is what makes the loop compound rather than reset every time.</div>
   </section>
 
   <!-- THE SHIFT -->
   <section class="section wrap">
     <div class="sec-head">
       <div class="sec-tag">The shift</div>
-      <h2>Customer maturity is moving faster than most propositions.</h2>
-      <p>Clients increasingly arrive past discovery. Their question is not what to pursue, it is how to operationalise AI across the organisation. PICASSO moves the centre of gravity to match.</p>
+      <h2>The centre of gravity moves to operationalisation.</h2>
+      <p>Discovery and prioritisation stay. They are simply no longer the whole job. PICASSO expands the framework to the part mature clients are now asking for, and that our delivery has to make repeatable.</p>
     </div>
 
     <div class="shift">
       <div class="col from">
         <div class="k">Where we were strong</div>
         <h3>Discover and prioritise.</h3>
-        <p>Identify, prioritise and deliver AI opportunities. Envisioning, ideation and use case discovery. Vital, and increasingly a starting point clients have already passed.</p>
+        <p>Identify, prioritise and deliver AI opportunities. Envisioning, ideation and use case discovery. Vital work, and increasingly a starting point mature clients have already passed before they reach us.</p>
       </div>
       <div class="arrow">➜</div>
       <div class="col to">
         <div class="k">Where we are heading</div>
         <h3>Operationalise and sustain.</h3>
-        <p>Build the governance, operating models, human capability and execution discipline to run AI at scale. Reusable operational assets, not more discovery outputs.</p>
+        <p>Build the governance, operating models, human capability and execution discipline to run AI at scale. Reusable operational assets over additional discovery outputs, so value holds long after the first proof.</p>
       </div>
     </div>
   </section>
 
-  <!-- FRAMEWORK: FLIP CARDS -->
+  <!-- FRAMEWORK: FLIP TILES -->
   <section class="section wrap">
-    <div class="sec-head">
+    <div class="sec-head wide">
       <div class="sec-tag">The framework</div>
-      <h2>Seven elements. Tap any tile to open it.</h2>
-      <p>The proven phases hold, each now defined by what it produces. Governance is the canvas beneath. Change is the thread through.</p>
+      <h2>Seven elements. Tap any tile to open the full picture.</h2>
+      <p>The proven phases hold, each now defined by what it produces for the client. Two structural rails hold it together, and both open for detail: a Change thread running through every phase, and a Governance canvas beneath all of them.</p>
     </div>
 
     <div class="frow">
@@ -372,8 +481,15 @@
         <span class="tline">Readiness, opportunity and value, now ingesting discovery a client has already done.</span>
         <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
         <span class="detail">
-          <span class="dcol"><span class="role">Readiness + value</span><span class="dp">Assesses readiness, opportunity and where value can be created, and now ingests and structures discovery a client has already produced. Pulse data drives cohort allocation, sets the maturity baseline and feeds the AIM Hub the inputs for every later phase.</span></span>
-          <span class="outs"><span class="out">Ingests existing discovery</span><span class="out">Cohort allocation</span><span class="out">Readiness baseline</span></span>
+          <span class="dcol">
+            <span class="role">Readiness + value · the entry point</span>
+            <span class="dp">Assesses readiness, opportunity and where value can be created. For mature clients, Pulse now ingests and structures the envisioning and discovery they have already produced, so we start from their priorities rather than repeat work they have done.</span>
+            <span class="dp"><b>Pulse data is the source of truth.</b> It drives cohort allocation, sets the maturity and readiness baseline, and gives the AIM Hub the inputs it needs to generate the delivery agenda, methods and assets for every later phase.</span>
+          </span>
+          <span class="side">
+            <span class="sh">Outcomes</span>
+            <span class="outs"><span class="out">Ingests existing discovery</span><span class="out">Cohort allocation</span><span class="out">Readiness baseline</span><span class="out">Feeds the Hub</span></span>
+          </span>
         </span>
       </button>
 
@@ -384,8 +500,15 @@
         <span class="tline">Strategy to proof. Tangible value fast, momentum for broader adoption.</span>
         <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
         <span class="detail">
-          <span class="dcol"><span class="role">Strategy to proof</span><span class="dp">Moves from strategy to proof. Helps organisations demonstrate tangible value quickly and create the momentum broader adoption needs.</span></span>
-          <span class="outs"><span class="out">First proof</span><span class="out">Early momentum</span></span>
+          <span class="dcol">
+            <span class="role">Strategy to proof · the first win</span>
+            <span class="dp">Moves from strategy to proof. Turns the highest-value opportunities from Pulse into something real your team can use in weeks, demonstrating tangible value quickly.</span>
+            <span class="dp"><b>Momentum is the point.</b> A first win people can feel builds belief faster than any business case, and creates the pull broader adoption needs.</span>
+          </span>
+          <span class="side">
+            <span class="sh">Outcomes</span>
+            <span class="outs"><span class="out">First proof</span><span class="out">Tangible value</span><span class="out">Early momentum</span></span>
+          </span>
         </span>
       </button>
 
@@ -396,8 +519,16 @@
         <span class="tline">Sponsorship, champions, comms and the behaviours adoption needs.</span>
         <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
         <span class="detail">
-          <span class="dcol"><span class="role">Organisational change</span><span class="dp">A dedicated change capability: executive sponsorship, stakeholder alignment, champion networks, communications, behavioural adoption and reinforcement. It creates the conditions cohort enablement and new solutions need to succeed.</span></span>
-          <span class="outs"><span class="out">Active sponsorship</span><span class="out">Champion networks</span><span class="out">Sustained behaviour change</span></span>
+          <span class="dcol">
+            <span class="role">Organisational change · the human craft</span>
+            <span class="dp">A dedicated change capability: executive sponsorship, stakeholder alignment, champion networks, communications, behavioural adoption and reinforcement. It creates the conditions cohort enablement and new solutions need to succeed.</span>
+            <span class="dp"><b>Old change management manages people through a change. Modern change management changes how people behave, by choice.</b> The human is the point, not the risk. This is where adoption becomes something people choose to do, not something they are told to complete.</span>
+            <span class="dp">Because technology never fails alone, adoption does. Change is also the continuous thread running through every element, expanded in the rail below.</span>
+          </span>
+          <span class="side">
+            <span class="sh">Outcomes</span>
+            <span class="outs"><span class="out">Active sponsorship</span><span class="out">Clear ownership</span><span class="out">Champion networks</span><span class="out">Targeted comms</span><span class="out">Sustained behaviour change</span></span>
+          </span>
         </span>
       </button>
 
@@ -408,8 +539,15 @@
         <span class="tline">Continues Ignite month to month. Grows real capability in each cohort.</span>
         <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
         <span class="detail">
-          <span class="dcol"><span class="role">Cohort enablement</span><span class="dp">Continues the Ignite motion month to month. Takes the cohorts from Pulse and grows real capability through deeper skills, applied use cases, coaching and reinforcement. Distinct from Change: Accelerate builds capability, Change builds the conditions.</span></span>
-          <span class="outs"><span class="out">Month to month</span><span class="out">Applied use cases</span><span class="out">Sustained capability growth</span></span>
+          <span class="dcol">
+            <span class="role">Cohort enablement · month to month</span>
+            <span class="dp">Continues the Ignite motion on a month-to-month basis. Takes the cohorts already defined through Pulse and progresses their enablement journey through deeper skills, applied use cases, coaching, measurement and reinforcement.</span>
+            <span class="dp"><b>The outcome is sustained capability growth, not a one-off training event.</b> Accelerate is distinct from Change: Accelerate develops the practical capability of the cohorts, while Change builds the sponsorship, communications and behavioural conditions required for that capability to take hold.</span>
+          </span>
+          <span class="side">
+            <span class="sh">Outcomes</span>
+            <span class="outs"><span class="out">Month to month</span><span class="out">Deeper skills</span><span class="out">Applied use cases</span><span class="out">Coaching</span><span class="out">Sustained capability growth</span></span>
+          </span>
         </span>
       </button>
 
@@ -420,8 +558,15 @@
         <span class="tline">Identify, build and run agentic solutions, with hypercare and lifecycle.</span>
         <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
         <span class="detail">
-          <span class="dcol"><span class="role">Agentic solutions</span><span class="dp">Owns the identification, creation and management of agentic software solutions. Shape and engineer, move to production with structured hypercare, then run them: performance, ownership, lifecycle controls, benefits tracking and continuous improvement.</span></span>
-          <span class="outs"><span class="out">Agentic solutions</span><span class="out">Hypercare</span><span class="out">Lifecycle + benefits</span></span>
+          <span class="dcol">
+            <span class="role">Agentic solutions · build and run</span>
+            <span class="dp">Focuses on the identification, creation and ongoing management of agentic software solutions. Select the right opportunities, shape and engineer the solution, move it into production and provide structured hypercare as it stabilises.</span>
+            <span class="dp"><b>Once operational, it stays healthy.</b> Scale + Operate manages performance, ownership, lifecycle controls, benefits tracking, operational reporting and continuous improvement, so successful solutions expand safely and keep delivering measurable value.</span>
+          </span>
+          <span class="side">
+            <span class="sh">Outcomes</span>
+            <span class="outs"><span class="out">Agentic solutions</span><span class="out">Structured hypercare</span><span class="out">Lifecycle controls</span><span class="out">Benefits tracking</span><span class="out">Continuous improvement</span></span>
+          </span>
         </span>
       </button>
 
@@ -432,8 +577,15 @@
         <span class="tline">Embedded practitioners translating capability into real execution.</span>
         <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
         <span class="detail">
-          <span class="dcol"><span class="role">Embedded delivery</span><span class="dp">Embedded delivery on the Forward Deployed Engineer model. Practitioners inside the client team apply cohort learning to real work, clear blockers, coach owners and support the build and adoption of agentic solutions. Independence, not dependency.</span></span>
-          <span class="outs"><span class="out">Embedded practitioners</span><span class="out">Blockers cleared</span><span class="out">Ownership transferred</span></span>
+          <span class="dcol">
+            <span class="role">Embedded delivery · the last mile</span>
+            <span class="dp">The embedded delivery capability that connects cohort enablement, organisational change and solution execution. Influenced by the Forward Deployed Engineer model, Sherpa embeds experienced practitioners alongside client teams to apply cohort learning to real work, remove implementation blockers, coach business and technical owners, and support the build and adoption of agentic solutions.</span>
+            <span class="dp"><b>The objective is not dependency. It is independence.</b> They finish able to do it without us in the room, with ownership sitting firmly inside the client team.</span>
+          </span>
+          <span class="side">
+            <span class="sh">Outcomes</span>
+            <span class="outs"><span class="out">Embedded practitioners</span><span class="out">Faster application</span><span class="out">Blockers cleared</span><span class="out">Ownership transferred</span></span>
+          </span>
         </span>
       </button>
 
@@ -444,19 +596,78 @@
         <span class="tline">The enterprise operating model. Decision rights, demand, reporting.</span>
         <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
         <span class="detail">
-          <span class="dcol"><span class="role">The enterprise operating model</span><span class="dp">The capability tying everything together. How work moves across people, AI agents, business processes, data, systems and approvals. Where ownership and decision rights sit, how demand is prioritised, how governance forums interact and how performance is reported. Increasingly, this is where mature organisations want practical guidance, and where long-term value is either unlocked or constrained.</span></span>
-          <span class="outs"><span class="out">Operating model</span><span class="out">Decision rights</span><span class="out">Demand + prioritisation</span><span class="out">Performance reporting</span></span>
+          <span class="dcol">
+            <span class="role">The enterprise operating model · the tie</span>
+            <span class="dp">The capability that ties everything together. Orchestrate focuses on the enterprise AI operating model: how work moves across people, AI agents, business processes, data, systems and approvals. Where ownership and decision rights sit, how demand is prioritised, how governance forums interact and how performance is reported.</span>
+            <span class="dp"><b>Increasingly, this is where mature organisations want practical guidance,</b> and where long-term value is either unlocked or constrained.</span>
+          </span>
+          <span class="side">
+            <span class="sh">Outcomes</span>
+            <span class="outs"><span class="out">Operating model</span><span class="out">Decision rights</span><span class="out">Demand + prioritisation</span><span class="out">Governance forums</span><span class="out">Performance reporting</span></span>
+          </span>
         </span>
       </button>
     </div>
 
-    <div class="band thread" style="margin-top:24px">
-      <div class="ic" aria-hidden="true">🧵</div>
-      <div class="tt"><div class="tag">The thread through</div><h4>AI Change · a continuous thread</h4><p>Sustainable AI transformation is a people and behaviour challenge, not a technology deployment exercise. Change runs through every phase.</p></div>
+    <!-- Expandable rails -->
+    <div class="railx thread">
+      <button class="rxhead" type="button" aria-expanded="false">
+        <span class="rxic" aria-hidden="true">🧵</span>
+        <span class="rxtt">
+          <span class="rxtag">The thread through every phase</span>
+          <span class="rxname">AI Change · a continuous thread</span>
+          <span class="rxsum">Sustainable AI transformation is a people and behaviour challenge, not a technology deployment exercise. Tap to open.</span>
+        </span>
+        <span class="rxplus" aria-hidden="true">+</span>
+      </button>
+      <div class="rxdetail">
+        <div class="rxgrid">
+          <div>
+            <p class="dp"><b>Change is not a workstream bolted on at the end. It is the thread running under every element.</b> Old change management manages people through a change. Modern change management changes how people behave, by choice, with the human at the centre. We build agency, not compliance.</p>
+            <p class="dp">At each phase there is a behaviour moment. Pulse reads the human signal. Ignite makes change felt. Change names the craft. Accelerate builds the habit into the work. Scale + Operate lets norms harden and hold. Sherpa transfers ownership. Orchestrate makes it simply the culture. This is how a pilot becomes the way people actually work.</p>
+          </div>
+          <div>
+            <div class="sh">What it rejects, and what it builds</div>
+            <div class="rxmap">
+              <div class="row"><span class="no">Resistance management</span><span class="ar">→</span><span class="yes">Agency building</span></div>
+              <div class="row"><span class="no">Training completion</span><span class="ar">→</span><span class="yes">Habit formation</span></div>
+              <div class="row"><span class="no">A comms plan at go-live</span><span class="ar">→</span><span class="yes">A behaviour system from the first Pulse</span></div>
+              <div class="row"><span class="no">A change team's workstream</span><span class="ar">→</span><span class="yes">How everyone thinks, works and operates</span></div>
+              <div class="row"><span class="no">People as the risk</span><span class="ar">→</span><span class="yes">People as the point</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="band canvas">
-      <div class="ic" aria-hidden="true">🛡️</div>
-      <div class="tt"><div class="tag">The canvas beneath</div><h4>AI Governance · a maturity path</h4><p>Ownership, decision rights, policy, controls, risk, responsible AI, assurance and lifecycle oversight. It evolves as use cases move to production and scale.</p></div>
+
+    <div class="railx canvas">
+      <button class="rxhead" type="button" aria-expanded="false">
+        <span class="rxic" aria-hidden="true">🛡️</span>
+        <span class="rxtt">
+          <span class="rxtag">The canvas beneath every phase</span>
+          <span class="rxname">AI Governance · a maturity path</span>
+          <span class="rxsum">A first-order capability that evolves as use cases move to production and scale, not a one-off design exercise. Tap to open.</span>
+        </span>
+        <span class="rxplus" aria-hidden="true">+</span>
+      </button>
+      <div class="rxdetail">
+        <div class="rxgrid">
+          <div>
+            <p class="dp"><b>Governance is the canvas beneath every phase, and a capability in its own right.</b> It covers ownership, decision rights, policy, controls, risk management, responsible AI, assurance and lifecycle oversight. It runs alongside adoption, not as a supporting topic bolted on later.</p>
+            <p class="dp">It is not a one-off design exercise. Governance evolves as use cases move from experimentation into production and as AI capabilities scale. People move fast precisely because the ground is solid, and mature clients increasingly ask how it works in practice: how ownership sits, how controls evolve, and how capability scales safely over time.</p>
+          </div>
+          <div>
+            <div class="sh">A defined maturity path</div>
+            <div class="rxladder">
+              <div class="st"><div class="n">01</div><div class="s">Ad hoc</div></div>
+              <div class="st"><div class="n">02</div><div class="s">Defined</div></div>
+              <div class="st"><div class="n">03</div><div class="s">Managed</div></div>
+              <div class="st"><div class="n">04</div><div class="s">Assured</div></div>
+              <div class="st peak"><div class="n">05</div><div class="s">Adaptive</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="legend">
@@ -467,76 +678,94 @@
     </div>
   </section>
 
-  <!-- DELIVERY ENGINE: CHANGE / ACCELERATE / SHERPA -->
+  <!-- DELIVERY ENGINE -->
   <section class="section wrap">
-    <div class="sec-head">
+    <div class="sec-head wide">
       <div class="sec-tag">The delivery engine</div>
       <h2>Change, Accelerate and Sherpa, working as one.</h2>
-      <p>Three motions people used to feel as separate. Defined together, each carries its own outcome and hands to the next.</p>
+      <p>Three motions people used to feel as separate. Defined together, each carries its own outcome and hands cleanly to the next, so cohort capability actually reaches real-world execution.</p>
     </div>
 
     <div class="flow">
       <div class="fcard" style="--letter:var(--change)">
         <div class="fh"><span class="fn">AI Change</span><span class="r">Conditions</span></div>
-        <p>Creates the organisational conditions: sponsorship, alignment, champions and the behaviours that let capability take hold.</p>
+        <p>Creates the organisational conditions: sponsorship, alignment, champions and the behaviours that let capability take hold across the business.</p>
+        <div class="fq">Without the conditions, capability never sticks.</div>
         <div class="outs"><span class="out">Sponsorship</span><span class="out">Champions</span><span class="out">Behaviour</span></div>
       </div>
       <div class="fx">➜</div>
       <div class="fcard" style="--letter:var(--accelerate)">
         <div class="fh"><span class="fn">AI Accelerate</span><span class="r">Capability</span></div>
-        <p>Continues each cohort's enablement journey. Deeper skills and applied use cases, month to month, until capability sticks.</p>
+        <p>Continues each cohort's enablement journey. Deeper skills and applied use cases, month to month, with coaching and reinforcement until capability sticks.</p>
+        <div class="fq">Capability without execution stays theoretical.</div>
         <div class="outs"><span class="out">Skills</span><span class="out">Use cases</span><span class="out">Reinforcement</span></div>
       </div>
       <div class="fx">➜</div>
       <div class="fcard" style="--letter:var(--sherpa)">
         <div class="fh"><span class="fn">AI Sherpa</span><span class="r">Execution</span></div>
-        <p>Translates that capability into real-world execution. Embedded practitioners clear blockers and transfer ownership to the client.</p>
+        <p>Translates that capability into real-world execution. Embedded practitioners clear blockers, coach owners and transfer ownership to the client.</p>
+        <div class="fq">Execution is where ownership finally lands.</div>
         <div class="outs"><span class="out">Embedded</span><span class="out">Blockers cleared</span><span class="out">Ownership</span></div>
       </div>
     </div>
 
-    <div class="flow-note"><b>Change creates the conditions. Accelerate continues the enablement. Sherpa translates capability into execution and client ownership.</b> Three motions, one delivery engine.</div>
+    <div class="flow-note"><b>Change creates the conditions. Accelerate continues the enablement. Sherpa translates capability into execution and client ownership.</b> Three motions, one delivery engine, each with a specific outcome.</div>
   </section>
 
-  <!-- AIM HUB -->
+  <!-- AIM HUB, THE BACKPLANE -->
   <section class="section wrap">
+    <div class="sec-head wide">
+      <div class="sec-tag">The engine room</div>
+      <h2>The AIM Hub is the backplane. It is how PICASSO scales.</h2>
+      <p>Framework direction alone does not close the gap. Capability only becomes repeatable when it is converted into delivery assets, methods and accountabilities field teams can use consistently. The Hub is the backplane and asset engine that does exactly that, and the place the feedback loop compounds.</p>
+    </div>
+
     <div class="hub">
       <div class="hub-top">
         <div class="ic" aria-hidden="true">🛠️</div>
         <div>
-          <h3>The AIM Hub: the backplane and asset engine.</h3>
-          <p>Framework direction alone does not close the gap. The Hub converts capability into repeatable delivery assets, methods and accountabilities field teams can use consistently.</p>
+          <h3>One backplane, feeding every phase.</h3>
+          <p>The Hub codifies what works into reusable assets, then makes them easy for teams to discover, apply and refine. As assets are created, tested and improved through delivery, <b>bespoke reinvention falls away and customer outcomes become consistent and repeatable.</b> Pulse data drives the whole thing: it allocates cohorts and gives the Hub the inputs to generate each phase's delivery agenda, methods and assets.</p>
         </div>
       </div>
 
-      <div class="assets">
-        <div class="asset"><div class="an">Reusable</div><div class="at">Operating model patterns</div></div>
-        <div class="asset"><div class="an">Reusable</div><div class="at">Governance and decision-rights artefacts</div></div>
-        <div class="asset"><div class="an">Reusable</div><div class="at">Champion and adoption toolkits</div></div>
-        <div class="asset"><div class="an">Reusable</div><div class="at">Executive reporting packs</div></div>
-        <div class="asset"><div class="an">Reusable</div><div class="at">Value realisation frameworks</div></div>
-        <div class="asset"><div class="an">Reusable</div><div class="at">Readiness assessments</div></div>
-        <div class="asset"><div class="an">Reusable</div><div class="at">Lifecycle management approaches</div></div>
-        <div class="asset"><div class="an">Driven by</div><div class="at">Pulse data and cohort allocation</div></div>
+      <div class="hub-h">How it runs, end to end</div>
+      <div class="hub-pipe">
+        <div class="pstep"><div class="pn">Input</div><div class="pt">Pulse data</div><div class="pd">Readiness, priorities and maturity baseline from every client.</div></div>
+        <div class="pstep"><div class="pn">Allocate</div><div class="pt">Cohorts</div><div class="pd">People grouped by readiness so enablement fits where they are.</div></div>
+        <div class="pstep"><div class="pn">Generate</div><div class="pt">Phase agendas</div><div class="pd">Delivery agendas, methods and assets built per phase, per cohort.</div></div>
+        <div class="pstep"><div class="pn">Deliver</div><div class="pt">In the field</div><div class="pd">Teams apply proven assets rather than starting from a blank page.</div></div>
+        <div class="pstep"><div class="pn">Learn</div><div class="pt">Evidence back</div><div class="pd">What worked flows back in and sharpens the asset for next time.</div></div>
       </div>
 
-      <div class="hub-loop">
-        <span class="st">Create</span><span class="ar">→</span>
-        <span class="st">Test</span><span class="ar">→</span>
-        <span class="st">Improve</span><span class="ar">→</span>
-        <span class="st">Discover</span><span class="ar">→</span>
-        <span class="st">Apply</span><span class="ar">→</span>
-        <span class="st">Refine</span><span class="ar">↺</span>
+      <div class="hub-h">The reusable asset library it codifies</div>
+      <div class="assets">
+        <div class="asset"><div class="an">Reusable</div><div class="at">Operating model patterns</div><div class="ad">Blueprints for how work, agents, data and approvals move across the enterprise.</div></div>
+        <div class="asset"><div class="an">Reusable</div><div class="at">Governance and decision-rights artefacts</div><div class="ad">Policy, controls and ownership models that scale from pilot to production.</div></div>
+        <div class="asset"><div class="an">Reusable</div><div class="at">Champion and adoption toolkits</div><div class="ad">Stakeholder plans, champion playbooks, comms patterns and reinforcement.</div></div>
+        <div class="asset"><div class="an">Reusable</div><div class="at">Executive reporting packs</div><div class="ad">Board-ready views of adoption, capability, readiness, value and risk.</div></div>
+        <div class="asset"><div class="an">Reusable</div><div class="at">Value realisation frameworks</div><div class="ad">Benefits definition, KPI ownership and tracking through to realised value.</div></div>
+        <div class="asset"><div class="an">Reusable</div><div class="at">Readiness assessments</div><div class="ad">Technology, data, process, governance, risk and ownership checks.</div></div>
+        <div class="asset"><div class="an">Reusable</div><div class="at">Lifecycle management approaches</div><div class="ad">Hypercare, monitoring, drift and continuous improvement once live.</div></div>
+        <div class="asset"><div class="an">Driven by</div><div class="at">Pulse-generated delivery agendas</div><div class="ad">Per-cohort, per-phase plans generated straight from Pulse data.</div></div>
       </div>
+
+      <div class="hub-why">
+        <div class="hwc"><h4>Repeatable, not bespoke</h4><p>Field teams deliver the same promise consistently, without reinventing governance, adoption or reporting per engagement.</p></div>
+        <div class="hwc"><h4>Compounding, not resetting</h4><p>Every delivery improves the asset. The next engagement starts stronger than the last, so quality climbs over time.</p></div>
+        <div class="hwc"><h4>Consistent outcomes</h4><p>The same quality bar, whoever delivers and wherever they are, from the first Pulse to a running enterprise capability.</p></div>
+      </div>
+
+      <div class="hub-line">PICASSO gives us the structure. <b>The AIM Hub is the backplane that turns it into repeatable delivery, and the loop that keeps it learning.</b></div>
     </div>
   </section>
 
   <!-- MATURITY CONSOLE -->
   <section class="section wrap">
-    <div class="sec-head">
+    <div class="sec-head wide">
       <div class="sec-tag">Measuring what matters</div>
       <h2>Beyond tool adoption, towards organisational outcomes.</h2>
-      <p>The maturity model reads three dimensions at once and connects them to operational and business outcomes. Move the levers to where a client sits. It can feed an executive reporting view of adoption, capability, readiness, value and risk.</p>
+      <p>The maturity model reads three dimensions at once and connects them to operational and business outcomes. Move the levers to where a client sits. It can feed an executive reporting view of adoption, capability growth, implementation readiness, realised value and the actions required to sustain progress.</p>
     </div>
 
     <div class="console">
@@ -569,28 +798,38 @@
 
   <!-- PARADIGM -->
   <section class="section wrap">
-    <div class="sec-head">
+    <div class="sec-head wide">
       <div class="sec-tag">The paradigm to resolve</div>
       <h2>Proposition and delivery have to mature together.</h2>
-      <p>This is the tension the shift exposes. Get one ahead of the other and we feel it in the field.</p>
+      <p>This is the tension the shift exposes, and the reason PICASSO and the AIM Hub matter now. Get one ahead of the other and we feel it in the field. The work is to hold them in step.</p>
     </div>
 
     <div class="para">
       <div class="pcard sell">
         <div class="pk">The proposition</div>
         <h3>Strong enough to sell the future state.</h3>
-        <p>Our story has to match the operating capability mature clients are already asking for. Governance, operating models, adoption, value and lifecycle, positioned with confidence.</p>
+        <p>Our story has to match the operating capability mature clients are already asking for, positioned with confidence.</p>
+        <ul>
+          <li>Governance, operating models and decision rights</li>
+          <li>Adoption, value realisation and executive reporting</li>
+          <li>Scaling and lifecycle beyond the first pilot</li>
+        </ul>
       </div>
       <div class="pcard deliver">
         <div class="pk">The delivery system</div>
         <h3>Mature enough to fulfil it consistently.</h3>
-        <p>The AIM Hub assets, methods and accountabilities have to be repeatable, so field teams deliver the promise without reinventing it per engagement.</p>
+        <p>The AIM Hub assets, methods and accountabilities have to be repeatable, so field teams deliver without reinventing per engagement.</p>
+        <ul>
+          <li>Reusable assets for every phase and capability</li>
+          <li>Clear ownership and accountabilities in delivery</li>
+          <li>Evidence flowing back to sharpen the next run</li>
+        </ul>
       </div>
     </div>
 
     <div class="para-next">
       <div class="nk">The next step</div>
-      <p>Align <b>what we position, what we can deliver today, and what we must build next.</b></p>
+      <p>Align <b>what we position, what we can deliver today, and what we must build next.</b> That alignment is the work, and the Hub is where we do it.</p>
     </div>
   </section>
 
@@ -687,10 +926,20 @@
     Array.prototype.forEach.call(tiles, function (t) {
       t.addEventListener('click', function () {
         var wasOpen = t.classList.contains('open');
-        Array.prototype.forEach.call(tiles, function (x) {
-          x.classList.remove('open'); x.setAttribute('aria-expanded', 'false');
-        });
-        if (!wasOpen) { t.classList.add('open'); t.setAttribute('aria-expanded', 'true'); }
+        Array.prototype.forEach.call(tiles, function (x) { x.classList.remove('open'); x.setAttribute('aria-expanded','false'); });
+        if (!wasOpen) { t.classList.add('open'); t.setAttribute('aria-expanded','true'); }
+      });
+    });
+  })();
+
+  /* Expandable rails: Change thread + Governance canvas */
+  (function () {
+    var heads = document.querySelectorAll('.railx .rxhead');
+    Array.prototype.forEach.call(heads, function (h) {
+      h.addEventListener('click', function () {
+        var r = h.closest('.railx');
+        var on = r.classList.toggle('open');
+        h.setAttribute('aria-expanded', on ? 'true' : 'false');
       });
     });
   })();
