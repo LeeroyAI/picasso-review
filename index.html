@@ -3,911 +3,514 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="PICASSO: the AIMomentum framework with an ACM change-thread overlay and an interactive, three-axis maturity model. Concept mockup for reaction.">
-<title>PICASSO · Human at the centre</title>
+<meta name="description" content="PICASSO: the AI Momentum operating position. From discovering AI opportunities to building the capability, governance, operating model and behaviours to sustain AI at scale. Concept for reaction.">
+<title>PICASSO · The operating position</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  /* ============================================================
-     Insentra web colour system. Tokens pasted from the
-     insentra-web-color-system skill. Colour comes from these
-     tokens, not from ad hoc hex. Dark is the default.
-     ============================================================ */
+  /* Insentra web colour system. Colour comes from tokens. Dark is default. */
   :root {
-    --color-bg:             7 9 15;
-    --color-surface:        18 21 32;
-    --color-surface-raised: 26 30 45;
-    --color-sidebar:        13 16 27;
-    --color-input:          12 14 22;
-    --color-border:         51 65 85;
-    --color-border-strong:  90 115 145;
-    --color-text:           241 245 249;
-    --color-text-2:         190 200 215;
-    --color-text-3:         154 170 187;
-    --color-text-muted:     154 170 187;
-    --color-text-disabled:  71 85 105;
-    --color-brand:          242 101 34;
-    --color-brand-hover:    220 88 22;
-    --color-brand-light:    255 140 66;
-    --color-brand-fg:       255 255 255;
-    --color-ink-on-fill:    10 10 10;
-    --color-success:        16 185 129;
-    --color-warning:        245 158 11;
-    --color-warning-fg:     40 26 3;
-    --color-danger:         239 68 68;
-    --color-info:           59 130 246;
-    --color-ring:           242 101 34;
-    /* Phase accents: Pulse, Ignite, Accelerate, Scale, Operate, Governance */
-    --color-phase-1: 52 178 122;  --color-phase-2: 78 121 184;  --color-phase-3: 133 119 206;
-    --color-phase-4: 31 168 160;  --color-phase-5: 79 176 212;  --color-phase-6: 176 106 166;
-    --font-sans: 'Montserrat', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    --hero-glow: 0.18;
-    --shadow: 0 24px 60px rgba(0,0,0,.55);
+    --color-bg:7 9 15; --color-surface:18 21 32; --color-surface-raised:26 30 45;
+    --color-sidebar:13 16 27; --color-input:12 14 22; --color-border:51 65 85; --color-border-strong:90 115 145;
+    --color-text:241 245 249; --color-text-2:190 200 215; --color-text-3:154 170 187; --color-text-disabled:71 85 105;
+    --color-brand:242 101 34; --color-brand-hover:220 88 22; --color-brand-light:255 140 66; --color-brand-fg:255 255 255; --color-ink-on-fill:10 10 10;
+    --color-success:16 185 129; --color-warning:245 158 11; --color-danger:239 68 68; --color-info:59 130 246; --color-ring:242 101 34;
+    --color-phase-1:52 178 122; --color-phase-2:78 121 184; --color-phase-3:133 119 206;
+    --color-phase-4:31 168 160; --color-phase-5:79 176 212; --color-phase-6:176 106 166;
+    --font-sans:'Montserrat', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --hero-glow:0.18; --shadow:0 24px 60px rgba(0,0,0,.55);
   }
-
-  /* Light mode, forced by a .light class on any ancestor */
   .light {
-    --color-bg:             245 244 240;
-    --color-surface:        255 255 255;
-    --color-surface-raised: 233 227 217;
-    --color-sidebar:        250 248 244;
-    --color-input:          255 255 255;
-    --color-border:         216 213 206;
-    --color-border-strong:  148 142 128;
-    --color-text:           17 17 17;
-    --color-text-2:         80 80 80;
-    --color-text-3:         100 100 100;
-    --color-text-muted:     130 130 130;
-    --color-text-disabled:  180 180 180;
-    --color-brand:          192 74 20;
-    --color-brand-hover:    160 62 16;
-    --color-brand-light:    242 101 34;
-    --color-brand-fg:       255 255 255;
-    --color-ink-on-fill:    255 255 255;
-    --color-success:        15 118 110;
-    --color-warning:        180 83 9;
-    --color-warning-fg:     255 255 255;
-    --color-danger:         185 28 28;
-    --color-info:           29 78 216;
-    --color-ring:           192 74 20;
-    --color-phase-1: 27 122 70;   --color-phase-2: 58 90 140;   --color-phase-3: 94 82 176;
-    --color-phase-4: 14 124 120;  --color-phase-5: 44 111 140;  --color-phase-6: 138 74 128;
-    --hero-glow: 0.12;
-    --shadow: 0 18px 44px rgba(17,17,17,.10);
+    --color-bg:245 244 240; --color-surface:255 255 255; --color-surface-raised:233 227 217;
+    --color-sidebar:250 248 244; --color-input:255 255 255; --color-border:216 213 206; --color-border-strong:148 142 128;
+    --color-text:17 17 17; --color-text-2:80 80 80; --color-text-3:100 100 100; --color-text-disabled:180 180 180;
+    --color-brand:192 74 20; --color-brand-hover:160 62 16; --color-brand-light:242 101 34; --color-brand-fg:255 255 255; --color-ink-on-fill:255 255 255;
+    --color-success:15 118 110; --color-warning:180 83 9; --color-danger:185 28 28; --color-info:29 78 216; --color-ring:192 74 20;
+    --color-phase-1:27 122 70; --color-phase-2:58 90 140; --color-phase-3:94 82 176;
+    --color-phase-4:14 124 120; --color-phase-5:44 111 140; --color-phase-6:138 74 128;
+    --hero-glow:0.12; --shadow:0 18px 44px rgba(17,17,17,.10);
   }
-
-  /* Light mode by OS preference, unless .dark forces dark */
   @media (prefers-color-scheme: light) {
     :root:not(.dark) {
       --color-bg:245 244 240; --color-surface:255 255 255; --color-surface-raised:233 227 217;
-      --color-sidebar:250 248 244; --color-input:255 255 255; --color-border:216 213 206;
-      --color-border-strong:148 142 128; --color-text:17 17 17; --color-text-2:80 80 80;
-      --color-text-3:100 100 100; --color-text-muted:130 130 130; --color-text-disabled:180 180 180;
-      --color-brand:192 74 20; --color-brand-hover:160 62 16; --color-brand-light:242 101 34;
-      --color-brand-fg:255 255 255; --color-ink-on-fill:255 255 255; --color-success:15 118 110;
-      --color-warning:180 83 9; --color-warning-fg:255 255 255; --color-danger:185 28 28;
-      --color-info:29 78 216; --color-ring:192 74 20;
+      --color-sidebar:250 248 244; --color-input:255 255 255; --color-border:216 213 206; --color-border-strong:148 142 128;
+      --color-text:17 17 17; --color-text-2:80 80 80; --color-text-3:100 100 100; --color-text-disabled:180 180 180;
+      --color-brand:192 74 20; --color-brand-hover:160 62 16; --color-brand-light:242 101 34; --color-brand-fg:255 255 255; --color-ink-on-fill:255 255 255;
+      --color-success:15 118 110; --color-warning:180 83 9; --color-danger:185 28 28; --color-info:29 78 216; --color-ring:192 74 20;
       --color-phase-1:27 122 70; --color-phase-2:58 90 140; --color-phase-3:94 82 176;
       --color-phase-4:14 124 120; --color-phase-5:44 111 140; --color-phase-6:138 74 128;
       --hero-glow:0.12; --shadow:0 18px 44px rgba(17,17,17,.10);
     }
   }
-
-  /* Dark mode, forced by a .dark class, wins over the OS */
   .dark {
     --color-bg:7 9 15; --color-surface:18 21 32; --color-surface-raised:26 30 45;
-    --color-sidebar:13 16 27; --color-input:12 14 22; --color-border:51 65 85;
-    --color-border-strong:90 115 145; --color-text:241 245 249; --color-text-2:190 200 215;
-    --color-text-3:154 170 187; --color-text-muted:154 170 187; --color-text-disabled:71 85 105;
-    --color-brand:242 101 34; --color-brand-hover:220 88 22; --color-brand-light:255 140 66;
-    --color-brand-fg:255 255 255; --color-ink-on-fill:10 10 10; --color-success:16 185 129;
-    --color-warning:245 158 11; --color-warning-fg:40 26 3; --color-danger:239 68 68;
-    --color-info:59 130 246; --color-ring:242 101 34;
+    --color-sidebar:13 16 27; --color-input:12 14 22; --color-border:51 65 85; --color-border-strong:90 115 145;
+    --color-text:241 245 249; --color-text-2:190 200 215; --color-text-3:154 170 187; --color-text-disabled:71 85 105;
+    --color-brand:242 101 34; --color-brand-hover:220 88 22; --color-brand-light:255 140 66; --color-brand-fg:255 255 255; --color-ink-on-fill:10 10 10;
+    --color-success:16 185 129; --color-warning:245 158 11; --color-danger:239 68 68; --color-info:59 130 246; --color-ring:242 101 34;
     --color-phase-1:52 178 122; --color-phase-2:78 121 184; --color-phase-3:133 119 206;
     --color-phase-4:31 168 160; --color-phase-5:79 176 212; --color-phase-6:176 106 166;
     --hero-glow:0.18; --shadow:0 24px 60px rgba(0,0,0,.55);
   }
 
-  /* Bridge: this mockup's semantic variable names resolve from the tokens above,
-     so every colour on the page is driven by the system, in both modes. */
   :root {
-    --bg:         rgb(var(--color-bg));
-    --bg-2:       rgb(var(--color-surface));
-    --panel:      rgb(var(--color-surface));
-    --panel-2:    rgb(var(--color-surface-raised));
-    --border:     rgb(var(--color-border));
-    --border-2:   rgb(var(--color-border-strong));
-    --ink:        rgb(var(--color-text));
-    --ink-soft:   rgb(var(--color-text-2));
-    --ink-mute:   rgb(var(--color-text-3));
-    --pulse:      rgb(var(--color-phase-1));
-    --ignite:     rgb(var(--color-phase-2));
-    --accelerate: rgb(var(--color-phase-3));
-    --scale:      rgb(var(--color-phase-4));
-    --operate:    rgb(var(--color-phase-5));
-    --governance: rgb(var(--color-phase-6));
-    --change:     rgb(var(--color-brand));
-    --sherpa:     rgb(var(--color-brand));
-    --brand:      rgb(var(--color-brand));
+    --bg:rgb(var(--color-bg)); --bg-2:rgb(var(--color-surface));
+    --panel:rgb(var(--color-surface)); --panel-2:rgb(var(--color-surface-raised));
+    --border:rgb(var(--color-border)); --border-2:rgb(var(--color-border-strong));
+    --ink:rgb(var(--color-text)); --ink-soft:rgb(var(--color-text-2)); --ink-mute:rgb(var(--color-text-3));
+    --pulse:rgb(var(--color-phase-1)); --ignite:rgb(var(--color-phase-2)); --accelerate:rgb(var(--color-phase-3));
+    --scale:rgb(var(--color-phase-4)); --operate:rgb(var(--color-phase-5)); --governance:rgb(var(--color-phase-6));
+    --change:rgb(var(--color-brand)); --sherpa:rgb(var(--color-brand)); --brand:rgb(var(--color-brand));
   }
+  :focus-visible { outline:2px solid rgb(var(--color-ring)); outline-offset:2px; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { font-family:var(--font-sans); background:var(--bg); color:var(--ink); line-height:1.55; -webkit-font-smoothing:antialiased; transition:background .3s ease, color .3s ease; overflow-x:hidden; }
+  .wrap { max-width:1180px; margin:0 auto; padding:0 28px; }
 
-  :focus-visible { outline: 2px solid rgb(var(--color-ring)); outline-offset: 2px; }
+  /* Top bar */
+  .topbar { position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); }
+  .topbar-inner { display:flex; align-items:center; justify-content:space-between; height:62px; }
+  .brand { display:flex; align-items:center; gap:11px; font-weight:800; letter-spacing:.02em; }
+  .brand .logo { width:34px; height:34px; border-radius:9px; display:grid; place-items:center; font-size:18px; background:linear-gradient(135deg, var(--change), var(--accelerate)); box-shadow:0 6px 18px rgb(var(--color-phase-3) / .35); }
+  .brand small { display:block; font-size:10px; font-weight:600; letter-spacing:.18em; color:var(--ink-mute); text-transform:uppercase; }
+  .brand b { font-size:16px; }
+  .top-actions { display:flex; align-items:center; gap:14px; }
+  .pill-mock { font-size:10.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute); border:1px solid var(--border-2); border-radius:999px; padding:5px 11px; }
+  .theme-btn { display:flex; align-items:center; gap:8px; background:var(--panel-2); color:var(--ink); border:1px solid var(--border-2); border-radius:999px; padding:7px 14px; font-family:inherit; font-size:12.5px; font-weight:600; cursor:pointer; transition:border-color .2s; }
+  .theme-btn:hover { border-color:var(--accelerate); }
 
-  /* Utility classes from the system preamble, present for portable markup. */
-  .bg-bg{background-color:rgb(var(--color-bg))} .bg-surface{background-color:rgb(var(--color-surface))}
-  .bg-surface-raised{background-color:rgb(var(--color-surface-raised))} .bg-sidebar{background-color:rgb(var(--color-sidebar))}
-  .bg-input{background-color:rgb(var(--color-input))}
-  .border-strong{border-color:rgb(var(--color-border-strong))} .border-stroke{border-color:rgb(var(--color-border))}
-  .text-text{color:rgb(var(--color-text))} .text-text-2{color:rgb(var(--color-text-2))}
-  .text-brand{color:rgb(var(--color-brand))}
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-    transition: background .3s ease, color .3s ease;
-    overflow-x: hidden;
-  }
-
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
-
-  /* ---------- Top bar ---------- */
-  .topbar {
-    position: sticky; top: 0; z-index: 50;
-    background: color-mix(in srgb, var(--bg) 82%, transparent);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-  }
-  .topbar-inner {
-    display: flex; align-items: center; justify-content: space-between;
-    height: 62px;
-  }
-  .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: .02em; }
-  .brand .logo {
-    width: 34px; height: 34px; border-radius: 9px;
-    display: grid; place-items: center; font-size: 18px;
-    background: linear-gradient(135deg, var(--change), var(--accelerate));
-    box-shadow: 0 6px 18px rgb(var(--color-phase-3) / .35);
-  }
-  .brand small { display: block; font-size: 10px; font-weight: 600; letter-spacing: .18em; color: var(--ink-mute); text-transform: uppercase; }
-  .brand b { font-size: 16px; }
-  .top-actions { display: flex; align-items: center; gap: 14px; }
-  .pill-mock {
-    font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
-    color: var(--ink-mute); border: 1px solid var(--border-2); border-radius: 999px;
-    padding: 5px 11px;
-  }
-  .theme-btn {
-    display: flex; align-items: center; gap: 8px;
-    background: var(--panel-2); color: var(--ink);
-    border: 1px solid var(--border-2); border-radius: 999px;
-    padding: 7px 14px; font-family: inherit; font-size: 12.5px; font-weight: 600;
-    cursor: pointer; transition: border-color .2s, background .2s;
-  }
-  .theme-btn:hover { border-color: var(--accelerate); }
-
-  /* ---------- Hero ---------- */
-  .hero {
-    position: relative;
-    padding: 74px 0 60px;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: ""; position: absolute; inset: -20% -10% auto -10%; height: 420px;
+  /* Hero */
+  .hero { position:relative; padding:70px 0 54px; overflow:hidden; }
+  .hero::before { content:""; position:absolute; inset:-20% -10% auto -10%; height:420px; pointer-events:none;
     background:
-      radial-gradient(600px 300px at 20% 0%, rgb(var(--color-brand) / var(--hero-glow)), transparent 60%),
+      radial-gradient(600px 300px at 18% 0%, rgb(var(--color-brand) / var(--hero-glow)), transparent 60%),
       radial-gradient(600px 320px at 55% 10%, rgb(var(--color-phase-3) / var(--hero-glow)), transparent 60%),
-      radial-gradient(600px 300px at 88% 0%, rgb(var(--color-phase-5) / var(--hero-glow)), transparent 60%);
-    pointer-events: none;
-  }
-  .hero .wrap { position: relative; }
-  .eyebrow {
-    display: inline-flex; align-items: center; gap: 9px;
-    font-size: 11.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
-    color: var(--ink-soft);
-    border: 1px solid var(--border-2); border-radius: 999px; padding: 6px 14px;
-    margin-bottom: 30px;
-  }
-  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--change); box-shadow: 0 0 12px var(--change); }
+      radial-gradient(600px 300px at 90% 0%, rgb(var(--color-phase-5) / var(--hero-glow)), transparent 60%); }
+  .hero .wrap { position:relative; }
+  .eyebrow { display:inline-flex; align-items:center; gap:9px; font-size:11.5px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft); border:1px solid var(--border-2); border-radius:999px; padding:6px 14px; margin-bottom:26px; }
+  .eyebrow .dot { width:7px; height:7px; border-radius:50%; background:var(--change); box-shadow:0 0 12px var(--change); }
+  .wordmark { display:flex; flex-wrap:wrap; gap:clamp(4px,1.4vw,16px); margin-bottom:30px; }
+  .glyph { display:flex; flex-direction:column; align-items:center; gap:9px; min-width:60px; }
+  .glyph .ch { font-size:clamp(50px,9.5vw,104px); font-weight:900; line-height:.88; letter-spacing:-.02em; color:var(--letter); text-shadow:0 8px 40px color-mix(in srgb, var(--letter) 45%, transparent); }
+  .glyph .lbl { font-size:clamp(8.5px,.95vw,11px); font-weight:700; color:var(--ink-soft); text-align:center; max-width:88px; }
+  .glyph .lbl b { color:var(--letter); display:block; font-weight:800; }
+  .hero h1 { font-size:clamp(32px,5vw,58px); font-weight:800; letter-spacing:-.02em; line-height:1.03; margin-bottom:18px; max-width:18ch; }
+  .hero h1 .grad { background:linear-gradient(100deg, var(--change), var(--accelerate), var(--operate)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+  .hero .sub { font-size:clamp(16px,2vw,21px); color:var(--ink-soft); font-weight:500; max-width:56ch; line-height:1.45; }
+  .hero .sub b { color:var(--ink); font-weight:700; }
+  .hero-note { margin-top:30px; display:inline-flex; align-items:center; gap:12px; font-size:12.5px; color:var(--ink-mute); font-weight:500; }
+  .hero-note span { width:26px; height:1px; background:var(--border-2); }
 
-  /* Wordmark */
-  .wordmark {
-    display: flex; flex-wrap: wrap; gap: clamp(4px, 1.4vw, 16px);
-    margin-bottom: 34px;
-  }
-  .glyph {
-    display: flex; flex-direction: column; align-items: center; gap: 10px;
-    min-width: 64px;
-  }
-  .glyph .ch {
-    font-size: clamp(58px, 11vw, 128px);
-    font-weight: 900; line-height: .88; letter-spacing: -.02em;
-    color: var(--letter);
-    text-shadow: 0 8px 40px color-mix(in srgb, var(--letter) 45%, transparent);
-    transition: transform .25s ease;
-  }
-  .glyph:hover .ch { transform: translateY(-6px); }
-  .glyph .lbl {
-    font-size: clamp(9px, 1vw, 12px); font-weight: 700; letter-spacing: .04em;
-    color: var(--ink-soft); text-align: center; white-space: normal; max-width: 92px; margin: 0 auto;
-  }
-  .glyph .lbl b { color: var(--letter); display: block; font-weight: 800; }
-  .glyph.craft .ch::after {
-    content: "✦"; font-size: .2em; vertical-align: super; margin-left: .12em;
-    color: var(--letter);
-  }
+  /* Section scaffolding */
+  .section { padding:56px 0; }
+  .sec-head { margin-bottom:36px; max-width:64ch; }
+  .sec-tag { font-size:11px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:var(--change); margin-bottom:12px; }
+  .sec-head h2 { font-size:clamp(24px,3.4vw,37px); font-weight:800; letter-spacing:-.015em; line-height:1.12; }
+  .sec-head p { margin-top:14px; color:var(--ink-soft); font-size:16px; font-weight:500; line-height:1.5; }
+  .grad-ink { background:linear-gradient(100deg, var(--change), var(--accelerate), var(--operate)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
 
-  .hero h1 {
-    font-size: clamp(34px, 5.4vw, 62px); font-weight: 800; letter-spacing: -.02em;
-    line-height: 1.02; margin-bottom: 18px; max-width: 16ch;
-  }
-  .hero h1 .grad {
-    background: linear-gradient(100deg, var(--change), var(--accelerate), var(--operate));
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .hero .sub {
-    font-size: clamp(16px, 2vw, 21px); color: var(--ink-soft); font-weight: 500;
-    max-width: 44ch;
-  }
-  .hero .sub b { color: var(--ink); font-weight: 700; }
+  /* The shift: from -> to */
+  .shift { display:grid; grid-template-columns:1fr auto 1fr; align-items:stretch; gap:20px; }
+  .shift .col { background:var(--panel); border:1px solid var(--border); border-radius:20px; padding:26px 26px; box-shadow:var(--shadow); position:relative; overflow:hidden; }
+  .shift .col.to { border-left:4px solid var(--change); }
+  .shift .col.to::after { content:""; position:absolute; top:-40px; right:-40px; width:180px; height:180px; background:radial-gradient(circle, rgb(var(--color-brand) / .22), transparent 70%); pointer-events:none; }
+  .shift .k { font-size:10.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; margin-bottom:10px; color:var(--ink-mute); }
+  .shift .col.to .k { color:var(--change); }
+  .shift h3 { font-size:19px; font-weight:800; letter-spacing:-.01em; margin-bottom:8px; }
+  .shift p { font-size:13.5px; color:var(--ink-soft); font-weight:500; line-height:1.55; }
+  .shift .arrow { display:grid; place-items:center; font-size:26px; color:var(--change); font-weight:900; }
 
-  .hero-note {
-    margin-top: 34px; display: inline-flex; align-items: center; gap: 12px;
-    font-size: 12.5px; color: var(--ink-mute); font-weight: 500;
-  }
-  .hero-note span { width: 26px; height: 1px; background: var(--border-2); }
+  /* Journey grid */
+  .journey { position:relative; background:var(--panel); border:1px solid var(--border); border-radius:26px; padding:32px 28px 24px; box-shadow:var(--shadow); }
+  .journey-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:10px; }
+  .node { position:relative; background:var(--panel-2); border:1px solid var(--border); border-top:3px solid var(--letter); border-radius:14px; padding:14px 12px 16px; min-height:150px; display:flex; flex-direction:column; transition:transform .2s, border-color .2s, box-shadow .2s; }
+  .node:hover { transform:translateY(-5px); box-shadow:0 16px 34px color-mix(in srgb, var(--letter) 26%, transparent); border-color:var(--letter); }
+  .node .step { font-size:9.5px; font-weight:800; letter-spacing:.12em; color:var(--ink-mute); text-transform:uppercase; }
+  .node .badge { align-self:flex-start; font-size:8.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--letter); background:color-mix(in srgb, var(--letter) 15%, transparent); border:1px solid color-mix(in srgb, var(--letter) 40%, transparent); border-radius:999px; padding:3px 8px; margin:8px 0 9px; }
+  .node h3 { font-size:14px; font-weight:800; letter-spacing:-.01em; margin-bottom:7px; }
+  .node h3 .k { color:var(--letter); }
+  .node p { font-size:11px; color:var(--ink-soft); font-weight:500; line-height:1.45; }
+  .node.craft { background:color-mix(in srgb, var(--letter) 9%, var(--panel-2)); }
+  .band { margin-top:12px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; border-radius:16px; padding:15px 20px; }
+  .band .ic { width:38px; height:38px; border-radius:10px; display:grid; place-items:center; font-size:19px; flex-shrink:0; }
+  .band .tt { flex:1; min-width:220px; }
+  .band .tag { font-size:9.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-mute); }
+  .band h4 { font-size:14px; font-weight:800; }
+  .band p { font-size:12px; color:var(--ink-soft); font-weight:500; margin-top:2px; }
+  .band.thread { background:linear-gradient(100deg, color-mix(in srgb, var(--change) 18%, var(--panel-2)), var(--panel-2)); border:1px solid color-mix(in srgb, var(--change) 40%, var(--border)); }
+  .band.thread .ic { background:color-mix(in srgb, var(--change) 22%, transparent); border:1px solid color-mix(in srgb, var(--change) 45%, transparent); }
+  .band.thread h4 { color:var(--change); }
+  .band.canvas { background:linear-gradient(100deg, color-mix(in srgb, var(--governance) 18%, var(--panel-2)), var(--panel-2)); border:1px solid color-mix(in srgb, var(--governance) 40%, var(--border)); }
+  .band.canvas .ic { background:color-mix(in srgb, var(--governance) 22%, transparent); border:1px solid color-mix(in srgb, var(--governance) 45%, transparent); }
+  .band.canvas h4 { color:var(--governance); }
+  .legend { display:flex; gap:20px; flex-wrap:wrap; margin-top:20px; }
+  .legend div { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft); font-weight:600; }
+  .legend .sw { width:12px; height:12px; border-radius:4px; }
+  .legend .craft-sw { background:linear-gradient(135deg, var(--change), var(--sherpa)); }
 
-  /* ---------- Section scaffolding ---------- */
-  .section { padding: 60px 0; }
-  .sec-head { margin-bottom: 40px; max-width: 60ch; }
-  .sec-tag {
-    font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase;
-    color: var(--change); margin-bottom: 12px;
-  }
-  .sec-head h2 { font-size: clamp(25px, 3.5vw, 38px); font-weight: 800; letter-spacing: -.015em; line-height: 1.12; }
-  .sec-head p { margin-top: 14px; color: var(--ink-soft); font-size: 16px; font-weight: 500; }
+  /* Expanded elements */
+  .elems { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .elem { background:var(--panel); border:1px solid var(--border); border-left:4px solid var(--letter); border-radius:18px; padding:22px 24px; box-shadow:var(--shadow); }
+  .elem .top { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+  .elem .mk { width:38px; height:38px; border-radius:11px; display:grid; place-items:center; font-size:16px; font-weight:900; color:var(--letter); background:color-mix(in srgb, var(--letter) 16%, var(--bg)); border:2px solid var(--letter); flex-shrink:0; }
+  .elem .nm { font-size:17px; font-weight:800; letter-spacing:-.01em; }
+  .elem .nm .k { color:var(--letter); }
+  .elem .role { font-size:10px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-mute); margin-left:auto; }
+  .elem p { font-size:12.5px; color:var(--ink-soft); font-weight:500; line-height:1.55; }
+  .elem .outs { display:flex; flex-wrap:wrap; gap:7px; margin-top:13px; }
+  .elem .out { font-size:9.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--letter); background:color-mix(in srgb, var(--letter) 12%, transparent); border:1px solid color-mix(in srgb, var(--letter) 38%, transparent); border-radius:999px; padding:3px 9px; }
+  .elem.wide { grid-column:1 / -1; }
 
-  /* ---------- Journey ---------- */
-  .journey {
-    position: relative;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 26px;
-    padding: 34px 30px 26px;
-    box-shadow: var(--shadow);
-  }
-  .journey-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 12px;
-    position: relative;
-    z-index: 2;
-  }
-  .node {
-    position: relative;
-    background: var(--panel-2);
-    border: 1px solid var(--border);
-    border-top: 3px solid var(--letter);
-    border-radius: 16px;
-    padding: 16px 14px 18px;
-    min-height: 172px;
-    display: flex; flex-direction: column;
-    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
-  }
-  .node:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 16px 34px color-mix(in srgb, var(--letter) 26%, transparent);
-    border-color: var(--letter);
-  }
-  .node .step { font-size: 10px; font-weight: 800; letter-spacing: .14em; color: var(--ink-mute); text-transform: uppercase; }
-  .node .badge {
-    display: inline-flex; align-items: center; gap: 5px; align-self: flex-start;
-    font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--letter);
-    background: color-mix(in srgb, var(--letter) 15%, transparent);
-    border: 1px solid color-mix(in srgb, var(--letter) 40%, transparent);
-    border-radius: 999px; padding: 3px 8px; margin: 8px 0 10px;
-  }
-  .node h3 { font-size: 15.5px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 8px; }
-  .node h3 .k { color: var(--letter); }
-  .node p { font-size: 12px; color: var(--ink-soft); font-weight: 500; line-height: 1.5; }
-  .node.craft { background: color-mix(in srgb, var(--letter) 9%, var(--panel-2)); }
-  .node.craft::before {
-    content: "CRAFT LAYER"; position: absolute; top: 10px; right: 12px;
-    font-size: 7.5px; font-weight: 800; letter-spacing: .12em; color: var(--letter);
-    opacity: .85;
-  }
+  /* Delivery engine interlock */
+  .flow { display:grid; grid-template-columns:1fr auto 1fr auto 1fr; align-items:stretch; gap:12px; }
+  .fcard { background:var(--panel); border:1px solid var(--border); border-top:3px solid var(--letter); border-radius:16px; padding:20px 20px; box-shadow:var(--shadow); }
+  .fcard .fh { display:flex; align-items:center; gap:9px; margin-bottom:8px; }
+  .fcard .fn { font-size:15.5px; font-weight:800; color:var(--letter); letter-spacing:-.01em; }
+  .fcard .r { font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-mute); }
+  .fcard p { font-size:12px; color:var(--ink-soft); font-weight:500; line-height:1.5; }
+  .fcard .outs { display:flex; flex-wrap:wrap; gap:6px; margin-top:11px; }
+  .fcard .out { font-size:9px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--letter); background:color-mix(in srgb, var(--letter) 12%, transparent); border:1px solid color-mix(in srgb, var(--letter) 38%, transparent); border-radius:999px; padding:2px 8px; }
+  .flow .fx { display:grid; place-items:center; font-size:22px; font-weight:900; color:var(--ink-mute); }
+  .flow-note { margin-top:20px; background:linear-gradient(120deg, color-mix(in srgb, var(--change) 12%, var(--bg-2)), color-mix(in srgb, var(--accelerate) 10%, var(--bg-2))); border:1px solid var(--border); border-radius:18px; padding:20px 24px; font-size:14.5px; font-weight:600; color:var(--ink); line-height:1.5; }
+  .flow-note b { color:var(--change); font-weight:800; }
 
-  /* Governance canvas band */
-  .canvas-band {
-    margin-top: 14px;
-    position: relative; z-index: 2;
-    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-    background: linear-gradient(100deg, color-mix(in srgb, var(--governance) 20%, var(--panel-2)), var(--panel-2));
-    border: 1px solid color-mix(in srgb, var(--governance) 40%, var(--border));
-    border-radius: 16px;
-    padding: 16px 20px;
-  }
-  .canvas-band .cg-icon {
-    width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
-    display: grid; place-items: center; font-size: 20px;
-    background: color-mix(in srgb, var(--governance) 22%, transparent);
-    border: 1px solid color-mix(in srgb, var(--governance) 45%, transparent);
-  }
-  .canvas-band .cg-txt { flex: 1; min-width: 220px; }
-  .canvas-band h4 { font-size: 14px; font-weight: 800; color: var(--governance); letter-spacing: .01em; }
-  .canvas-band p { font-size: 12.5px; color: var(--ink-soft); font-weight: 500; margin-top: 3px; }
-  .canvas-band .cg-tag { font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); }
+  /* AIM Hub */
+  .hub { background:linear-gradient(135deg, color-mix(in srgb, var(--change) 14%, var(--panel)), var(--panel) 55%, color-mix(in srgb, var(--operate) 12%, var(--panel))); border:1px solid var(--border); border-radius:26px; padding:34px 34px; box-shadow:var(--shadow); }
+  .hub-top { display:flex; align-items:center; gap:16px; margin-bottom:22px; flex-wrap:wrap; }
+  .hub-top .ic { width:48px; height:48px; border-radius:13px; display:grid; place-items:center; font-size:24px; background:color-mix(in srgb, var(--change) 22%, transparent); border:1px solid color-mix(in srgb, var(--change) 45%, transparent); }
+  .hub-top h3 { font-size:22px; font-weight:800; letter-spacing:-.015em; }
+  .hub-top p { font-size:13.5px; color:var(--ink-soft); font-weight:500; margin-top:2px; max-width:80ch; }
+  .assets { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  .asset { background:var(--panel-2); border:1px solid var(--border); border-radius:13px; padding:14px 14px; }
+  .asset .an { font-size:9px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--change); }
+  .asset .at { font-size:13px; font-weight:800; margin-top:4px; letter-spacing:-.01em; line-height:1.3; }
+  .hub-loop { margin-top:20px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-size:11.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); }
+  .hub-loop .st { background:var(--panel-2); border:1px solid var(--border); border-radius:999px; padding:6px 13px; }
+  .hub-loop .ar { color:var(--change); font-weight:900; }
 
-  /* Change thread band (ACM overlay, sits opposite the canvas) */
-  .thread-band {
-    margin-top: 12px;
-    position: relative; z-index: 2;
-    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-    background: linear-gradient(100deg, color-mix(in srgb, var(--change) 20%, var(--panel-2)), var(--panel-2));
-    border: 1px solid color-mix(in srgb, var(--change) 40%, var(--border));
-    border-radius: 16px;
-    padding: 16px 20px;
-  }
-  .thread-band .cg-icon {
-    width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
-    display: grid; place-items: center; font-size: 20px;
-    background: color-mix(in srgb, var(--change) 22%, transparent);
-    border: 1px solid color-mix(in srgb, var(--change) 45%, transparent);
-  }
-  .thread-band .cg-txt { flex: 1; min-width: 220px; }
-  .thread-band h4 { font-size: 14px; font-weight: 800; color: var(--change); letter-spacing: .01em; }
-  .thread-band p { font-size: 12.5px; color: var(--ink-soft); font-weight: 500; margin-top: 3px; }
-  .thread-band .cg-tag { font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); }
+  /* Interactive maturity console */
+  .console { position:relative; display:grid; grid-template-columns:1.55fr 1fr; gap:20px; margin:6px 0 0; }
+  .card { position:relative; background:color-mix(in srgb, var(--panel) 92%, transparent); border:1px solid var(--border); border-radius:24px; box-shadow:var(--shadow); overflow:hidden; }
+  .card::before { content:""; position:absolute; inset:0; border-radius:24px; padding:1px; background:linear-gradient(140deg, rgb(var(--color-brand) / .35), transparent 38%, transparent 62%, rgb(var(--color-phase-5) / .30)); -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; }
+  .axes { padding:24px 26px 20px; display:flex; flex-direction:column; gap:8px; }
+  .axes-top { display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:8px; }
+  .axes-top .lede { font-size:13px; font-weight:600; color:var(--ink-mute); }
+  .axes-top .hint { font-size:10.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute); display:inline-flex; align-items:center; gap:7px; }
+  .axes-top .hint::before { content:""; width:16px; height:16px; border-radius:6px; background:color-mix(in srgb, var(--brand) 22%, transparent); border:1px solid color-mix(in srgb, var(--brand) 45%, transparent); }
+  .axrow { --ax:var(--color-brand); }
+  .axhead { display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:15px; }
+  .axhead .name { font-size:15px; font-weight:800; color:rgb(var(--ax)); letter-spacing:-.01em; }
+  .axhead .name .sub { color:var(--ink-mute); font-weight:700; }
+  .axhead .desc { font-size:11.5px; font-weight:600; color:var(--ink-soft); }
+  .axhead .lvl { font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:rgb(var(--ax)); background:color-mix(in srgb, rgb(var(--ax)) 14%, transparent); border:1px solid color-mix(in srgb, rgb(var(--ax)) 42%, transparent); border-radius:999px; padding:3px 10px; }
+  .track { position:relative; }
+  .rail { position:absolute; left:0; right:0; top:9px; height:5px; border-radius:999px; background:color-mix(in srgb, var(--ink-mute) 22%, transparent); }
+  .rail-fill { position:absolute; left:0; top:0; height:100%; width:0; border-radius:999px; background:linear-gradient(90deg, color-mix(in srgb, rgb(var(--ax)) 55%, transparent), rgb(var(--ax))); box-shadow:0 0 14px color-mix(in srgb, rgb(var(--ax)) 55%, transparent); transition:width .45s cubic-bezier(.2,.7,.2,1); }
+  .knob { position:absolute; top:9px; left:0; width:16px; height:16px; border-radius:50%; transform:translate(-50%,-50%); background:var(--panel); border:3px solid rgb(var(--ax)); box-shadow:0 0 0 4px color-mix(in srgb, rgb(var(--ax)) 22%, transparent), 0 4px 12px rgba(0,0,0,.4); transition:left .45s cubic-bezier(.2,.7,.2,1); z-index:4; }
+  .knob::after { content:""; position:absolute; inset:-3px; border-radius:50%; border:2px solid color-mix(in srgb, rgb(var(--ax)) 60%, transparent); animation:mpulse 2.6s ease-out infinite; }
+  @keyframes mpulse { 0%{transform:scale(1);opacity:.7} 70%{transform:scale(2.1);opacity:0} 100%{opacity:0} }
+  .cells { position:relative; z-index:3; display:grid; grid-template-columns:repeat(var(--n,5),1fr); gap:9px; padding-top:22px; }
+  .cell { position:relative; background:var(--panel-2); border:1px solid var(--border); border-radius:13px; padding:12px 12px 13px; text-align:left; cursor:pointer; font-family:inherit; color:var(--ink); transition:transform .18s, border-color .18s, background .25s, box-shadow .2s; }
+  .cell:hover { transform:translateY(-3px); border-color:color-mix(in srgb, rgb(var(--ax)) 45%, var(--border)); }
+  .cell .n { font-size:9.5px; font-weight:800; letter-spacing:.14em; color:var(--ink-mute); text-transform:uppercase; }
+  .cell .nm { font-size:13px; font-weight:800; color:var(--ink); margin-top:3px; letter-spacing:-.01em; }
+  .cell.done { background:color-mix(in srgb, rgb(var(--ax)) 9%, var(--panel-2)); border-color:color-mix(in srgb, rgb(var(--ax)) 26%, var(--border)); }
+  .cell.done .nm { color:color-mix(in srgb, rgb(var(--ax)) 75%, var(--ink)); }
+  .cell.cur { background:color-mix(in srgb, rgb(var(--ax)) 16%, var(--panel-2)); border-color:rgb(var(--ax)); box-shadow:0 10px 26px color-mix(in srgb, rgb(var(--ax)) 26%, transparent); }
+  .cell.cur .nm { color:rgb(var(--ax)); }
+  .sig { padding:22px 22px; display:flex; flex-direction:column; gap:16px; }
+  .sig-idx { position:relative; border:1px solid var(--border); border-radius:18px; padding:18px 20px; background:linear-gradient(135deg, color-mix(in srgb, var(--color-brand) 12%, var(--panel-2)), var(--panel-2)); overflow:hidden; }
+  .sig-idx .mcap { font-size:10px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-mute); }
+  .sig-idx .row { display:flex; align-items:flex-end; gap:12px; margin-top:2px; }
+  .sig-idx .num { font-size:52px; font-weight:900; line-height:.9; letter-spacing:-.03em; font-variant-numeric:tabular-nums; background:linear-gradient(100deg, rgb(var(--color-brand)), rgb(var(--color-phase-3))); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+  .sig-idx .den { font-size:14px; font-weight:800; color:var(--ink-mute); padding-bottom:6px; }
+  .sig-idx .band2 { margin-left:auto; align-self:center; font-size:10px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--ink); background:var(--panel); border:1px solid var(--border-2); border-radius:999px; padding:5px 11px; }
+  .sig-idx .mfoot { margin-top:8px; font-size:11px; color:var(--ink-mute); font-weight:600; }
+  .sig-read { font-size:13.5px; font-weight:600; color:var(--ink-soft); line-height:1.5; }
+  .sig-read b { color:var(--ink); font-weight:800; }
+  .meters { display:flex; flex-direction:column; gap:11px; }
+  .meter { --ax:var(--color-brand); }
+  .meter .mtop { display:flex; align-items:baseline; justify-content:space-between; gap:8px; margin-bottom:5px; }
+  .meter .mlab { font-size:11px; font-weight:800; letter-spacing:.04em; color:var(--ink-soft); text-transform:uppercase; }
+  .meter .mval { font-size:12px; font-weight:800; color:rgb(var(--ax)); }
+  .meter .bar { height:8px; border-radius:999px; background:color-mix(in srgb, var(--ink-mute) 20%, transparent); overflow:hidden; }
+  .meter .bfill { height:100%; width:0; border-radius:999px; background:linear-gradient(90deg, color-mix(in srgb, rgb(var(--ax)) 55%, transparent), rgb(var(--ax))); transition:width .45s cubic-bezier(.2,.7,.2,1); }
+  .next { border:1px solid color-mix(in srgb, var(--color-brand) 42%, var(--border)); background:color-mix(in srgb, var(--color-brand) 10%, var(--panel-2)); border-radius:14px; padding:14px 16px; }
+  .next .mcap { font-size:10px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--brand); display:flex; align-items:center; gap:7px; }
+  .next .mcap::before { content:"\279C"; font-size:12px; }
+  .next .mv { font-size:13.5px; font-weight:800; color:var(--ink); margin-top:6px; letter-spacing:-.01em; }
+  .next .mv b { color:var(--brand); }
+  .next .hy { font-size:12px; font-weight:600; color:var(--ink-soft); margin-top:4px; line-height:1.45; }
+  .measure-line { margin-top:20px; font-size:15px; font-weight:600; color:var(--ink-soft); line-height:1.5; max-width:92ch; }
+  .measure-line b { color:var(--governance); font-weight:800; }
 
-  .legend { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 22px; }
-  .legend div { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-soft); font-weight: 600; }
-  .legend .sw { width: 12px; height: 12px; border-radius: 4px; }
-  .legend .craft-sw { background: linear-gradient(135deg, var(--change), var(--sherpa)); }
+  /* Paradigm */
+  .para { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  .pcard { background:var(--panel); border:1px solid var(--border); border-radius:20px; padding:26px 28px; box-shadow:var(--shadow); }
+  .pcard.sell { border-top:3px solid var(--accelerate); }
+  .pcard.deliver { border-top:3px solid var(--operate); }
+  .pcard .pk { font-size:10.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; margin-bottom:10px; }
+  .pcard.sell .pk { color:var(--accelerate); }
+  .pcard.deliver .pk { color:var(--operate); }
+  .pcard h3 { font-size:19px; font-weight:800; letter-spacing:-.01em; margin-bottom:8px; }
+  .pcard p { font-size:13.5px; color:var(--ink-soft); font-weight:500; line-height:1.55; }
+  .para-next { margin-top:22px; background:linear-gradient(120deg, color-mix(in srgb, var(--change) 12%, var(--bg-2)), var(--bg-2)); border:1px solid var(--border); border-radius:20px; padding:26px 30px; }
+  .para-next .nk { font-size:11px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--change); margin-bottom:8px; }
+  .para-next p { font-size:clamp(17px,2.1vw,22px); font-weight:700; color:var(--ink); line-height:1.4; max-width:50ch; }
+  .para-next p b { background:linear-gradient(100deg, var(--change), var(--accelerate)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
 
-  /* ---------- Narrative journey ---------- */
-  .narrative { position: relative; }
-  .n-intro {
-    max-width: 62ch; margin-bottom: 44px;
-  }
-  .n-intro .lede {
-    font-size: clamp(18px, 2.3vw, 24px); font-weight: 600; color: var(--ink);
-    line-height: 1.4; margin-top: 14px;
-  }
-  .n-intro .lede b { background: linear-gradient(100deg, var(--change), var(--accelerate)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .foot { padding:30px 0 54px; margin-top:14px; border-top:1px solid var(--border); color:var(--ink-mute); font-size:12px; font-weight:500; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
+  .foot b { color:var(--ink-soft); }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 
-  .spine { position: relative; padding-left: 4px; }
-  .spine::before {
-    content: ""; position: absolute; left: 21px; top: 8px; bottom: 90px; width: 3px;
-    border-radius: 3px;
-    background: linear-gradient(180deg,
-      var(--pulse), var(--ignite), var(--change), var(--accelerate),
-      var(--scale), var(--sherpa), var(--operate));
-    opacity: .55;
+  @media (max-width:980px) {
+    .journey-grid { grid-template-columns:repeat(2,1fr); }
+    .elems { grid-template-columns:1fr; }
+    .assets { grid-template-columns:repeat(2,1fr); }
+    .console { grid-template-columns:1fr; }
+    .para { grid-template-columns:1fr; }
+    .shift { grid-template-columns:1fr; }
+    .shift .arrow { transform:rotate(90deg); }
+    .flow { grid-template-columns:1fr; }
+    .flow .fx { transform:rotate(90deg); }
   }
-  .beat {
-    position: relative; display: grid; grid-template-columns: 46px 1fr; gap: 20px;
-    padding-bottom: 30px;
+  @media (max-width:560px) {
+    .wrap { padding:0 18px; }
+    .brand small { display:none; } .pill-mock { display:none; }
+    .journey-grid { grid-template-columns:1fr; }
+    .assets { grid-template-columns:1fr; }
+    .cells { grid-template-columns:repeat(2,1fr); }
   }
-  .beat .mark {
-    position: relative; z-index: 2;
-    width: 46px; height: 46px; border-radius: 13px;
-    display: grid; place-items: center;
-    font-size: 19px; font-weight: 900; color: var(--letter);
-    background: color-mix(in srgb, var(--letter) 16%, var(--bg));
-    border: 2px solid var(--letter);
-    box-shadow: 0 0 0 5px var(--bg), 0 8px 20px color-mix(in srgb, var(--letter) 30%, transparent);
-  }
-  .beat .body { padding-top: 2px; }
-  .beat .who {
-    display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-bottom: 7px;
-  }
-  .beat .who .name { font-size: 16px; font-weight: 800; color: var(--letter); letter-spacing: -.01em; }
-  .beat .who .role { font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); }
-  .beat .who .craft-tag {
-    font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--letter);
-    border: 1px solid color-mix(in srgb, var(--letter) 45%, transparent);
-    background: color-mix(in srgb, var(--letter) 14%, transparent);
-    border-radius: 999px; padding: 2px 8px;
-  }
-  /* ACM axis pill on each beat, the change thread made visible */
-  .beat .who .axis-pill {
-    font-size: 9px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
-    color: var(--change);
-    border: 1px dashed color-mix(in srgb, var(--change) 55%, transparent);
-    background: color-mix(in srgb, var(--change) 10%, transparent);
-    border-radius: 999px; padding: 2px 9px;
-    display: inline-flex; align-items: center; gap: 5px;
-  }
-  .beat .who .axis-pill::before { content: "🧵"; font-size: 9px; }
-  .beat p { font-size: 14.5px; color: var(--ink-soft); font-weight: 500; line-height: 1.62; max-width: 60ch; }
-  .beat p strong { color: var(--ink); font-weight: 700; }
-  .beat.craft .body {
-    background: color-mix(in srgb, var(--letter) 8%, transparent);
-    border-left: 2px solid color-mix(in srgb, var(--letter) 55%, transparent);
-    border-radius: 0 12px 12px 0;
-    padding: 12px 18px 14px; margin-left: -2px;
-  }
-
-  .beat.canvas .mark {
-    border-radius: 13px;
-    background: color-mix(in srgb, var(--governance) 18%, var(--bg));
-    border-color: var(--governance); color: var(--governance);
-    box-shadow: 0 0 0 5px var(--bg), 0 8px 20px color-mix(in srgb, var(--governance) 34%, transparent);
-  }
-  .beat.canvas .body {
-    background: linear-gradient(100deg, color-mix(in srgb, var(--governance) 12%, var(--panel)), var(--panel));
-    border: 1px solid color-mix(in srgb, var(--governance) 38%, var(--border));
-    border-radius: 16px; padding: 18px 22px;
-  }
-  .beat.canvas .who .name { color: var(--governance); }
-
-  .n-close {
-    margin-top: 8px; margin-left: 66px;
-    font-size: clamp(17px, 2.2vw, 22px); font-weight: 700; color: var(--ink);
-    line-height: 1.4; max-width: 40ch;
-  }
-  .n-close b { background: linear-gradient(100deg, var(--change), var(--accelerate), var(--operate)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-
-  /* ---------- ACM overlay: reframe ---------- */
-  .acm-eq { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 4px 0 2px; font-weight: 800; }
-  .acm-eq .frag { font-size: 15px; color: var(--ink-mute); font-weight: 700; }
-  .acm-eq .frag b { color: var(--ink); } .acm-eq .frag .hl { color: var(--change); }
-  .reframe { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 6px; }
-  .rf-card { background: var(--panel); border: 1px solid var(--border); border-radius: 20px; padding: 26px 26px 24px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
-  .rf-card.old { border-left: 4px solid var(--color-text-disabled); }
-  .rf-card.new { border-left: 4px solid var(--change); }
-  .rf-card.new::after { content: ""; position: absolute; top: -40px; right: -40px; width: 180px; height: 180px; background: radial-gradient(circle, rgb(var(--color-brand) / .22), transparent 70%); pointer-events: none; }
-  .rf-card .kick { font-size: 10.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 12px; }
-  .rf-card.old .kick { color: var(--ink-mute); } .rf-card.new .kick { color: var(--change); }
-  .rf-card h3 { font-size: 20px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 8px; }
-  .rf-card p { font-size: 13.5px; color: var(--ink-soft); font-weight: 500; line-height: 1.6; }
-  .rf-card ul { list-style: none; margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
-  .rf-card li { position: relative; padding-left: 22px; font-size: 13px; color: var(--ink-soft); font-weight: 600; }
-  .rf-card.old li::before { content: "\2715"; position: absolute; left: 0; top: 0; color: var(--color-text-disabled); font-weight: 900; }
-  .rf-card.new li::before { content: "\2192"; position: absolute; left: 0; top: 0; color: var(--change); font-weight: 900; }
-  .rf-foot { margin-top: 20px; font-size: 15px; font-weight: 700; font-style: italic; color: var(--ink); }
-  .rf-foot b { color: var(--change); font-style: normal; }
-
-  /* ---------- ACM overlay: interactive maturity console ---------- */
-  .console { position: relative; display: grid; grid-template-columns: 1.55fr 1fr; gap: 20px; margin: 6px 0 0; }
-  .card { position: relative; background: color-mix(in srgb, var(--panel) 92%, transparent); border: 1px solid var(--border); border-radius: 24px; box-shadow: var(--shadow); overflow: hidden; }
-  .card::before { content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 1px; background: linear-gradient(140deg, rgb(var(--color-brand) / .35), transparent 38%, transparent 62%, rgb(var(--color-phase-5) / .30)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
-  .axes { padding: 26px 28px 22px; display: flex; flex-direction: column; gap: 8px; }
-  .axes-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
-  .axes-top .lede { font-size: 13px; font-weight: 600; color: var(--ink-mute); }
-  .axes-top .hint { font-size: 10.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); display: inline-flex; align-items: center; gap: 7px; }
-  .axes-top .hint::before { content: ""; width: 16px; height: 16px; border-radius: 6px; background: color-mix(in srgb, var(--brand) 22%, transparent); border: 1px solid color-mix(in srgb, var(--brand) 45%, transparent); }
-  .axrow { --ax: var(--color-brand); }
-  .axhead { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
-  .axhead .name { font-size: 15px; font-weight: 800; color: rgb(var(--ax)); letter-spacing: -.01em; }
-  .axhead .name .sub { color: var(--ink-mute); font-weight: 700; }
-  .axhead .desc { font-size: 11.5px; font-weight: 600; color: var(--ink-soft); }
-  .axhead .lvl { font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: rgb(var(--ax)); background: color-mix(in srgb, rgb(var(--ax)) 14%, transparent); border: 1px solid color-mix(in srgb, rgb(var(--ax)) 42%, transparent); border-radius: 999px; padding: 3px 10px; }
-  .track { position: relative; }
-  .rail { position: absolute; left: 0; right: 0; top: 9px; height: 5px; border-radius: 999px; background: color-mix(in srgb, var(--ink-mute) 22%, transparent); }
-  .rail-fill { position: absolute; left: 0; top: 0; height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, color-mix(in srgb, rgb(var(--ax)) 55%, transparent), rgb(var(--ax))); box-shadow: 0 0 14px color-mix(in srgb, rgb(var(--ax)) 55%, transparent); transition: width .45s cubic-bezier(.2,.7,.2,1); }
-  .knob { position: absolute; top: 9px; left: 0; width: 16px; height: 16px; border-radius: 50%; transform: translate(-50%,-50%); background: var(--panel); border: 3px solid rgb(var(--ax)); box-shadow: 0 0 0 4px color-mix(in srgb, rgb(var(--ax)) 22%, transparent), 0 4px 12px rgba(0,0,0,.4); transition: left .45s cubic-bezier(.2,.7,.2,1); z-index: 4; }
-  .knob::after { content: ""; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid color-mix(in srgb, rgb(var(--ax)) 60%, transparent); animation: mpulse 2.6s ease-out infinite; }
-  @keyframes mpulse { 0%{ transform: scale(1); opacity: .7 } 70%{ transform: scale(2.1); opacity: 0 } 100%{ opacity: 0 } }
-  .cells { position: relative; z-index: 3; display: grid; grid-template-columns: repeat(var(--n, 5), 1fr); gap: 9px; padding-top: 22px; }
-  .cell { position: relative; background: var(--panel-2); border: 1px solid var(--border); border-radius: 13px; padding: 13px 12px 14px; text-align: left; cursor: pointer; font-family: inherit; color: var(--ink); transition: transform .18s ease, border-color .18s ease, background .25s ease, box-shadow .2s ease; }
-  .cell:hover { transform: translateY(-3px); border-color: color-mix(in srgb, rgb(var(--ax)) 45%, var(--border)); }
-  .cell .n { font-size: 9.5px; font-weight: 800; letter-spacing: .14em; color: var(--ink-mute); text-transform: uppercase; }
-  .cell .nm { font-size: 13.5px; font-weight: 800; color: var(--ink); margin-top: 3px; letter-spacing: -.01em; }
-  .cell.done { background: color-mix(in srgb, rgb(var(--ax)) 9%, var(--panel-2)); border-color: color-mix(in srgb, rgb(var(--ax)) 26%, var(--border)); }
-  .cell.done .nm { color: color-mix(in srgb, rgb(var(--ax)) 75%, var(--ink)); }
-  .cell.cur { background: color-mix(in srgb, rgb(var(--ax)) 16%, var(--panel-2)); border-color: rgb(var(--ax)); box-shadow: 0 10px 26px color-mix(in srgb, rgb(var(--ax)) 26%, transparent); }
-  .cell.cur .nm { color: rgb(var(--ax)); }
-  .cell.cur .n { color: color-mix(in srgb, rgb(var(--ax)) 80%, var(--ink-mute)); }
-  .sig { padding: 24px 24px 24px; display: flex; flex-direction: column; gap: 18px; }
-  .sig-idx { position: relative; border: 1px solid var(--border); border-radius: 18px; padding: 18px 20px; background: linear-gradient(135deg, color-mix(in srgb, var(--color-brand) 12%, var(--panel-2)), var(--panel-2)); overflow: hidden; }
-  .sig-idx .mcap { font-size: 10px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-mute); }
-  .sig-idx .row { display: flex; align-items: flex-end; gap: 12px; margin-top: 4px; }
-  .sig-idx .num { font-size: 56px; font-weight: 900; line-height: .9; letter-spacing: -.03em; font-variant-numeric: tabular-nums; background: linear-gradient(100deg, rgb(var(--color-brand)), rgb(var(--color-phase-3))); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .sig-idx .den { font-size: 15px; font-weight: 800; color: var(--ink-mute); padding-bottom: 6px; }
-  .sig-idx .band { margin-left: auto; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); background: var(--panel); border: 1px solid var(--border-2); border-radius: 999px; padding: 6px 12px; align-self: center; }
-  .sig-idx .mfoot { margin-top: 8px; font-size: 11px; color: var(--ink-mute); font-weight: 600; }
-  .sig-read { font-size: 14px; font-weight: 600; color: var(--ink-soft); line-height: 1.5; }
-  .sig-read b { color: var(--ink); font-weight: 800; }
-  .meters { display: flex; flex-direction: column; gap: 11px; }
-  .meter { --ax: var(--color-brand); }
-  .meter .mtop { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 5px; }
-  .meter .mlab { font-size: 11px; font-weight: 800; letter-spacing: .04em; color: var(--ink-soft); text-transform: uppercase; }
-  .meter .mval { font-size: 12px; font-weight: 800; color: rgb(var(--ax)); }
-  .meter .bar { height: 8px; border-radius: 999px; background: color-mix(in srgb, var(--ink-mute) 20%, transparent); overflow: hidden; }
-  .meter .bfill { height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, color-mix(in srgb, rgb(var(--ax)) 55%, transparent), rgb(var(--ax))); transition: width .45s cubic-bezier(.2,.7,.2,1); }
-  .next { border: 1px solid color-mix(in srgb, var(--color-brand) 42%, var(--border)); background: color-mix(in srgb, var(--color-brand) 10%, var(--panel-2)); border-radius: 16px; padding: 16px 18px; }
-  .next .mcap { font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--brand); display: flex; align-items: center; gap: 7px; }
-  .next .mcap::before { content: "\279C"; font-size: 12px; }
-  .next .mv { font-size: 14.5px; font-weight: 800; color: var(--ink); margin-top: 7px; letter-spacing: -.01em; }
-  .next .mv b { color: var(--brand); }
-  .next .hy { font-size: 12.5px; font-weight: 600; color: var(--ink-soft); margin-top: 5px; line-height: 1.45; }
-  .board-note { margin-top: 20px; background: linear-gradient(120deg, color-mix(in srgb, var(--change) 12%, var(--bg-2)), color-mix(in srgb, var(--accelerate) 10%, var(--bg-2))); border: 1px solid var(--border); border-radius: 18px; padding: 22px 26px; }
-  .board-note p { font-size: 15px; font-weight: 600; color: var(--ink); line-height: 1.5; max-width: 72ch; } .board-note p b { color: var(--change); }
-
-  /* ---------- Craft spotlight ---------- */
-  .spotlight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-  .spot {
-    position: relative;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--letter);
-    border-radius: 20px;
-    padding: 28px 28px 26px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-  }
-  .spot::after {
-    content: ""; position: absolute; top: -40px; right: -40px; width: 180px; height: 180px;
-    background: radial-gradient(circle, color-mix(in srgb, var(--letter) 26%, transparent), transparent 70%);
-    pointer-events: none;
-  }
-  .spot .tagrow { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
-  .spot .chip {
-    font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
-    color: var(--letter); background: color-mix(in srgb, var(--letter) 15%, transparent);
-    border: 1px solid color-mix(in srgb, var(--letter) 40%, transparent);
-    border-radius: 999px; padding: 4px 10px;
-  }
-  .spot .newtag { font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute); }
-  .spot h3 { font-size: 22px; font-weight: 800; letter-spacing: -.015em; margin-bottom: 6px; }
-  .spot h3 .k { color: var(--letter); }
-  .spot .lede { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
-  .spot p { font-size: 13.5px; color: var(--ink-soft); font-weight: 500; line-height: 1.6; }
-  .spot .quote {
-    margin-top: 16px; padding: 13px 16px;
-    background: var(--panel-2); border-radius: 12px;
-    border: 1px solid var(--border);
-    font-size: 13px; font-style: italic; color: var(--ink); font-weight: 500;
-  }
-  .spot .quote b { color: var(--letter); font-style: normal; }
-
-  /* ---------- Why strip ---------- */
-  .why {
-    background: linear-gradient(120deg, color-mix(in srgb, var(--change) 14%, var(--bg-2)), color-mix(in srgb, var(--accelerate) 12%, var(--bg-2)));
-    border: 1px solid var(--border);
-    border-radius: 26px;
-    padding: 42px 38px;
-    box-shadow: var(--shadow);
-  }
-  .why h2 { font-size: clamp(23px, 3vw, 32px); font-weight: 800; letter-spacing: -.015em; margin-bottom: 26px; max-width: 24ch; }
-  .why h2 em { font-style: normal; background: linear-gradient(100deg, var(--change), var(--accelerate)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-  .why-card .num { font-size: 13px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--change); margin-bottom: 9px; }
-  .why-card h4 { font-size: 17px; font-weight: 800; margin-bottom: 7px; }
-  .why-card p { font-size: 13.5px; color: var(--ink-soft); font-weight: 500; line-height: 1.6; }
-
-  /* ---------- Footer ---------- */
-  .foot {
-    padding: 34px 0 54px; margin-top: 20px;
-    border-top: 1px solid var(--border);
-    color: var(--ink-mute); font-size: 12px; font-weight: 500;
-    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
-  }
-  .foot b { color: var(--ink-soft); }
-
-  /* ---------- Block label ---------- */
-  .block-label { font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 16px; }
-
-  /* ---------- Learning loop ---------- */
-  .loop { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 6px; }
-  .loop .stage {
-    position: relative; background: var(--panel-2); border: 1px solid var(--border);
-    border-top: 3px solid var(--letter); border-radius: 14px; padding: 15px 13px 16px;
-  }
-  .loop .stage .n { font-size: 11px; font-weight: 800; color: var(--letter); letter-spacing: .1em; }
-  .loop .stage h4 { font-size: 14px; font-weight: 800; margin: 6px 0 6px; letter-spacing: -.01em; }
-  .loop .stage p { font-size: 11.5px; color: var(--ink-soft); font-weight: 500; line-height: 1.46; }
-  .loop .stage::after {
-    content: "\2192"; position: absolute; right: -10px; top: 50%; transform: translateY(-50%);
-    color: var(--ink-mute); font-weight: 800; font-size: 15px; z-index: 3;
-  }
-  .loop .stage:last-child::after { content: "\21BA"; color: var(--pulse); }
-  .loop-return {
-    margin-top: 18px; text-align: center; font-size: 13.5px; color: var(--ink-soft); font-weight: 600;
-    max-width: 68ch; margin-left: auto; margin-right: auto; line-height: 1.5;
-  }
-  .loop-return b { color: var(--ink); }
-
-  /* ---------- Four capabilities ---------- */
-  .caps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .cap {
-    background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--letter);
-    border-radius: 14px; padding: 18px 18px 20px;
-  }
-  .cap .tag { font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--letter); }
-  .cap h4 { font-size: 16.5px; font-weight: 800; margin: 8px 0 7px; letter-spacing: -.01em; }
-  .cap p { font-size: 12.5px; color: var(--ink-soft); font-weight: 500; line-height: 1.5; }
-
-  /* ---------- Five modes ---------- */
-  .modes { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
-  .mode {
-    background: var(--panel-2); border: 1px solid var(--border); border-bottom: 3px solid var(--letter);
-    border-radius: 12px; padding: 14px 14px 15px;
-  }
-  .mode.on { background: color-mix(in srgb, var(--letter) 10%, var(--panel-2)); border-color: color-mix(in srgb, var(--letter) 45%, var(--border)); }
-  .mode h5 { font-size: 14.5px; font-weight: 800; color: var(--letter); margin-bottom: 5px; }
-  .mode p { font-size: 11.5px; color: var(--ink-soft); font-weight: 500; line-height: 1.46; }
-  .mode .link { display: block; margin-top: 9px; font-size: 8.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--letter); }
-
-  /* ---------- Measure strip ---------- */
-  .measure {
-    background: linear-gradient(120deg, color-mix(in srgb, var(--governance) 12%, var(--bg-2)), var(--bg-2));
-    border: 1px solid var(--border); border-radius: 26px; padding: 40px 38px; box-shadow: var(--shadow);
-  }
-  .measure .not { font-size: clamp(21px, 2.8vw, 30px); font-weight: 800; color: var(--ink); margin-bottom: 8px; letter-spacing: -.015em; }
-  .measure .not b { color: var(--governance); }
-  .measure .sub { color: var(--ink-soft); font-weight: 500; margin-bottom: 24px; max-width: 58ch; font-size: 15px; }
-  .measure ul.better { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 11px 28px; }
-  .measure ul.better li { position: relative; padding-left: 25px; font-size: 13.5px; color: var(--ink-soft); font-weight: 500; line-height: 1.4; }
-  .measure ul.better li::before { content: "\2713"; position: absolute; left: 0; top: 0; color: var(--pulse); font-weight: 900; }
-  .measure .core { margin-top: 24px; font-style: italic; font-size: 14.5px; color: var(--ink); font-weight: 600; border-top: 1px solid var(--border); padding-top: 18px; }
-  .measure .core b { font-style: normal; color: var(--governance); }
-
-  /* ---------- Responsive ---------- */
-  @media (max-width: 900px) {
-    .journey-grid { grid-template-columns: repeat(2, 1fr); }
-    .spotlight-grid { grid-template-columns: 1fr; }
-    .why-grid { grid-template-columns: 1fr; gap: 18px; }
-    .node { min-height: 0; }
-    .loop { grid-template-columns: repeat(2, 1fr); }
-    .loop .stage::after { display: none; }
-    .caps { grid-template-columns: repeat(2, 1fr); }
-    .modes { grid-template-columns: repeat(2, 1fr); }
-    .measure ul.better { grid-template-columns: 1fr; }
-    .measure { padding: 32px 24px; }
-    .reframe { grid-template-columns: 1fr; }
-    .console { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 560px) {
-    .wrap { padding: 0 18px; }
-    .journey-grid { grid-template-columns: 1fr; }
-    .glyph { min-width: 48px; }
-    .brand small { display: none; }
-    .pill-mock { display: none; }
-    .why { padding: 30px 22px; }
-    .journey { padding: 24px 18px 20px; }
-    .beat { grid-template-columns: 40px 1fr; gap: 14px; }
-    .beat .mark { width: 40px; height: 40px; font-size: 16px; }
-    .spine::before { left: 18px; }
-    .n-close { margin-left: 0; }
-    .loop { grid-template-columns: 1fr; }
-    .caps { grid-template-columns: 1fr; }
-    .modes { grid-template-columns: 1fr; }
-    .cells { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  /* ---------- Accessibility helpers ---------- */
-  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .knob::after { animation: none; }
-    .rail-fill, .knob, .bfill, .cell, .glyph .ch, .node { transition: none; }
+    html { scroll-behavior:auto; }
+    .knob::after { animation:none; }
+    .rail-fill, .knob, .bfill, .cell, .node { transition:none; }
   }
 </style>
 </head>
 <body>
 
-  <!-- Top bar -->
   <header class="topbar">
     <div class="wrap topbar-inner">
       <div class="brand">
         <div class="logo" aria-hidden="true">🎨</div>
-        <div><b>PICASSO</b><small>Concept mockup · AIMomentum</small></div>
+        <div><b>PICASSO</b><small>The operating position · AIMomentum</small></div>
       </div>
       <div class="top-actions">
-        <span class="pill-mock">Concept only · not wired</span>
-        <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
-          <span id="themeIcon">🌙</span><span id="themeLabel">Dark</span>
-        </button>
+        <span class="pill-mock">Concept for reaction</span>
+        <button class="theme-btn" id="themeBtn" aria-label="Toggle theme"><span id="themeIcon">🌙</span><span id="themeLabel">Dark</span></button>
       </div>
     </div>
   </header>
 
-  <!-- ===== HERO (Dashboard-hero treatment) ===== -->
+  <!-- HERO -->
   <section class="hero">
     <div class="wrap">
-      <span class="eyebrow"><span class="dot"></span>Dashboard hero preview</span>
+      <span class="eyebrow"><span class="dot"></span>The operating position</span>
 
-      <div class="wordmark" id="wordmark">
-        <div class="glyph"       style="--letter:var(--pulse)"><span class="ch">P</span><span class="lbl">AI<b>Pulse</b></span></div>
-        <div class="glyph"       style="--letter:var(--ignite)"><span class="ch">I</span><span class="lbl">AI<b>Ignite</b></span></div>
-        <div class="glyph craft" style="--letter:var(--change)"><span class="ch">C</span><span class="lbl">AI<b>Change</b></span></div>
-        <div class="glyph"       style="--letter:var(--accelerate)"><span class="ch">A</span><span class="lbl">AI<b>Accelerate</b></span></div>
-        <div class="glyph"       style="--letter:var(--scale)"><span class="ch">S</span><span class="lbl">AI<b>Scale + Operate</b></span></div>
-        <div class="glyph craft" style="--letter:var(--sherpa)"><span class="ch">S</span><span class="lbl">AI<b>Sherpa</b></span></div>
-        <div class="glyph"       style="--letter:var(--operate)"><span class="ch">O</span><span class="lbl">AI<b>Orchestrate</b></span></div>
+      <div class="wordmark">
+        <div class="glyph" style="--letter:var(--pulse)"><span class="ch">P</span><span class="lbl">AI<b>Pulse</b></span></div>
+        <div class="glyph" style="--letter:var(--ignite)"><span class="ch">I</span><span class="lbl">AI<b>Ignite</b></span></div>
+        <div class="glyph" style="--letter:var(--change)"><span class="ch">C</span><span class="lbl">AI<b>Change</b></span></div>
+        <div class="glyph" style="--letter:var(--accelerate)"><span class="ch">A</span><span class="lbl">AI<b>Accelerate</b></span></div>
+        <div class="glyph" style="--letter:var(--scale)"><span class="ch">S</span><span class="lbl">AI<b>Scale + Operate</b></span></div>
+        <div class="glyph" style="--letter:var(--sherpa)"><span class="ch">S</span><span class="lbl">AI<b>Sherpa</b></span></div>
+        <div class="glyph" style="--letter:var(--operate)"><span class="ch">O</span><span class="lbl">AI<b>Orchestrate</b></span></div>
       </div>
 
-      <h1><span class="grad">Human at the centre.</span> AI at your side.</h1>
-      <p class="sub"><b>Starting AI is easy.</b> Embedding it in how your people work is the craft PICASSO is built for.</p>
+      <h1>From discovering AI, <span class="grad">to operating it at scale.</span></h1>
+      <p class="sub"><b>The strengths of AI Momentum remain.</b> PICASSO expands the framework to build the capability, governance, operating model and behaviours needed to sustain AI across the enterprise.</p>
 
-      <div class="hero-note"><span></span>Seven elements. One craft. An ACM change thread through every step, on a Governance canvas.</div>
+      <div class="hero-note"><span></span>Seven elements. A Governance canvas beneath. A Change thread through. An AIM Hub building the assets behind it.</div>
     </div>
   </section>
 
-  <!-- ===== FRAMEWORK OVERVIEW (dedicated page) ===== -->
+  <!-- THE SHIFT -->
   <section class="section wrap">
     <div class="sec-head">
-      <div class="sec-tag">The framework</div>
-      <h2>Seven elements, painted as one journey.</h2>
-      <p>Your proven phases stay intact. Scale and Operate now share one stage. Two craft layers, Change and Sherpa, weave through the phases, and Orchestrate designs how the whole system moves. Seven elements, one word, held between two rails: a Governance canvas beneath, and an ACM change thread through every element.</p>
+      <div class="sec-tag">The shift</div>
+      <h2>Customer maturity is moving faster than most propositions.</h2>
+      <p>Clients increasingly arrive past discovery. Their question is not what to pursue, it is how to operationalise AI across the organisation. PICASSO moves the centre of gravity to match.</p>
+    </div>
+
+    <div class="shift">
+      <div class="col from">
+        <div class="k">Where we were strong</div>
+        <h3>Discover and prioritise.</h3>
+        <p>Identify, prioritise and deliver AI opportunities. Envisioning, ideation and use case discovery. Vital, and increasingly a starting point clients have already passed.</p>
+      </div>
+      <div class="arrow">➜</div>
+      <div class="col to">
+        <div class="k">Where we are heading</div>
+        <h3>Operationalise and sustain.</h3>
+        <p>Build the governance, operating models, human capability and execution discipline to run AI at scale. Reusable operational assets, not more discovery outputs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRAMEWORK AT A GLANCE -->
+  <section class="section wrap">
+    <div class="sec-head">
+      <div class="sec-tag">The framework at a glance</div>
+      <h2>Seven elements, two structural rails.</h2>
+      <p>The proven phases hold. Governance becomes the canvas beneath every phase. Change becomes a continuous thread through all of them.</p>
     </div>
 
     <div class="journey">
       <div class="journey-grid">
-        <div class="node"       style="--letter:var(--pulse)"><div class="step">Step 01</div><span class="badge">Discover</span><h3><span class="k">P</span> · AI Pulse</h3><p>Read the signal. Assess readiness, appetite and the highest-value opportunities.</p></div>
-        <div class="node"       style="--letter:var(--ignite)"><div class="step">Step 02</div><span class="badge">Prove</span><h3><span class="k">I</span> · AI Ignite</h3><p>Spark the first win. Turn the art of the possible into a working proof.</p></div>
-        <div class="node craft" style="--letter:var(--change)"><div class="step">Step 03</div><span class="badge">Enable</span><h3><span class="k">C</span> · AI Change</h3><p>Bring the org with you: sponsorship, comms, champions, adoption behaviours.</p></div>
-        <div class="node"       style="--letter:var(--accelerate)"><div class="step">Step 04</div><span class="badge">Build</span><h3><span class="k">A</span> · AI Accelerate</h3><p>Move from pilot to production. Ship real capability at pace, engineered to last.</p></div>
-        <div class="node"       style="--letter:var(--scale)"><div class="step">Step 05</div><span class="badge">Grow + Run</span><h3><span class="k">S</span> · AI Scale + Operate</h3><p>Multiply what works, then keep it healthy. Extend across teams, then monitor, tune and sustain the value once it is live.</p></div>
-        <div class="node craft" style="--letter:var(--sherpa)"><div class="step">Step 06</div><span class="badge">Embed</span><h3><span class="k">S</span> · AI Sherpa</h3><p>Our specialists work inside your team, not at a distance, through the hard climb to production.</p></div>
-        <div class="node"       style="--letter:var(--operate)"><div class="step">Step 07</div><span class="badge">Conduct</span><h3><span class="k">O</span> · AI Orchestrate</h3><p>Design how work moves across people, agents, data, tools and approvals. Clear authority, real evidence and clean handovers.</p></div>
+        <div class="node" style="--letter:var(--pulse)"><div class="step">Step 01</div><span class="badge">Discover</span><h3><span class="k">P</span> · AI Pulse</h3><p>Readiness and value, now ingesting discovery a client has already done.</p></div>
+        <div class="node" style="--letter:var(--ignite)"><div class="step">Step 02</div><span class="badge">Prove</span><h3><span class="k">I</span> · AI Ignite</h3><p>Strategy to proof. Tangible value fast, momentum for broader adoption.</p></div>
+        <div class="node craft" style="--letter:var(--change)"><div class="step">Step 03</div><span class="badge">Enable</span><h3><span class="k">C</span> · AI Change</h3><p>Sponsorship, champions, comms and the behaviours adoption needs.</p></div>
+        <div class="node" style="--letter:var(--accelerate)"><div class="step">Step 04</div><span class="badge">Continue</span><h3><span class="k">A</span> · Accelerate</h3><p>Continues Ignite month to month. Grows real capability in each cohort.</p></div>
+        <div class="node" style="--letter:var(--scale)"><div class="step">Step 05</div><span class="badge">Build + Run</span><h3><span class="k">S</span> · Scale + Operate</h3><p>Identify, build and run agentic solutions, with hypercare and lifecycle.</p></div>
+        <div class="node craft" style="--letter:var(--sherpa)"><div class="step">Step 06</div><span class="badge">Embed</span><h3><span class="k">S</span> · AI Sherpa</h3><p>Embedded practitioners translating capability into real execution.</p></div>
+        <div class="node" style="--letter:var(--operate)"><div class="step">Step 07</div><span class="badge">Conduct</span><h3><span class="k">O</span> · Orchestrate</h3><p>The enterprise operating model. Decision rights, demand, reporting.</p></div>
       </div>
 
-      <div class="thread-band">
-        <div class="cg-icon" aria-hidden="true">🧵</div>
-        <div class="cg-txt">
-          <div class="cg-tag">The thread through</div>
-          <h4>ACM · the change thread</h4>
-          <p>Adoption and change runs through every element. Human behaviour shifting by choice, so the picture actually holds once it is live.</p>
-        </div>
+      <div class="band thread">
+        <div class="ic" aria-hidden="true">🧵</div>
+        <div class="tt"><div class="tag">The thread through</div><h4>AI Change · a continuous thread</h4><p>Sustainable AI transformation is a people and behaviour challenge, not a technology deployment exercise. Change runs through every phase.</p></div>
       </div>
-
-      <div class="canvas-band">
-        <div class="cg-icon" aria-hidden="true">🛡️</div>
-        <div class="cg-txt">
-          <div class="cg-tag">The canvas beneath</div>
-          <h4>AI Governance</h4>
-          <p>Every element sits on one foundation: trust, controls, risk and responsible AI holding the whole picture together.</p>
-        </div>
+      <div class="band canvas">
+        <div class="ic" aria-hidden="true">🛡️</div>
+        <div class="tt"><div class="tag">The canvas beneath</div><h4>AI Governance · a maturity path</h4><p>Ownership, decision rights, policy, controls, risk, responsible AI, assurance and lifecycle oversight. It evolves as use cases move to production and scale.</p></div>
       </div>
 
       <div class="legend">
         <div><span class="sw" style="background:var(--pulse)"></span>Proven phase</div>
-        <div><span class="sw craft-sw"></span>New craft layer (Change · Sherpa)</div>
-        <div><span class="sw" style="background:var(--change)"></span>ACM change thread</div>
+        <div><span class="sw craft-sw"></span>Craft layer (Change · Sherpa)</div>
+        <div><span class="sw" style="background:var(--change)"></span>Change thread</div>
         <div><span class="sw" style="background:var(--governance)"></span>Governance canvas</div>
       </div>
     </div>
   </section>
 
-  <!-- ===== GUIDED JOURNEY NARRATIVE ===== -->
-  <section class="section wrap narrative">
-    <div class="sec-head n-intro">
-      <div class="sec-tag">Walk the journey</div>
-      <h2>Your people lead every step.</h2>
-      <p class="lede">This is how the journey feels from where you sit. <b>You make the calls and own the results.</b> We set up each stage and stay close, so nothing stalls. The change thread moves your people along at every beat.</p>
-    </div>
-
-    <div class="spine">
-
-      <div class="beat" style="--letter:var(--pulse)">
-        <div class="mark">P</div>
-        <div class="body">
-          <div class="who"><span class="name">AI Pulse</span><span class="craft-tag">Companion app</span><span class="axis-pill">Behaviour: Aware</span></div>
-          <p>You start inside the AI Pulse Companion app. Your team pinpoints its real use cases, maps the scenarios worth chasing and tracks everyone taking part in one place. Every priority you capture becomes your single source of truth. That living record is the foundation every later step builds on. You leave knowing exactly where you stand and why.</p>
-        </div>
-      </div>
-
-      <div class="beat" style="--letter:var(--ignite)">
-        <div class="mark">I</div>
-        <div class="body">
-          <div class="who"><span class="name">AI Ignite</span><span class="role">You prove it is real</span><span class="axis-pill">Behaviour: Willing</span></div>
-          <p>Then you land the first win. Your top opportunities from the Pulse record become working agents, built with our engineers alongside. Something real your team can use in weeks. Momentum you can feel.</p>
-        </div>
-      </div>
-
-      <div class="beat craft" style="--letter:var(--change)">
-        <div class="mark">C</div>
-        <div class="body">
-          <div class="who"><span class="name">AI Change</span><span class="craft-tag">Craft layer</span><span class="axis-pill">Willing to Practising</span></div>
-          <p>This is where change usually stalls. Your sponsors, your champions and your teams come with you, and we help you carry the message. <strong>Adoption becomes something your people choose to do.</strong></p>
-        </div>
-      </div>
-
-      <div class="beat" style="--letter:var(--accelerate)">
-        <div class="mark">A</div>
-        <div class="body">
-          <div class="who"><span class="name">AI Accelerate</span><span class="role">You build for real</span><span class="axis-pill">Behaviour: Practising</span></div>
-          <p>Now pilot becomes production. Your team ships real capability at pace, built to last, with our engineers in support. The idea turns into a platform your people actually use.</p>
-        </div>
-      </div>
-
-      <div class="beat" style="--letter:var(--scale)">
-        <div class="mark">S</div>
-        <div class="body">
-          <div class="who"><span class="name">AI Scale + Operate</span><span class="role">You grow it and keep it running</span><span class="axis-pill">Habitual · Team to Enterprise</span></div>
-          <p>What proves itself once, you take everywhere. Across teams, workflows and business units, measured against the targets you set at Pulse. It stays healthy too: monitored, tuned and improving long after go-live. You stop running experiments and start running a capability you trust.</p>
-        </div>
-      </div>
-
-      <div class="beat craft" style="--letter:var(--sherpa)">
-        <div class="mark">S</div>
-        <div class="body">
-          <div class="who"><span class="name">AI Sherpa</span><span class="craft-tag">Craft layer</span><span class="axis-pill">Agency: Fluent to Leading</span></div>
-          <p>Through the hardest stretch, you get engineers working inside your team, not handing over a document and leaving. Together you clear the integration, the edge cases and the last mile where AI usually stalls. <strong>You do not brief a supplier and wait. You climb with people who own the outcome with you.</strong></p>
-        </div>
-      </div>
-
-      <div class="beat" style="--letter:var(--operate)">
-        <div class="mark">O</div>
-        <div class="body">
-          <div class="who"><span class="name">AI Orchestrate</span><span class="role">You direct how it all moves</span><span class="axis-pill">Cultural · Agency: Leading</span></div>
-          <p>This is where it all comes together. Work flows cleanly across your people, agents, data, tools and approvals. Every trigger, every review, every stop point and escalation, mapped with you. More than automated steps, you get clear authority, real evidence and clean handovers, so the whole system is one your people can rely on.</p>
-        </div>
-      </div>
-
-      <div class="beat canvas" style="--letter:var(--governance)">
-        <div class="mark">🛡️</div>
-        <div class="body">
-          <div class="who"><span class="name">AI Governance</span><span class="role">The ground beneath every step</span></div>
-          <p>Under all of it sits one steady foundation. Trust, controls and responsible AI holding the whole picture together. You move fast precisely because the ground is solid. Real confidence at every step.</p>
-        </div>
-      </div>
-
-    </div>
-
-    <p class="n-close">From the first Pulse to the running system, your people stay in the lead and we stay close. <b>Method gets you moving. Craft gets you results your people trust and own.</b></p>
-  </section>
-
-  <!-- ===== ACM OVERLAY: THE CHANGE THREAD ===== -->
+  <!-- ELEMENTS EXPANDED -->
   <section class="section wrap">
     <div class="sec-head">
-      <div class="sec-tag">The ACM overlay</div>
-      <div class="acm-eq">
-        <span class="frag"><b>PICASSO</b> is <span class="hl">what we create</span>.</span>
-        <span class="frag"><b>ACM</b> is <span class="hl">how we think, work and operate</span>.</span>
-      </div>
-      <h2>Adoption and change is the thread, not a workstream.</h2>
-      <p>It runs under every element you just walked. Old ACM manages people through a change. Modern ACM changes how people behave, by choice, with the human at the centre. This is not a product or vendor push. It is a people craft.</p>
+      <div class="sec-tag">The seven elements, expanded</div>
+      <h2>Every phase carries a specific outcome.</h2>
+      <p>The same shape, now defined by what it produces for the client, not just the activity it runs.</p>
     </div>
 
-    <div class="reframe">
-      <div class="rf-card old">
-        <div class="kick">Vendor ACM · the old way</div>
-        <h3>People as risk to manage.</h3>
-        <p>Treats humans as resistance to handle. Ends the day the tool goes live. It is why pilots die in Pilot Purgatory.</p>
-        <ul>
-          <li>Resistance management</li>
-          <li>Training completion</li>
-          <li>A comms plan at go-live</li>
-          <li>A change team's workstream</li>
-          <li>Tool rollout, then walk away</li>
-        </ul>
+    <div class="elems">
+      <div class="elem" style="--letter:var(--pulse)">
+        <div class="top"><div class="mk">P</div><div class="nm"><span class="k">AI Pulse</span></div><div class="role">Readiness + value</div></div>
+        <p>Assesses readiness, opportunity and where value can be created, and now ingests and structures discovery a client has already produced. Pulse data drives cohort allocation, sets the maturity baseline and feeds the AIM Hub the inputs for every later phase.</p>
+        <div class="outs"><span class="out">Ingests existing discovery</span><span class="out">Cohort allocation</span><span class="out">Readiness baseline</span></div>
       </div>
-      <div class="rf-card new">
-        <div class="kick">The change thread · modern ACM</div>
-        <h3>People as the whole point.</h3>
-        <p>Builds capability your people own long after any tool retires. Behaviour shifts by choice, with AI at their side.</p>
-        <ul>
-          <li>Agency building</li>
-          <li>Habit formation</li>
-          <li>A behaviour system from the first Pulse</li>
-          <li>How everyone thinks, works and operates</li>
-          <li>Human capability that outlasts the tool</li>
-        </ul>
+
+      <div class="elem" style="--letter:var(--ignite)">
+        <div class="top"><div class="mk">I</div><div class="nm"><span class="k">AI Ignite</span></div><div class="role">Strategy to proof</div></div>
+        <p>Moves from strategy to proof. Helps organisations demonstrate tangible value quickly and create the momentum broader adoption needs.</p>
+        <div class="outs"><span class="out">First proof</span><span class="out">Early momentum</span></div>
+      </div>
+
+      <div class="elem" style="--letter:var(--change)">
+        <div class="top"><div class="mk">C</div><div class="nm"><span class="k">AI Change</span></div><div class="role">Organisational change</div></div>
+        <p>A dedicated change capability: executive sponsorship, stakeholder alignment, champion networks, communications, behavioural adoption and reinforcement. It creates the conditions cohort enablement and new solutions need to succeed.</p>
+        <div class="outs"><span class="out">Active sponsorship</span><span class="out">Champion networks</span><span class="out">Sustained behaviour change</span></div>
+      </div>
+
+      <div class="elem" style="--letter:var(--accelerate)">
+        <div class="top"><div class="mk">A</div><div class="nm"><span class="k">AI Accelerate</span></div><div class="role">Cohort enablement</div></div>
+        <p>Continues the Ignite motion month to month. Takes the cohorts from Pulse and grows real capability through deeper skills, applied use cases, coaching and reinforcement. Distinct from Change: Accelerate builds capability, Change builds the conditions.</p>
+        <div class="outs"><span class="out">Month to month</span><span class="out">Applied use cases</span><span class="out">Sustained capability growth</span></div>
+      </div>
+
+      <div class="elem" style="--letter:var(--scale)">
+        <div class="top"><div class="mk">S</div><div class="nm"><span class="k">AI Scale + Operate</span></div><div class="role">Agentic solutions</div></div>
+        <p>Owns the identification, creation and management of agentic software solutions. Shape and engineer, move to production with structured hypercare, then run them: performance, ownership, lifecycle controls, benefits tracking and continuous improvement.</p>
+        <div class="outs"><span class="out">Agentic solutions</span><span class="out">Hypercare</span><span class="out">Lifecycle + benefits</span></div>
+      </div>
+
+      <div class="elem" style="--letter:var(--sherpa)">
+        <div class="top"><div class="mk">S</div><div class="nm"><span class="k">AI Sherpa</span></div><div class="role">Embedded delivery</div></div>
+        <p>Embedded delivery on the Forward Deployed Engineer model. Practitioners inside the client team apply cohort learning to real work, clear blockers, coach owners and support the build and adoption of agentic solutions. Independence, not dependency.</p>
+        <div class="outs"><span class="out">Embedded practitioners</span><span class="out">Blockers cleared</span><span class="out">Ownership transferred</span></div>
+      </div>
+
+      <div class="elem wide" style="--letter:var(--operate)">
+        <div class="top"><div class="mk">O</div><div class="nm"><span class="k">AI Orchestrate</span></div><div class="role">The enterprise operating model</div></div>
+        <p>The capability tying everything together. How work moves across people, AI agents, business processes, data, systems and approvals. Where ownership and decision rights sit, how demand is prioritised, how governance forums interact and how performance is reported. Increasingly, this is where mature organisations want practical guidance, and where long-term value is either unlocked or constrained.</p>
+        <div class="outs"><span class="out">Operating model</span><span class="out">Decision rights</span><span class="out">Demand + prioritisation</span><span class="out">Performance reporting</span></div>
       </div>
     </div>
-    <p class="rf-foot">This is not a product push. <b>It is a people craft.</b></p>
   </section>
 
-  <!-- ===== ACM MATURITY: THREE AXES (interactive console) ===== -->
+  <!-- DELIVERY ENGINE: CHANGE / ACCELERATE / SHERPA -->
   <section class="section wrap">
     <div class="sec-head">
-      <div class="sec-tag">The maturity overlay</div>
-      <h2>Three axes, moving at once.</h2>
-      <p>Maturity is not one number. Move the levers to where your people actually sit. The signature updates live: your index, what the shape means, and the one move with the most upside right now.</p>
+      <div class="sec-tag">The delivery engine</div>
+      <h2>Change, Accelerate and Sherpa, working as one.</h2>
+      <p>Three motions people used to feel as separate. Defined together, each carries its own outcome and hands to the next.</p>
+    </div>
+
+    <div class="flow">
+      <div class="fcard" style="--letter:var(--change)">
+        <div class="fh"><span class="fn">AI Change</span><span class="r">Conditions</span></div>
+        <p>Creates the organisational conditions: sponsorship, alignment, champions and the behaviours that let capability take hold.</p>
+        <div class="outs"><span class="out">Sponsorship</span><span class="out">Champions</span><span class="out">Behaviour</span></div>
+      </div>
+      <div class="fx">➜</div>
+      <div class="fcard" style="--letter:var(--accelerate)">
+        <div class="fh"><span class="fn">AI Accelerate</span><span class="r">Capability</span></div>
+        <p>Continues each cohort's enablement journey. Deeper skills and applied use cases, month to month, until capability sticks.</p>
+        <div class="outs"><span class="out">Skills</span><span class="out">Use cases</span><span class="out">Reinforcement</span></div>
+      </div>
+      <div class="fx">➜</div>
+      <div class="fcard" style="--letter:var(--sherpa)">
+        <div class="fh"><span class="fn">AI Sherpa</span><span class="r">Execution</span></div>
+        <p>Translates that capability into real-world execution. Embedded practitioners clear blockers and transfer ownership to the client.</p>
+        <div class="outs"><span class="out">Embedded</span><span class="out">Blockers cleared</span><span class="out">Ownership</span></div>
+      </div>
+    </div>
+
+    <div class="flow-note"><b>Change creates the conditions. Accelerate continues the enablement. Sherpa translates capability into execution and client ownership.</b> Three motions, one delivery engine.</div>
+  </section>
+
+  <!-- AIM HUB -->
+  <section class="section wrap">
+    <div class="hub">
+      <div class="hub-top">
+        <div class="ic" aria-hidden="true">🛠️</div>
+        <div>
+          <h3>The AIM Hub: the backplane and asset engine.</h3>
+          <p>Framework direction alone does not close the gap. The Hub converts capability into repeatable delivery assets, methods and accountabilities field teams can use consistently.</p>
+        </div>
+      </div>
+
+      <div class="assets">
+        <div class="asset"><div class="an">Reusable</div><div class="at">Operating model patterns</div></div>
+        <div class="asset"><div class="an">Reusable</div><div class="at">Governance and decision-rights artefacts</div></div>
+        <div class="asset"><div class="an">Reusable</div><div class="at">Champion and adoption toolkits</div></div>
+        <div class="asset"><div class="an">Reusable</div><div class="at">Executive reporting packs</div></div>
+        <div class="asset"><div class="an">Reusable</div><div class="at">Value realisation frameworks</div></div>
+        <div class="asset"><div class="an">Reusable</div><div class="at">Readiness assessments</div></div>
+        <div class="asset"><div class="an">Reusable</div><div class="at">Lifecycle management approaches</div></div>
+        <div class="asset"><div class="an">Driven by</div><div class="at">Pulse data and cohort allocation</div></div>
+      </div>
+
+      <div class="hub-loop">
+        <span class="st">Create</span><span class="ar">→</span>
+        <span class="st">Test</span><span class="ar">→</span>
+        <span class="st">Improve</span><span class="ar">→</span>
+        <span class="st">Discover</span><span class="ar">→</span>
+        <span class="st">Apply</span><span class="ar">→</span>
+        <span class="st">Refine</span><span class="ar">↺</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATURITY CONSOLE -->
+  <section class="section wrap">
+    <div class="sec-head">
+      <div class="sec-tag">Measuring what matters</div>
+      <h2>Beyond tool adoption, towards organisational outcomes.</h2>
+      <p>The maturity model reads three dimensions at once and connects them to operational and business outcomes. Move the levers to where a client sits. It can feed an executive reporting view of adoption, capability, readiness, value and risk.</p>
     </div>
 
     <div class="console">
@@ -920,338 +523,147 @@
           <div id="axesMount"></div>
         </div>
       </div>
-
       <div class="card">
         <div class="sig">
           <div class="sig-idx">
             <div class="mcap">Maturity index</div>
-            <div class="row">
-              <span class="num" id="idxNum">0</span>
-              <span class="den">/ 100</span>
-              <span class="band" id="idxBand">·</span>
-            </div>
-            <div class="mfoot">A conversation starter, not a grade. The shape matters more than the score.</div>
+            <div class="row"><span class="num" id="idxNum">0</span><span class="den">/ 100</span><span class="band2" id="idxBand">·</span></div>
+            <div class="mfoot">Prompts, logins and training completion are supporting signals, not the definition of success.</div>
           </div>
-
           <div class="sig-read" id="sigRead"></div>
-
           <div class="meters" id="metersMount"></div>
-
-          <div class="next">
-            <div class="mcap">Your next move</div>
-            <div class="mv" id="nextMove"></div>
-            <div class="hy" id="nextHow"></div>
-          </div>
+          <div class="next"><div class="mcap">Your next move</div><div class="mv" id="nextMove"></div><div class="hy" id="nextHow"></div></div>
         </div>
       </div>
     </div>
 
+    <p class="measure-line">We are interested in whether decision-making improves, behaviours change, capability grows and value scales. <b>That is what operationalised AI actually looks like.</b></p>
     <p class="sr-only" id="srStatus" aria-live="polite"></p>
-
-    <div class="board-note">
-      <p>A team can be <b>Habitual</b> in behaviour, <b>Fluent</b> in agency, and still only <b>Team</b>-deep in spread. That gap is the plan. The change thread names where you are on each axis, then moves you along all three.</p>
-    </div>
   </section>
 
-  <!-- ===== THE ENGINE: HUMAN-LED LEARNING LOOP ===== -->
+  <!-- PARADIGM -->
   <section class="section wrap">
     <div class="sec-head">
-      <div class="sec-tag">The engine beneath the journey</div>
-      <h2>A human-led learning loop.</h2>
-      <p>In PICASSO, people get more important, not less. Every run creates evidence. Every piece of evidence sharpens the next run. Capability compounds, and your organisation gets better at absorbing whatever the frontier brings next.</p>
+      <div class="sec-tag">The paradigm to resolve</div>
+      <h2>Proposition and delivery have to mature together.</h2>
+      <p>This is the tension the shift exposes. Get one ahead of the other and we feel it in the field.</p>
     </div>
 
-    <div class="loop">
-      <div class="stage" style="--letter:var(--pulse)"><div class="n">01</div><h4>Better work</h4><p>Good people working to a higher standard, with AI in the loop.</p></div>
-      <div class="stage" style="--letter:var(--ignite)"><div class="n">02</div><h4>Evidence</h4><p>The work throws off proof of what actually improved.</p></div>
-      <div class="stage" style="--letter:var(--change)"><div class="n">03</div><h4>A stronger run</h4><p>That evidence sharpens the next run, the real unit of AI work.</p></div>
-      <div class="stage" style="--letter:var(--accelerate)"><div class="n">04</div><h4>A smarter harness</h4><p>Repeatable runs harden into a harness others can trust.</p></div>
-      <div class="stage" style="--letter:var(--sherpa)"><div class="n">05</div><h4>Captured judgement</h4><p>Judgement gets captured, so it lives beyond one person's head.</p></div>
-      <div class="stage" style="--letter:var(--operate)"><div class="n">06</div><h4>Owned capability</h4><p>Captured judgement becomes capability the whole business owns.</p></div>
-    </div>
-
-    <p class="loop-return">And back to the top, sharper every cycle. <b>The frontier keeps moving.</b> Your ability to keep learning is the advantage that lasts.</p>
-  </section>
-
-  <!-- ===== THE PEOPLE MAKE IT WORK ===== -->
-  <section class="section wrap">
-    <div class="sec-head">
-      <div class="sec-tag">The people make it work</div>
-      <h2>Craft lives in people, not just models.</h2>
-      <p>PICASSO is people-first by design. Two things carry the whole journey: a baseline every person brings, and a ladder of capability your organisation grows into.</p>
-    </div>
-
-    <h3 class="block-label">The baseline every person brings</h3>
-    <div class="caps">
-      <div class="cap" style="--letter:var(--ignite)"><div class="tag">Ask well</div><h4>Specify the work</h4><p>State the goal, the audience, the constraints and what good looks like. This is work specification, not prompt decoration.</p></div>
-      <div class="cap" style="--letter:var(--accelerate)"><div class="tag">Plan the work</div><h4>Design the workflow</h4><p>Break the job into stages. Decide what AI does, what the human does and what must not be delegated at all.</p></div>
-      <div class="cap" style="--letter:var(--scale)"><div class="tag">Check the output</div><h4>Verify to a standard</h4><p>Slow down enough to test truth, evidence and fit. Looks right is never a review standard.</p></div>
-      <div class="cap" style="--letter:var(--governance)"><div class="tag">Own the decision</div><h4>Keep the judgement</h4><p>AI assists. The human owns the risk, the ethics and the outcome. Judgement stays with people.</p></div>
-    </div>
-
-    <h3 class="block-label" style="margin-top:38px">The ladder capability grows into</h3>
-    <div class="modes">
-      <div class="mode" style="--letter:var(--pulse)"><h5>Use</h5><p>Work with AI safely and well in your own day to day.</p></div>
-      <div class="mode" style="--letter:var(--ignite)"><h5>Build</h5><p>Turn repeated work into reusable skills and templates.</p></div>
-      <div class="mode" style="--letter:var(--scale)"><h5>Operate</h5><p>Keep live runs healthy. Monitor, handle exceptions, watch for drift.</p></div>
-      <div class="mode on" style="--letter:var(--operate)"><h5>Orchestrate</h5><p>Design how work flows across people, agents, data and approvals.<span class="link">Powers the O</span></p></div>
-      <div class="mode" style="--letter:var(--governance)"><h5>Lead</h5><p>Decide what gets built, funded, governed, scaled or stopped.</p></div>
-    </div>
-  </section>
-
-  <!-- ===== CRAFT SPOTLIGHT ===== -->
-  <section class="section wrap">
-    <div class="sec-head">
-      <div class="sec-tag">The two new brushstrokes</div>
-      <h2>What turns a promising pilot into AI your people trust.</h2>
-    </div>
-
-    <div class="spotlight-grid">
-      <div class="spot" style="--letter:var(--change)">
-        <div class="tagrow"><span class="chip">C · AI Change</span><span class="newtag">New layer</span></div>
-        <h3><span class="k">Bring the org with you.</span></h3>
-        <div class="lede">Technology never fails alone. Adoption does.</div>
-        <p>The change and enablement layer that most AI programmes skip. Sponsorship, clear comms, visible champions and the everyday behaviours that make new capability stick. This is how a pilot becomes the way people actually work.</p>
-        <div class="quote">The 20% innovation only pays off when the 80% of people come along with it.</div>
+    <div class="para">
+      <div class="pcard sell">
+        <div class="pk">The proposition</div>
+        <h3>Strong enough to sell the future state.</h3>
+        <p>Our story has to match the operating capability mature clients are already asking for. Governance, operating models, adoption, value and lifecycle, positioned with confidence.</p>
       </div>
-
-      <div class="spot" style="--letter:var(--sherpa)">
-        <div class="tagrow"><span class="chip">S · AI Sherpa</span><span class="newtag">New layer</span></div>
-        <h3><span class="k">Climb together.</span></h3>
-        <div class="lede">Forward-deployed engineers, embedded in your team.</div>
-        <p>Not a spec thrown over the wall. Our engineers sit inside your team and do the hard climb to production alongside you: the integration, the edge cases, the last mile that decides whether AI ships or stalls.</p>
-        <div class="quote">You don't hand them a spec and wait. <b>You climb together.</b></div>
+      <div class="pcard deliver">
+        <div class="pk">The delivery system</div>
+        <h3>Mature enough to fulfil it consistently.</h3>
+        <p>The AIM Hub assets, methods and accountabilities have to be repeatable, so field teams deliver the promise without reinventing it per engagement.</p>
       </div>
     </div>
-  </section>
 
-  <!-- ===== MEASURE BETTER WORK ===== -->
-  <section class="section wrap">
-    <div class="measure">
-      <div class="not">Usage is not adoption. <b>Better work is.</b></div>
-      <p class="sub">A dashboard of logins and prompt counts says nothing about whether the work improved. PICASSO measures the things that actually compound.</p>
-      <ul class="better">
-        <li>Repeated runs getting measurably better</li>
-        <li>Outputs more grounded in real evidence</li>
-        <li>Review cycles shorter without adding risk</li>
-        <li>Common errors falling away</li>
-        <li>Skills reused instead of prompts reinvented</li>
-        <li>Agents stopping at the right point</li>
-        <li>Customer promises safer, board claims better evidenced</li>
-        <li>People deciding better with better context</li>
-      </ul>
-      <p class="core">If you cannot measure AI impact, it is just another tool. <b>PICASSO is built to measure it.</b></p>
-    </div>
-  </section>
-
-  <!-- ===== WHY / HOOK STRIP ===== -->
-  <section class="section wrap">
-    <div class="why">
-      <h2>Why <em>PICASSO</em> is the hook, the hero and the core value.</h2>
-      <div class="why-grid">
-        <div class="why-card">
-          <div class="num">The hook</div>
-          <h4>A name that sticks.</h4>
-          <p>PICASSO reframes the whole category. Starting AI is easy, embedding it is the craft, and your people are what make it land. One word carries the promise into every conversation.</p>
-        </div>
-        <div class="why-card">
-          <div class="num">The hero</div>
-          <h4>Earns the Dashboard.</h4>
-          <p>Seven elements spelling one memorable word, headlining the hub. The framework becomes the first thing clients see and the story they repeat.</p>
-        </div>
-        <div class="why-card">
-          <div class="num">The core value</div>
-          <h4>Craft over checklist.</h4>
-          <p>AI Change and AI Sherpa name what we do best: bringing your people along, and getting all the way to production with them. Proof over positioning.</p>
-        </div>
-      </div>
+    <div class="para-next">
+      <div class="nk">The next step</div>
+      <p>Align <b>what we position, what we can deliver today, and what we must build next.</b></p>
     </div>
   </section>
 
   <footer class="wrap foot">
-    <div>PICASSO · a concept rebrand of <b>AIMomentum</b>, with the ACM change thread overlaid. Visual mockup for reaction only.</div>
+    <div>PICASSO · the operating position for <b>AI Momentum</b>, built on the AIM Hub. Concept for reaction.</div>
     <div>Not wired into the app. No framework changes made.</div>
   </footer>
 
 <script>
-  /* Interactive maturity console (ACM overlay) */
+  /* Interactive maturity console */
   (function () {
     var AXES = [
-      { key:'behaviour', name:'Behaviour', sub:'the shift', desc:'How people actually work, not what they clicked.',
-        color:'--color-brand',
+      { key:'behaviour', name:'Behaviour', sub:'the shift', desc:'How people actually work.', color:'--color-brand',
         stages:['Aware','Willing','Practising','Habitual','Cultural'],
-        moves:['give them a first win they can feel','build the habit into the daily workflow','make the new way the default and retire the old one','let peers set the norm, not the mandate','hold and protect it, watch for drift'],
-        sel:2 },
-      { key:'agency', name:'Agency', sub:'the capability', desc:'Growing human ownership alongside AI, never dependency.',
-        color:'--color-phase-3',
+        moves:['give them a first win they can feel','build the habit into the daily workflow','make the new way the default and retire the old one','let peers set the norm, not the mandate','hold and protect it, watch for drift'], sel:2 },
+      { key:'agency', name:'Agency', sub:'the capability', desc:'Confidence and capability working with AI.', color:'--color-phase-3',
         stages:['Assisted','Confident','Fluent','Leading'],
-        moves:['let them run it unaided on low-stakes work','have them build and reuse their own skills','put them in charge of what gets built and stopped','hold and protect it, watch for drift'],
-        sel:2 },
-      { key:'depth', name:'Depth', sub:'the spread', desc:'How far the new behaviour has actually travelled.',
-        color:'--color-phase-5',
+        moves:['let them run it unaided on low-stakes work','have them build and reuse their own skills','put them in charge of what gets built and stopped','hold and protect it, watch for drift'], sel:2 },
+      { key:'depth', name:'Depth', sub:'the spread', desc:'How far capability has spread across the organisation.', color:'--color-phase-5',
         stages:['Individual','Team','Function','Enterprise','Ecosystem'],
-        moves:['codify what one person proved for the whole team','make it the standard way of working across the function','carry it across business units with shared guardrails','extend the behaviour to partners and customers','hold and protect it, watch for drift'],
-        sel:1 }
+        moves:['codify what one person proved for the whole team','make it the standard way of working across the function','carry it across business units with shared guardrails','extend the behaviour to partners and customers','hold and protect it, watch for drift'], sel:1 }
     ];
-
     var mount = document.getElementById('axesMount');
     if (!mount) return;
-
-    function norm(a) { return a.sel / (a.stages.length - 1); }
-
+    function norm(a){ return a.sel / (a.stages.length - 1); }
     function buildAxis(a, ai) {
-      var wrap = document.createElement('div');
-      wrap.className = 'axrow';
-      wrap.style.setProperty('--ax', 'var(' + a.color + ')');
-      if (ai > 0) wrap.style.marginTop = '26px';
-
-      var head = document.createElement('div');
-      head.className = 'axhead';
-      head.innerHTML = '<span class="name">' + a.name + ' <span class="sub">· ' + a.sub + '</span></span>' +
-                       '<span class="desc">' + a.desc + '</span>' +
-                       '<span class="lvl" data-lvl></span>';
+      var wrap = document.createElement('div'); wrap.className='axrow';
+      wrap.style.setProperty('--ax','var('+a.color+')'); if (ai>0) wrap.style.marginTop='24px';
+      var head=document.createElement('div'); head.className='axhead';
+      head.innerHTML='<span class="name">'+a.name+' <span class="sub">· '+a.sub+'</span></span><span class="desc">'+a.desc+'</span><span class="lvl" data-lvl></span>';
       wrap.appendChild(head);
-
-      var track = document.createElement('div');
-      track.className = 'track';
-      var rail = document.createElement('div'); rail.className = 'rail';
-      var fill = document.createElement('div'); fill.className = 'rail-fill'; rail.appendChild(fill);
-      track.appendChild(rail);
-      var knob = document.createElement('div'); knob.className = 'knob'; track.appendChild(knob);
-
-      var cells = document.createElement('div');
-      cells.className = 'cells';
-      cells.setAttribute('role', 'radiogroup');
-      cells.setAttribute('aria-label', a.name + ' maturity level');
+      var track=document.createElement('div'); track.className='track';
+      var rail=document.createElement('div'); rail.className='rail';
+      var fill=document.createElement('div'); fill.className='rail-fill'; rail.appendChild(fill); track.appendChild(rail);
+      var knob=document.createElement('div'); knob.className='knob'; track.appendChild(knob);
+      var cells=document.createElement('div'); cells.className='cells';
+      cells.setAttribute('role','radiogroup'); cells.setAttribute('aria-label', a.name+' maturity level');
       cells.style.setProperty('--n', a.stages.length);
-      a.stages.forEach(function (s, i) {
-        var b = document.createElement('button');
-        b.className = 'cell'; b.type = 'button';
-        b.setAttribute('role', 'radio');
-        b.setAttribute('aria-label', s + ', level ' + (i + 1) + ' of ' + a.stages.length);
-        b.innerHTML = '<span class="n" aria-hidden="true">' + String(i + 1).padStart(2, '0') + '</span><span class="nm">' + s + '</span>';
-        b.addEventListener('click', function () { a.sel = i; update(); b.focus(); });
+      a.stages.forEach(function(s,i){
+        var b=document.createElement('button'); b.className='cell'; b.type='button';
+        b.setAttribute('role','radio'); b.setAttribute('aria-label', s+', level '+(i+1)+' of '+a.stages.length);
+        b.innerHTML='<span class="n" aria-hidden="true">'+String(i+1).padStart(2,'0')+'</span><span class="nm">'+s+'</span>';
+        b.addEventListener('click', function(){ a.sel=i; update(); b.focus(); });
         cells.appendChild(b);
       });
-      cells.addEventListener('keydown', function (e) {
-        var last = a.stages.length - 1, ns = a.sel;
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') ns = Math.min(last, a.sel + 1);
-        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') ns = Math.max(0, a.sel - 1);
-        else if (e.key === 'Home') ns = 0;
-        else if (e.key === 'End') ns = last;
-        else return;
-        e.preventDefault(); a.sel = ns; update(); cells.children[ns].focus();
+      cells.addEventListener('keydown', function(e){
+        var last=a.stages.length-1, ns=a.sel;
+        if (e.key==='ArrowRight'||e.key==='ArrowDown') ns=Math.min(last,a.sel+1);
+        else if (e.key==='ArrowLeft'||e.key==='ArrowUp') ns=Math.max(0,a.sel-1);
+        else if (e.key==='Home') ns=0; else if (e.key==='End') ns=last; else return;
+        e.preventDefault(); a.sel=ns; update(); cells.children[ns].focus();
       });
-      track.appendChild(cells);
-      wrap.appendChild(track);
-
-      a._el = { fill: fill, knob: knob, cells: cells, lvl: head.querySelector('[data-lvl]') };
+      track.appendChild(cells); wrap.appendChild(track);
+      a._el={fill:fill,knob:knob,cells:cells,lvl:head.querySelector('[data-lvl]')};
       return wrap;
     }
-
-    AXES.forEach(function (a, i) { mount.appendChild(buildAxis(a, i)); });
-
-    var idxNum = document.getElementById('idxNum');
-    var idxBand = document.getElementById('idxBand');
-    var sigRead = document.getElementById('sigRead');
-    var metersMount = document.getElementById('metersMount');
-    var nextMove = document.getElementById('nextMove');
-    var nextHow = document.getElementById('nextHow');
-
-    AXES.forEach(function (a) {
-      var m = document.createElement('div');
-      m.className = 'meter';
-      m.style.setProperty('--ax', 'var(' + a.color + ')');
-      m.innerHTML = '<div class="mtop"><span class="mlab">' + a.name + '</span><span class="mval" data-mv></span></div>' +
-                    '<div class="bar"><div class="bfill" data-bf></div></div>';
-      metersMount.appendChild(m);
-      a._meter = { val: m.querySelector('[data-mv]'), fill: m.querySelector('[data-bf]') };
+    AXES.forEach(function(a,i){ mount.appendChild(buildAxis(a,i)); });
+    var idxNum=document.getElementById('idxNum'), idxBand=document.getElementById('idxBand'),
+        sigRead=document.getElementById('sigRead'), metersMount=document.getElementById('metersMount'),
+        nextMove=document.getElementById('nextMove'), nextHow=document.getElementById('nextHow');
+    AXES.forEach(function(a){
+      var m=document.createElement('div'); m.className='meter'; m.style.setProperty('--ax','var('+a.color+')');
+      m.innerHTML='<div class="mtop"><span class="mlab">'+a.name+'</span><span class="mval" data-mv></span></div><div class="bar"><div class="bfill" data-bf></div></div>';
+      metersMount.appendChild(m); a._meter={val:m.querySelector('[data-mv]'),fill:m.querySelector('[data-bf]')};
     });
-
-    function bandFor(idx) {
-      if (idx >= 80) return 'Embedded';
-      if (idx >= 55) return 'Taking hold';
-      if (idx >= 30) return 'Early motion';
-      return 'Standing start';
-    }
-
-    function update() {
-      var total = 0;
-      AXES.forEach(function (a) {
-        var n = norm(a); total += n;
-        var pct = (n * 100).toFixed(1) + '%';
-        a._el.fill.style.width = pct;
-        a._el.knob.style.left = pct;
-        a._el.lvl.textContent = a.stages[a.sel];
-        Array.prototype.forEach.call(a._el.cells.children, function (c, i) {
-          c.classList.remove('done', 'cur');
-          if (i < a.sel) c.classList.add('done');
-          if (i === a.sel) c.classList.add('cur');
-          c.setAttribute('aria-checked', i === a.sel ? 'true' : 'false');
-          c.tabIndex = i === a.sel ? 0 : -1;
+    function bandFor(x){ if(x>=80)return'Embedded'; if(x>=55)return'Taking hold'; if(x>=30)return'Early motion'; return'Standing start'; }
+    function update(){
+      var total=0;
+      AXES.forEach(function(a){
+        var n=norm(a); total+=n; var pct=(n*100).toFixed(1)+'%';
+        a._el.fill.style.width=pct; a._el.knob.style.left=pct; a._el.lvl.textContent=a.stages[a.sel];
+        Array.prototype.forEach.call(a._el.cells.children, function(c,i){
+          c.classList.remove('done','cur'); if(i<a.sel)c.classList.add('done'); if(i===a.sel)c.classList.add('cur');
+          c.setAttribute('aria-checked', i===a.sel?'true':'false'); c.tabIndex = i===a.sel?0:-1;
         });
-        a._meter.fill.style.width = pct;
-        a._meter.val.textContent = a.stages[a.sel];
+        a._meter.fill.style.width=pct; a._meter.val.textContent=a.stages[a.sel];
       });
-
-      var idx = Math.round((total / AXES.length) * 100);
-      idxNum.textContent = idx;
-      idxBand.textContent = bandFor(idx);
-
-      var sorted = AXES.slice().sort(function (x, y) { return norm(x) - norm(y); });
-      var weak = sorted[0], strong = sorted[sorted.length - 1];
-
-      sigRead.innerHTML = '<b>' + strong.name + '</b> is your strength. <b>' + weak.name +
-        '</b> is your lever. The distance between them is where the next quarter of work sits.';
-
-      if (weak.sel >= weak.stages.length - 1) {
-        nextMove.innerHTML = 'Every axis is maxed. <b>Protect it.</b>';
-        nextHow.textContent = 'Guard against drift and keep the behaviour compounding.';
-      } else {
-        nextMove.innerHTML = 'Advance <b>' + weak.name + '</b>: ' + weak.stages[weak.sel] + ' → ' + weak.stages[weak.sel + 1];
-        nextHow.textContent = 'How: ' + weak.moves[weak.sel] + '.';
-      }
-
-      var sr = document.getElementById('srStatus');
-      if (sr) {
-        sr.textContent = 'Maturity index ' + idx + ' of 100, ' + bandFor(idx) + '. ' +
-          AXES.map(function (a) { return a.name + ' ' + a.stages[a.sel]; }).join(', ') + '.';
-      }
+      var idx=Math.round((total/AXES.length)*100);
+      idxNum.textContent=idx; idxBand.textContent=bandFor(idx);
+      var sorted=AXES.slice().sort(function(x,y){return norm(x)-norm(y);});
+      var weak=sorted[0], strong=sorted[sorted.length-1];
+      sigRead.innerHTML='<b>'+strong.name+'</b> is the strength. <b>'+weak.name+'</b> is the lever. The distance between them is where the next quarter of work sits.';
+      if (weak.sel>=weak.stages.length-1){ nextMove.innerHTML='Every axis is maxed. <b>Protect it.</b>'; nextHow.textContent='Guard against drift and keep the behaviour compounding.'; }
+      else { nextMove.innerHTML='Advance <b>'+weak.name+'</b>: '+weak.stages[weak.sel]+' → '+weak.stages[weak.sel+1]; nextHow.textContent='How: '+weak.moves[weak.sel]+'.'; }
+      var sr=document.getElementById('srStatus');
+      if (sr) sr.textContent='Maturity index '+idx+' of 100, '+bandFor(idx)+'. '+AXES.map(function(a){return a.name+' '+a.stages[a.sel];}).join(', ')+'.';
     }
-
     update();
   })();
-</script>
 
-<script>
+  /* Theme toggle */
   (function () {
-    var root = document.documentElement;
-    var btn = document.getElementById('themeBtn');
-    var icon = document.getElementById('themeIcon');
-    var label = document.getElementById('themeLabel');
-
-    // Dark is the default. OS preference drives the initial mode via CSS.
-    // The toggle forces a mode with the .light / .dark classes the system uses.
-    function isLight() {
-      if (root.classList.contains('light')) return true;
-      if (root.classList.contains('dark')) return false;
-      try { return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches; }
-      catch (e) { return false; }
-    }
-
-    function sync() {
-      var light = isLight();
-      icon.textContent = light ? '☀️' : '🌙';
-      label.textContent = light ? 'Light' : 'Dark';
-    }
+    var root=document.documentElement, btn=document.getElementById('themeBtn'),
+        ic=document.getElementById('themeIcon'), lb=document.getElementById('themeLabel');
+    function isLight(){ if(root.classList.contains('light'))return true; if(root.classList.contains('dark'))return false;
+      try{ return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches; }catch(e){ return false; } }
+    function sync(){ var l=isLight(); ic.textContent=l?'☀️':'🌙'; lb.textContent=l?'Light':'Dark'; }
     sync();
-
-    btn.addEventListener('click', function () {
-      var light = isLight();
-      root.classList.remove('light', 'dark');
-      root.classList.add(light ? 'dark' : 'light');
-      sync();
-    });
+    btn.addEventListener('click', function(){ var l=isLight(); root.classList.remove('light','dark'); root.classList.add(l?'dark':'light'); sync(); });
   })();
 </script>
 </body>
