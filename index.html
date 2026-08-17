@@ -1138,7 +1138,7 @@
        Formspree:      https://formspree.io/f/xxxxxxxx
        Google Apps Script web app: https://script.google.com/macros/s/AKfy.../exec
     */
-    var FEEDBACK_ENDPOINT = "";
+    var FEEDBACK_ENDPOINT = "https://script.google.com/macros/s/AKfycbxwFFya4ZjrnA91dlxicjdSp0iJOoMq_Ecjrp2mWjd_UOlLIX4ZIxb57p7XaWEBG0UU/exec";
     /* ============================== */
 
     var btn = document.getElementById('fbBtn'), panel = document.getElementById('fbPanel'),
@@ -1174,8 +1174,8 @@
         return;
       }
       submit.textContent = 'Sending…'; submit.disabled = true;
-      fetch(FEEDBACK_ENDPOINT, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
-        .then(function (r) { if (!r.ok) throw new Error('bad'); panel.classList.add('sent'); })
+      fetch(FEEDBACK_ENDPOINT, { method: 'POST', mode: 'no-cors', body: data })
+        .then(function () { panel.classList.add('sent'); })
         .catch(function () { submit.textContent = 'Send feedback'; submit.disabled = false; alert('Could not send. Check the endpoint URL.'); });
     });
   })();
