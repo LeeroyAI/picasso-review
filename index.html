@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PICASSO: the next iteration of AI Momentum. Why we are here, what we learnt, and how the AIM Hub backplane turns capability into repeatable delivery. Concept for reaction.">
+<title>PICASSO · The operating position</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* Insentra web colour system. Colour comes from tokens. */
+  :root {
+    --color-bg:7 9 15; --color-surface:18 21 32; --color-surface-raised:26 30 45;
+    --color-sidebar:13 16 27; --color-input:12 14 22; --color-border:51 65 85; --color-border-strong:90 115 145;
+    --color-text:241 245 249; --color-text-2:190 200 215; --color-text-3:154 170 187; --color-text-disabled:71 85 105;
+    --color-brand:242 101 34; --color-brand-hover:220 88 22; --color-brand-light:255 140 66; --color-brand-fg:255 255 255; --color-ink-on-fill:10 10 10;
+    --color-success:16 185 129; --color-warning:245 158 11; --color-danger:239 68 68; --color-info:59 130 246; --color-ring:242 101 34;
+    --color-phase-1:52 178 122; --color-phase-2:78 121 184; --color-phase-3:133 119 206;
+    --color-phase-4:31 168 160; --color-phase-5:79 176 212; --color-phase-6:176 106 166;
+    --font-sans:'Montserrat', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --hero-glow:0.18; --shadow:0 24px 60px rgba(0,0,0,.55);
+  }
+  .light {
+    --color-bg:245 244 240; --color-surface:255 255 255; --color-surface-raised:233 227 217;
+    --color-sidebar:250 248 244; --color-input:255 255 255; --color-border:216 213 206; --color-border-strong:148 142 128;
+    --color-text:17 17 17; --color-text-2:80 80 80; --color-text-3:100 100 100; --color-text-disabled:180 180 180;
+    --color-brand:192 74 20; --color-brand-hover:160 62 16; --color-brand-light:242 101 34; --color-brand-fg:255 255 255; --color-ink-on-fill:255 255 255;
+    --color-success:15 118 110; --color-warning:180 83 9; --color-danger:185 28 28; --color-info:29 78 216; --color-ring:192 74 20;
+    --color-phase-1:27 122 70; --color-phase-2:58 90 140; --color-phase-3:94 82 176;
+    --color-phase-4:14 124 120; --color-phase-5:44 111 140; --color-phase-6:138 74 128;
+    --hero-glow:0.12; --shadow:0 18px 44px rgba(17,17,17,.10);
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not(.dark) {
+      --color-bg:245 244 240; --color-surface:255 255 255; --color-surface-raised:233 227 217;
+      --color-sidebar:250 248 244; --color-input:255 255 255; --color-border:216 213 206; --color-border-strong:148 142 128;
+      --color-text:17 17 17; --color-text-2:80 80 80; --color-text-3:100 100 100; --color-text-disabled:180 180 180;
+      --color-brand:192 74 20; --color-brand-hover:160 62 16; --color-brand-light:242 101 34; --color-brand-fg:255 255 255; --color-ink-on-fill:255 255 255;
+      --color-success:15 118 110; --color-warning:180 83 9; --color-danger:185 28 28; --color-info:29 78 216; --color-ring:192 74 20;
+      --color-phase-1:27 122 70; --color-phase-2:58 90 140; --color-phase-3:94 82 176;
+      --color-phase-4:14 124 120; --color-phase-5:44 111 140; --color-phase-6:138 74 128;
+      --hero-glow:0.12; --shadow:0 18px 44px rgba(17,17,17,.10);
+    }
+  }
+  .dark {
+    --color-bg:7 9 15; --color-surface:18 21 32; --color-surface-raised:26 30 45;
+    --color-sidebar:13 16 27; --color-input:12 14 22; --color-border:51 65 85; --color-border-strong:90 115 145;
+    --color-text:241 245 249; --color-text-2:190 200 215; --color-text-3:154 170 187; --color-text-disabled:71 85 105;
+    --color-brand:242 101 34; --color-brand-hover:220 88 22; --color-brand-light:255 140 66; --color-brand-fg:255 255 255; --color-ink-on-fill:10 10 10;
+    --color-success:16 185 129; --color-warning:245 158 11; --color-danger:239 68 68; --color-info:59 130 246; --color-ring:242 101 34;
+    --color-phase-1:52 178 122; --color-phase-2:78 121 184; --color-phase-3:133 119 206;
+    --color-phase-4:31 168 160; --color-phase-5:79 176 212; --color-phase-6:176 106 166;
+    --hero-glow:0.18; --shadow:0 24px 60px rgba(0,0,0,.55);
+  }
+
+  :root {
+    --bg:rgb(var(--color-bg)); --bg-2:rgb(var(--color-surface));
+    --panel:rgb(var(--color-surface)); --panel-2:rgb(var(--color-surface-raised));
+    --border:rgb(var(--color-border)); --border-2:rgb(var(--color-border-strong));
+    --ink:rgb(var(--color-text)); --ink-soft:rgb(var(--color-text-2)); --ink-mute:rgb(var(--color-text-3));
+    --pulse:rgb(var(--color-phase-1)); --ignite:rgb(var(--color-phase-2)); --accelerate:rgb(var(--color-phase-3));
+    --scale:rgb(var(--color-phase-4)); --operate:rgb(var(--color-phase-5)); --governance:rgb(var(--color-phase-6));
+    --change:rgb(var(--color-brand)); --sherpa:rgb(var(--color-brand)); --brand:rgb(var(--color-brand));
+  }
+  :focus-visible { outline:2px solid rgb(var(--color-ring)); outline-offset:3px; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { font-family:var(--font-sans); background:var(--bg); color:var(--ink); line-height:1.55; -webkit-font-smoothing:antialiased; transition:background .3s ease, color .3s ease; overflow-x:hidden; }
+  .wrap { max-width:1340px; margin:0 auto; padding:0 34px; }
+
+  /* Top bar */
+  .topbar { position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); }
+  .topbar-inner { display:flex; align-items:center; justify-content:space-between; height:62px; }
+  .brand { display:flex; align-items:center; gap:11px; font-weight:800; letter-spacing:.02em; }
+  .brand .logo { width:34px; height:34px; border-radius:9px; display:grid; place-items:center; font-size:18px; background:linear-gradient(135deg, var(--change), var(--accelerate)); box-shadow:0 6px 18px rgb(var(--color-phase-3) / .35); }
+  .brand small { display:block; font-size:10px; font-weight:600; letter-spacing:.18em; color:var(--ink-mute); text-transform:uppercase; }
+  .brand b { font-size:16px; }
+  .top-actions { display:flex; align-items:center; gap:14px; }
+  .pill-mock { font-size:10.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute); border:1px solid var(--border-2); border-radius:999px; padding:5px 11px; }
+  .theme-btn { display:flex; align-items:center; gap:8px; background:var(--panel-2); color:var(--ink); border:1px solid var(--border-2); border-radius:999px; padding:7px 14px; font-family:inherit; font-size:12.5px; font-weight:600; cursor:pointer; transition:border-color .2s; }
+  .theme-btn:hover { border-color:var(--accelerate); }
+
+  /* Hero */
+  .hero { position:relative; padding:66px 0 48px; overflow:hidden; }
+  .hero::before { content:""; position:absolute; inset:-20% -10% auto -10%; height:420px; pointer-events:none;
+    background:
+      radial-gradient(600px 300px at 16% 0%, rgb(var(--color-brand) / var(--hero-glow)), transparent 60%),
+      radial-gradient(600px 320px at 52% 8%, rgb(var(--color-phase-3) / var(--hero-glow)), transparent 60%),
+      radial-gradient(600px 300px at 88% 0%, rgb(var(--color-phase-5) / var(--hero-glow)), transparent 60%); }
+  .hero .wrap { position:relative; }
+  .eyebrow { display:inline-flex; align-items:center; gap:9px; font-size:11.5px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft); border:1px solid var(--border-2); border-radius:999px; padding:6px 14px; margin-bottom:24px; }
+  .eyebrow .dot { width:7px; height:7px; border-radius:50%; background:var(--change); box-shadow:0 0 12px var(--change); }
+  .wordmark { display:flex; flex-wrap:wrap; gap:clamp(4px,1.4vw,16px); margin-bottom:28px; }
+  .glyph { display:flex; flex-direction:column; align-items:center; gap:9px; min-width:60px; }
+  .glyph .ch { font-size:clamp(48px,9vw,100px); font-weight:900; line-height:.88; letter-spacing:-.02em; color:var(--letter); text-shadow:0 8px 40px color-mix(in srgb, var(--letter) 45%, transparent); }
+  .glyph .lbl { font-size:clamp(8.5px,.95vw,11px); font-weight:700; color:var(--ink-soft); text-align:center; max-width:88px; }
+  .glyph .lbl b { color:var(--letter); display:block; font-weight:800; }
+  .hero h1 { font-size:clamp(32px,5vw,58px); font-weight:800; letter-spacing:-.02em; line-height:1.03; margin-bottom:18px; max-width:20ch; }
+  .hero h1 .grad { background:linear-gradient(100deg, var(--change), var(--accelerate), var(--operate)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+  .hero .sub { font-size:clamp(16px,2vw,21px); color:var(--ink-soft); font-weight:500; max-width:74ch; line-height:1.5; }
+  .hero .sub b { color:var(--ink); font-weight:700; }
+  .hero-note { margin-top:28px; display:inline-flex; align-items:center; gap:12px; font-size:12.5px; color:var(--ink-mute); font-weight:500; }
+  .hero-note span { width:26px; height:1px; background:var(--border-2); }
+
+  /* Section scaffolding, wide by default */
+  .section { padding:54px 0; }
+  .sec-head { margin-bottom:34px; max-width:960px; }
+  .sec-head.wide { max-width:none; }
+  .sec-tag { font-size:11px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:var(--change); margin-bottom:12px; }
+  .sec-head h2 { font-size:clamp(25px,3.6vw,40px); font-weight:800; letter-spacing:-.015em; line-height:1.1; }
+  .sec-head p { margin-top:14px; color:var(--ink-soft); font-size:17px; font-weight:500; line-height:1.55; max-width:100ch; }
+  .grad-ink { background:linear-gradient(100deg, var(--change), var(--accelerate), var(--operate)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+
+  /* WHY: two-up + learning loop */
+  .why2 { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  .whyc { background:var(--panel); border:1px solid var(--border); border-radius:20px; padding:28px 30px; box-shadow:var(--shadow); }
+  .whyc.signal { border-left:4px solid var(--accelerate); }
+  .whyc.learnt { border-left:4px solid var(--pulse); }
+  .whyc .k { font-size:11px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; margin-bottom:11px; }
+  .whyc.signal .k { color:var(--accelerate); } .whyc.learnt .k { color:var(--pulse); }
+  .whyc h3 { font-size:22px; font-weight:800; letter-spacing:-.01em; margin-bottom:10px; }
+  .whyc p { font-size:14.5px; color:var(--ink-soft); font-weight:500; line-height:1.6; }
+  .whyc .themes { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+  .whyc .theme { font-size:10px; font-weight:800; letter-spacing:.03em; text-transform:uppercase; color:var(--ink); background:var(--panel-2); border:1px solid var(--border); border-radius:999px; padding:5px 11px; }
+
+  .loop { display:grid; grid-template-columns:repeat(6,1fr); gap:18px; margin-top:26px; }
+  .lstage { position:relative; background:var(--panel); border:1px solid var(--border); border-top:3px solid var(--letter); border-radius:14px; padding:16px 15px 17px; box-shadow:var(--shadow); }
+  .lstage .ln { font-size:11px; font-weight:800; color:var(--letter); letter-spacing:.1em; }
+  .lstage h4 { font-size:14.5px; font-weight:800; margin:6px 0 6px; letter-spacing:-.01em; }
+  .lstage p { font-size:11.5px; color:var(--ink-soft); font-weight:500; line-height:1.45; }
+  .lstage::after { content:"\276F"; position:absolute; right:-16px; top:50%; transform:translateY(-50%); width:26px; height:26px; display:grid; place-items:center; font-size:12px; font-weight:900; color:rgb(var(--color-brand-fg)); background:linear-gradient(135deg, var(--letter), color-mix(in srgb, var(--letter) 55%, var(--accelerate))); border-radius:50%; box-shadow:0 5px 14px color-mix(in srgb, var(--letter) 42%, transparent); z-index:5; }
+  .lstage:last-child::after { content:"\21BA"; background:linear-gradient(135deg, var(--change), var(--accelerate)); }
+  .loop-note { margin-top:22px; background:linear-gradient(120deg, color-mix(in srgb, var(--change) 12%, var(--bg-2)), color-mix(in srgb, var(--accelerate) 10%, var(--bg-2))); border:1px solid var(--border); border-radius:18px; padding:22px 26px; font-size:16px; font-weight:600; color:var(--ink); line-height:1.5; }
+  .loop-note b { color:var(--change); font-weight:800; }
+
+  /* The shift */
+  .shift { display:grid; grid-template-columns:1fr auto 1fr; align-items:stretch; gap:22px; }
+  .shift .col { background:var(--panel); border:1px solid var(--border); border-radius:20px; padding:28px 30px; box-shadow:var(--shadow); position:relative; overflow:hidden; }
+  .shift .col.to { border-left:4px solid var(--change); }
+  .shift .col.to::after { content:""; position:absolute; top:-40px; right:-40px; width:200px; height:200px; background:radial-gradient(circle, rgb(var(--color-brand) / .18), transparent 70%); pointer-events:none; }
+  .shift .k { font-size:10.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; margin-bottom:10px; color:var(--ink-mute); }
+  .shift .col.to .k { color:var(--change); }
+  .shift h3 { font-size:20px; font-weight:800; letter-spacing:-.01em; margin-bottom:8px; }
+  .shift p { font-size:14.5px; color:var(--ink-soft); font-weight:500; line-height:1.6; }
+  .shift .arrow { display:grid; place-items:center; font-size:28px; color:var(--change); font-weight:900; }
+
+  /* Framework tiles: row, click to expand large */
+  .frow { display:flex; flex-wrap:wrap; gap:14px; align-items:stretch; }
+  .tile { position:relative; flex:1 1 150px; min-width:150px; background:var(--panel); border:1px solid var(--border); border-top:3px solid var(--letter); border-radius:14px; padding:16px 16px 15px; cursor:pointer; display:flex; flex-direction:column; text-align:left; font-family:inherit; color:inherit; -webkit-appearance:none; appearance:none; transition:box-shadow .22s ease, border-color .22s ease, background .25s ease; }
+  .tile:hover { border-color:var(--letter); box-shadow:0 12px 26px color-mix(in srgb, var(--letter) 20%, transparent); }
+  .tile .badge { align-self:flex-start; font-size:8.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--letter); background:color-mix(in srgb, var(--letter) 15%, transparent); border:1px solid color-mix(in srgb, var(--letter) 40%, transparent); border-radius:999px; padding:3px 8px; margin-bottom:10px; }
+  .tile .tname { font-size:14.5px; font-weight:800; letter-spacing:-.01em; margin-bottom:8px; }
+  .tile .tname .k { color:var(--letter); }
+  .tile .tline { font-size:11.5px; color:var(--ink-soft); font-weight:500; line-height:1.45; }
+  .tile .thint { margin-top:auto; padding-top:12px; font-size:8.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute); display:inline-flex; align-items:center; gap:6px; }
+  .tile .thint .fi { color:var(--letter); font-size:11px; }
+  .tile .corner { position:absolute; top:14px; right:16px; font-size:8.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-mute); display:none; }
+  .tile .detail { display:none; }
+  .tile.thread { border-top:3px dashed var(--letter); background:linear-gradient(180deg, color-mix(in srgb, var(--letter) 9%, var(--panel)), var(--panel) 44%); }
+  .tile.thread .badge { background:color-mix(in srgb, var(--letter) 18%, transparent); }
+  .tile .threadline { display:inline-flex; align-items:center; gap:7px; font-size:8.5px; font-weight:800; letter-spacing:.11em; text-transform:uppercase; color:var(--letter); margin:-3px 0 9px; }
+  .tile .threadline::before { content:""; width:30px; height:3px; border-radius:3px; background:repeating-linear-gradient(90deg, var(--letter) 0 5px, transparent 5px 9px); }
+  .tile.open .threadline { display:none; }
+  .tile.open .detail .side { display:flex; flex-direction:column; gap:14px; }
+  .tile.open { flex-basis:100%; background:color-mix(in srgb, var(--letter) 6%, var(--panel)); box-shadow:0 20px 44px color-mix(in srgb, var(--letter) 20%, transparent); padding:26px 30px 28px; }
+  .tile.open .tline, .tile.open .thint { display:none; }
+  .tile.open .corner { display:block; }
+  .tile.open .badge { font-size:9.5px; margin-bottom:12px; }
+  .tile.open .tname { font-size:24px; margin-bottom:18px; }
+  .tile.open .detail { display:grid; grid-template-columns:1.9fr 1fr; gap:30px; align-items:start; animation:tfade .35s ease both; }
+  @keyframes tfade { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+  .tile.open .detail .dcol { display:flex; flex-direction:column; }
+  .tile.open .detail .role { font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--letter); margin-bottom:10px; }
+  .tile.open .detail .dp { font-size:14.5px; color:var(--ink-soft); font-weight:500; line-height:1.62; }
+  .tile.open .detail .dp + .dp { margin-top:11px; }
+  .tile.open .detail .dp b { color:var(--ink); font-weight:700; }
+  .tile.open .detail .side { }
+  .tile.open .detail .sh { font-size:9.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute); margin-bottom:9px; }
+  .tile.open .detail .outs { display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start; }
+  .tile.open .detail .out { font-size:9.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--letter); background:color-mix(in srgb, var(--letter) 12%, transparent); border:1px solid color-mix(in srgb, var(--letter) 38%, transparent); border-radius:999px; padding:4px 11px; }
+  @media (max-width:760px) { .tile.open .detail { grid-template-columns:1fr; gap:18px; } }
+
+  /* Expandable rails: Change thread + Governance canvas */
+  .railx { border:1px solid var(--border); border-radius:18px; overflow:hidden; margin-top:14px; box-shadow:var(--shadow); }
+  .railx.thread { background:linear-gradient(100deg, color-mix(in srgb, var(--change) 12%, var(--panel)), var(--panel)); border-color:color-mix(in srgb, var(--change) 36%, var(--border)); --letter:var(--change); }
+  .railx.canvas { background:linear-gradient(100deg, color-mix(in srgb, var(--governance) 12%, var(--panel)), var(--panel)); border-color:color-mix(in srgb, var(--governance) 36%, var(--border)); --letter:var(--governance); }
+  .rxhead { width:100%; display:flex; align-items:center; gap:16px; padding:18px 22px; background:transparent; border:0; cursor:pointer; text-align:left; font-family:inherit; color:inherit; }
+  .rxic { width:40px; height:40px; border-radius:11px; display:grid; place-items:center; font-size:20px; flex-shrink:0; background:color-mix(in srgb, var(--letter) 20%, transparent); border:1px solid color-mix(in srgb, var(--letter) 45%, transparent); }
+  .rxtt { flex:1; }
+  .rxtag { display:block; font-size:9.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-mute); }
+  .rxname { display:block; font-size:16px; font-weight:800; color:var(--letter); letter-spacing:-.01em; margin:1px 0 3px; }
+  .rxsum { display:block; font-size:12.5px; color:var(--ink-soft); font-weight:500; line-height:1.5; }
+  .rxplus { margin-left:auto; width:30px; height:30px; border-radius:50%; display:grid; place-items:center; font-size:20px; font-weight:800; color:var(--letter); border:1.5px solid color-mix(in srgb, var(--letter) 45%, transparent); transition:transform .3s ease; flex-shrink:0; }
+  .railx.open .rxplus { transform:rotate(45deg); }
+  .rxdetail { display:none; padding:4px 22px 24px 78px; }
+  .railx.open .rxdetail { display:block; animation:tfade .35s ease both; }
+  .rxgrid { display:grid; grid-template-columns:1.4fr 1fr; gap:26px; align-items:start; }
+  .rxdetail .dp { font-size:14px; color:var(--ink-soft); font-weight:500; line-height:1.62; }
+  .rxdetail .dp + .dp { margin-top:11px; }
+  .rxdetail .dp b { color:var(--ink); font-weight:700; }
+  .rxdetail .sh { font-size:9.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute); margin-bottom:10px; }
+  .rxmap { display:flex; flex-direction:column; gap:8px; }
+  .rxmap .row { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:10px; }
+  .rxmap .no { font-size:11.5px; font-weight:700; color:var(--ink-mute); text-decoration:line-through; text-decoration-color:color-mix(in srgb, var(--color-danger) 65%, transparent); }
+  .rxmap .ar { color:var(--letter); font-weight:900; }
+  .rxmap .yes { font-size:12px; font-weight:800; color:var(--ink); }
+  .rxladder { display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:7px; margin-top:4px; }
+  .rxladder .st { position:relative; background:var(--panel-2); border:1px solid var(--border); border-radius:9px; padding:9px 10px; }
+  .rxladder .st .n { font-size:8px; font-weight:800; letter-spacing:.1em; color:var(--ink-mute); text-transform:uppercase; }
+  .rxladder .st .s { font-size:11px; font-weight:800; margin-top:2px; letter-spacing:-.01em; }
+  .rxladder .st::after { content:"\2192"; position:absolute; right:-7px; top:50%; transform:translateY(-50%); color:var(--ink-mute); font-weight:800; font-size:11px; z-index:3; }
+  .rxladder .st:last-child::after { display:none; }
+  .rxladder .st.peak { background:color-mix(in srgb, var(--letter) 12%, var(--panel-2)); border-color:color-mix(in srgb, var(--letter) 45%, var(--border)); }
+  .rxladder .st.peak .s { color:var(--letter); }
+
+  .legend { display:flex; gap:20px; flex-wrap:wrap; margin-top:20px; }
+  .legend div { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft); font-weight:600; }
+  .legend .sw { width:12px; height:12px; border-radius:4px; }
+  .legend .craft-sw { background:linear-gradient(135deg, var(--change), var(--sherpa)); }
+
+  /* Delivery engine */
+  .flow { display:grid; grid-template-columns:1fr auto 1fr auto 1fr; align-items:stretch; gap:14px; }
+  .fcard { background:var(--panel); border:1px solid var(--border); border-top:3px solid var(--letter); border-radius:18px; padding:24px 24px; box-shadow:var(--shadow); }
+  .fcard .fh { display:flex; align-items:center; gap:9px; margin-bottom:9px; }
+  .fcard .fn { font-size:17px; font-weight:800; color:var(--letter); letter-spacing:-.01em; }
+  .fcard .r { font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-mute); }
+  .fcard p { font-size:13.5px; color:var(--ink-soft); font-weight:500; line-height:1.55; }
+  .fcard .fq { margin-top:12px; font-size:12px; font-weight:700; color:var(--ink); border-top:1px solid var(--border); padding-top:11px; }
+  .fcard .outs { display:flex; flex-wrap:wrap; gap:7px; margin-top:12px; }
+  .fcard .out { font-size:9px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--letter); background:color-mix(in srgb, var(--letter) 12%, transparent); border:1px solid color-mix(in srgb, var(--letter) 38%, transparent); border-radius:999px; padding:2px 8px; }
+  .flow .fx { display:grid; place-items:center; font-size:24px; font-weight:900; color:var(--ink-mute); }
+  .flow-note { margin-top:22px; background:linear-gradient(120deg, color-mix(in srgb, var(--change) 12%, var(--bg-2)), color-mix(in srgb, var(--accelerate) 10%, var(--bg-2))); border:1px solid var(--border); border-radius:18px; padding:22px 26px; font-size:16px; font-weight:600; color:var(--ink); line-height:1.5; }
+  .flow-note b { color:var(--change); font-weight:800; }
+
+  /* AIM Hub, the backplane */
+  .hub { background:linear-gradient(135deg, color-mix(in srgb, var(--change) 13%, var(--panel)), var(--panel) 52%, color-mix(in srgb, var(--operate) 12%, var(--panel))); border:1px solid var(--border); border-radius:28px; padding:38px 38px; box-shadow:var(--shadow); }
+  .hub-top { display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start; margin-bottom:26px; }
+  .hub-top .ic { width:54px; height:54px; border-radius:14px; display:grid; place-items:center; font-size:26px; background:color-mix(in srgb, var(--change) 22%, transparent); border:1px solid color-mix(in srgb, var(--change) 45%, transparent); }
+  .hub-top h3 { font-size:clamp(22px,2.6vw,30px); font-weight:800; letter-spacing:-.015em; margin-bottom:8px; }
+  .hub-top p { font-size:15px; color:var(--ink-soft); font-weight:500; line-height:1.6; max-width:none; }
+  .hub-top p b { color:var(--ink); font-weight:700; }
+  .hub-pipe { display:flex; flex-wrap:wrap; align-items:stretch; gap:36px; margin:6px 0 30px; }
+  .pstep { position:relative; flex:1 1 160px; background:var(--panel); border:1px solid var(--border); border-radius:15px; padding:17px 17px 18px; box-shadow:var(--shadow); }
+  .pstep .pnum { width:30px; height:30px; border-radius:9px; display:grid; place-items:center; font-size:13px; font-weight:900; color:rgb(var(--color-brand-fg)); background:linear-gradient(135deg, var(--change), var(--accelerate)); box-shadow:0 5px 14px color-mix(in srgb, var(--change) 40%, transparent); margin-bottom:11px; }
+  .pstep .pn { font-size:8.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--change); }
+  .pstep .pt { font-size:14.5px; font-weight:800; margin-top:3px; letter-spacing:-.01em; }
+  .pstep .pd { font-size:11.5px; color:var(--ink-soft); font-weight:500; line-height:1.45; margin-top:6px; }
+  .pstep:not(:last-child)::after { content:"\276F"; position:absolute; right:-31px; top:50%; transform:translateY(-50%); width:26px; height:26px; display:grid; place-items:center; font-size:12px; font-weight:900; color:rgb(var(--color-brand-fg)); background:linear-gradient(135deg, var(--change), var(--accelerate)); border-radius:50%; box-shadow:0 5px 14px color-mix(in srgb, var(--change) 40%, transparent); z-index:5; }
+  .hub-h { font-size:12px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-mute); margin:6px 0 14px; }
+  /* Asset library uses the expandable tile pattern, sized ~4 per row */
+  .frow.assets4 .tile { flex:1 1 250px; }
+  .frow.assets4 .tile.open { flex-basis:100%; }
+  .hub-why { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:24px; }
+  .hwc { border:1px solid var(--border); border-left:3px solid var(--change); border-radius:14px; padding:18px 20px; background:color-mix(in srgb, var(--change) 5%, var(--panel)); }
+  .hwc h4 { font-size:15.5px; font-weight:800; letter-spacing:-.01em; margin-bottom:6px; }
+  .hwc p { font-size:12.5px; color:var(--ink-soft); font-weight:500; line-height:1.5; }
+  .hub-line { margin-top:26px; border-top:1px solid var(--border); padding-top:22px; font-size:17px; font-weight:700; color:var(--ink); line-height:1.45; }
+  .hub-line b { background:linear-gradient(100deg, var(--change), var(--operate)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+
+  /* Maturity console */
+  .console { position:relative; display:grid; grid-template-columns:1.6fr 1fr; gap:20px; margin:6px 0 0; }
+  .card { position:relative; background:color-mix(in srgb, var(--panel) 92%, transparent); border:1px solid var(--border); border-radius:24px; box-shadow:var(--shadow); overflow:hidden; }
+  .card::before { content:""; position:absolute; inset:0; border-radius:24px; padding:1px; background:linear-gradient(140deg, rgb(var(--color-brand) / .35), transparent 38%, transparent 62%, rgb(var(--color-phase-5) / .30)); -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; }
+  .axes { padding:24px 28px 20px; display:flex; flex-direction:column; gap:8px; }
+  .axes-top { display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:8px; }
+  .axes-top .lede { font-size:13px; font-weight:600; color:var(--ink-mute); }
+  .axes-top .hint { font-size:10.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute); display:inline-flex; align-items:center; gap:7px; }
+  .axes-top .hint::before { content:""; width:16px; height:16px; border-radius:6px; background:color-mix(in srgb, var(--brand) 22%, transparent); border:1px solid color-mix(in srgb, var(--brand) 45%, transparent); }
+  .axrow { --ax:var(--color-brand); }
+  .axhead { display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:15px; }
+  .axhead .name { font-size:15px; font-weight:800; color:rgb(var(--ax)); letter-spacing:-.01em; }
+  .axhead .name .sub { color:var(--ink-mute); font-weight:700; }
+  .axhead .desc { font-size:11.5px; font-weight:600; color:var(--ink-soft); }
+  .axhead .lvl { font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:rgb(var(--ax)); background:color-mix(in srgb, rgb(var(--ax)) 14%, transparent); border:1px solid color-mix(in srgb, rgb(var(--ax)) 42%, transparent); border-radius:999px; padding:3px 10px; }
+  .track { position:relative; }
+  .rail { position:absolute; left:0; right:0; top:9px; height:5px; border-radius:999px; background:color-mix(in srgb, var(--ink-mute) 22%, transparent); }
+  .rail-fill { position:absolute; left:0; top:0; height:100%; width:0; border-radius:999px; background:linear-gradient(90deg, color-mix(in srgb, rgb(var(--ax)) 55%, transparent), rgb(var(--ax))); box-shadow:0 0 14px color-mix(in srgb, rgb(var(--ax)) 55%, transparent); transition:width .45s cubic-bezier(.2,.7,.2,1); }
+  .knob { position:absolute; top:9px; left:0; width:16px; height:16px; border-radius:50%; transform:translate(-50%,-50%); background:var(--panel); border:3px solid rgb(var(--ax)); box-shadow:0 0 0 4px color-mix(in srgb, rgb(var(--ax)) 22%, transparent), 0 4px 12px rgba(0,0,0,.4); transition:left .45s cubic-bezier(.2,.7,.2,1); z-index:4; }
+  .knob::after { content:""; position:absolute; inset:-3px; border-radius:50%; border:2px solid color-mix(in srgb, rgb(var(--ax)) 60%, transparent); animation:mpulse 2.6s ease-out infinite; }
+  @keyframes mpulse { 0%{transform:scale(1);opacity:.7} 70%{transform:scale(2.1);opacity:0} 100%{opacity:0} }
+  .cells { position:relative; z-index:3; display:grid; grid-template-columns:repeat(var(--n,5),1fr); gap:9px; padding-top:22px; }
+  .cell { position:relative; background:var(--panel-2); border:1px solid var(--border); border-radius:13px; padding:12px 12px 13px; text-align:left; cursor:pointer; font-family:inherit; color:var(--ink); transition:transform .18s, border-color .18s, background .25s, box-shadow .2s; }
+  .cell:hover { transform:translateY(-3px); border-color:color-mix(in srgb, rgb(var(--ax)) 45%, var(--border)); }
+  .cell .n { font-size:9.5px; font-weight:800; letter-spacing:.14em; color:var(--ink-mute); text-transform:uppercase; }
+  .cell .nm { font-size:13px; font-weight:800; color:var(--ink); margin-top:3px; letter-spacing:-.01em; }
+  .cell.done { background:color-mix(in srgb, rgb(var(--ax)) 9%, var(--panel-2)); border-color:color-mix(in srgb, rgb(var(--ax)) 26%, var(--border)); }
+  .cell.done .nm { color:color-mix(in srgb, rgb(var(--ax)) 75%, var(--ink)); }
+  .cell.cur { background:color-mix(in srgb, rgb(var(--ax)) 16%, var(--panel-2)); border-color:rgb(var(--ax)); box-shadow:0 10px 26px color-mix(in srgb, rgb(var(--ax)) 26%, transparent); }
+  .cell.cur .nm { color:rgb(var(--ax)); }
+  .sig { padding:22px 22px; display:flex; flex-direction:column; gap:16px; }
+  .sig-idx { position:relative; border:1px solid var(--border); border-radius:18px; padding:18px 20px; background:linear-gradient(135deg, color-mix(in srgb, var(--color-brand) 12%, var(--panel-2)), var(--panel-2)); overflow:hidden; }
+  .sig-idx .mcap { font-size:10px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-mute); }
+  .sig-idx .row { display:flex; align-items:flex-end; gap:12px; margin-top:2px; }
+  .sig-idx .num { font-size:52px; font-weight:900; line-height:.9; letter-spacing:-.03em; font-variant-numeric:tabular-nums; background:linear-gradient(100deg, rgb(var(--color-brand)), rgb(var(--color-phase-3))); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+  .sig-idx .den { font-size:14px; font-weight:800; color:var(--ink-mute); padding-bottom:6px; }
+  .sig-idx .band2 { margin-left:auto; align-self:center; font-size:10px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--ink); background:var(--panel); border:1px solid var(--border-2); border-radius:999px; padding:5px 11px; }
+  .sig-idx .mfoot { margin-top:8px; font-size:11px; color:var(--ink-mute); font-weight:600; }
+  .sig-read { font-size:13.5px; font-weight:600; color:var(--ink-soft); line-height:1.5; }
+  .sig-read b { color:var(--ink); font-weight:800; }
+  .meters { display:flex; flex-direction:column; gap:11px; }
+  .meter { --ax:var(--color-brand); }
+  .meter .mtop { display:flex; align-items:baseline; justify-content:space-between; gap:8px; margin-bottom:5px; }
+  .meter .mlab { font-size:11px; font-weight:800; letter-spacing:.04em; color:var(--ink-soft); text-transform:uppercase; }
+  .meter .mval { font-size:12px; font-weight:800; color:rgb(var(--ax)); }
+  .meter .bar { height:8px; border-radius:999px; background:color-mix(in srgb, var(--ink-mute) 20%, transparent); overflow:hidden; }
+  .meter .bfill { height:100%; width:0; border-radius:999px; background:linear-gradient(90deg, color-mix(in srgb, rgb(var(--ax)) 55%, transparent), rgb(var(--ax))); transition:width .45s cubic-bezier(.2,.7,.2,1); }
+  .next { border:1px solid color-mix(in srgb, var(--color-brand) 42%, var(--border)); background:color-mix(in srgb, var(--color-brand) 10%, var(--panel-2)); border-radius:14px; padding:14px 16px; }
+  .next .mcap { font-size:10px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--brand); display:flex; align-items:center; gap:7px; }
+  .next .mcap::before { content:"\279C"; font-size:12px; }
+  .next .mv { font-size:13.5px; font-weight:800; color:var(--ink); margin-top:6px; letter-spacing:-.01em; }
+  .next .mv b { color:var(--brand); }
+  .next .hy { font-size:12px; font-weight:600; color:var(--ink-soft); margin-top:4px; line-height:1.45; }
+  .measure-line { margin-top:20px; font-size:16px; font-weight:600; color:var(--ink-soft); line-height:1.5; max-width:110ch; }
+  .measure-line b { color:var(--governance); font-weight:800; }
+
+  /* Paradigm */
+  .para { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  .pcard { background:var(--panel); border:1px solid var(--border); border-radius:20px; padding:28px 30px; box-shadow:var(--shadow); }
+  .pcard.sell { border-top:3px solid var(--accelerate); }
+  .pcard.deliver { border-top:3px solid var(--operate); }
+  .pcard .pk { font-size:10.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; margin-bottom:10px; }
+  .pcard.sell .pk { color:var(--accelerate); }
+  .pcard.deliver .pk { color:var(--operate); }
+  .pcard h3 { font-size:20px; font-weight:800; letter-spacing:-.01em; margin-bottom:8px; }
+  .pcard p { font-size:14px; color:var(--ink-soft); font-weight:500; line-height:1.6; }
+  .pcard ul { list-style:none; margin-top:14px; display:flex; flex-direction:column; gap:8px; }
+  .pcard li { position:relative; padding-left:22px; font-size:13px; color:var(--ink-soft); font-weight:600; }
+  .pcard.sell li::before { content:"\2192"; position:absolute; left:0; color:var(--accelerate); font-weight:900; }
+  .pcard.deliver li::before { content:"\2192"; position:absolute; left:0; color:var(--operate); font-weight:900; }
+  .para-next { margin-top:22px; background:linear-gradient(120deg, color-mix(in srgb, var(--change) 12%, var(--bg-2)), var(--bg-2)); border:1px solid var(--border); border-radius:20px; padding:28px 32px; }
+  .para-next .nk { font-size:11px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--change); margin-bottom:8px; }
+  .para-next p { font-size:clamp(18px,2.2vw,24px); font-weight:700; color:var(--ink); line-height:1.4; max-width:62ch; }
+  .para-next p b { background:linear-gradient(100deg, var(--change), var(--accelerate)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+
+  .foot { padding:30px 0 54px; margin-top:14px; border-top:1px solid var(--border); color:var(--ink-mute); font-size:12px; font-weight:500; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
+  .foot b { color:var(--ink-soft); }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+  @media (max-width:1000px) {
+    .why2 { grid-template-columns:1fr; }
+    .loop { grid-template-columns:repeat(3,1fr); }
+    .lstage:nth-child(3)::after, .lstage:nth-child(6)::after { display:none; }
+    .assets { grid-template-columns:repeat(2,1fr); }
+    .hub-why { grid-template-columns:1fr; }
+    .pstep::after { display:none; }
+    .console { grid-template-columns:1fr; }
+    .para { grid-template-columns:1fr; }
+    .shift { grid-template-columns:1fr; } .shift .arrow { transform:rotate(90deg); }
+    .flow { grid-template-columns:1fr; } .flow .fx { transform:rotate(90deg); }
+    .rxgrid { grid-template-columns:1fr; }
+    .rxdetail { padding-left:22px; }
+  }
+  @media (max-width:560px) {
+    .wrap { padding:0 18px; }
+    .brand small { display:none; } .pill-mock { display:none; }
+    .loop { grid-template-columns:1fr; } .lstage::after { display:none; }
+    .assets { grid-template-columns:1fr; }
+    .cells { grid-template-columns:repeat(2,1fr); }
+    .hub-pipe .pstep { flex-basis:100%; }
+  }
+  /* Feedback widget */
+  .fb-btn { position:fixed; right:22px; bottom:22px; z-index:80; display:inline-flex; align-items:center; gap:9px; background:linear-gradient(135deg, var(--change), var(--accelerate)); color:rgb(var(--color-ink-on-fill)); border:0; border-radius:999px; padding:12px 18px; font-family:inherit; font-size:13.5px; font-weight:800; cursor:pointer; box-shadow:0 12px 30px color-mix(in srgb, var(--change) 45%, transparent); transition:transform .18s ease; }
+  .fb-btn:hover { transform:translateY(-2px); }
+  .fb-btn .fbi { font-size:15px; }
+  .fb-panel { position:fixed; right:22px; bottom:80px; z-index:81; width:min(384px, calc(100vw - 44px)); max-height:calc(100vh - 110px); overflow:auto; background:var(--panel); border:1px solid var(--border); border-radius:20px; box-shadow:0 30px 70px rgba(0,0,0,.35); padding:20px 22px 22px; display:none; }
+  .fb-panel.open { display:block; animation:tfade .3s ease both; }
+  .fb-panel h4 { font-size:16px; font-weight:800; letter-spacing:-.01em; }
+  .fb-panel .fbsub { font-size:12px; color:var(--ink-mute); font-weight:600; margin-top:2px; margin-bottom:6px; }
+  .fb-close { position:absolute; top:14px; right:16px; background:transparent; border:0; font-size:16px; color:var(--ink-mute); cursor:pointer; font-family:inherit; }
+  .fb-lbl { font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute); margin:14px 0 7px; display:block; }
+  .fb-sel, .fb-note { width:100%; background:rgb(var(--color-input)); border:1px solid var(--border-2); border-radius:11px; padding:10px 12px; font-family:inherit; font-size:13px; color:var(--ink); }
+  .fb-note { min-height:60px; resize:vertical; }
+  .fb-stars { display:flex; gap:6px; }
+  .fb-star { background:transparent; border:0; font-size:24px; cursor:pointer; color:var(--ink-mute); line-height:1; padding:0; transition:transform .1s ease, color .15s ease; }
+  .fb-star.on { color:var(--change); }
+  .fb-star:hover { transform:scale(1.12); }
+  .fb-checks { display:grid; grid-template-columns:1fr 1fr; gap:7px 12px; }
+  .fb-check { display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:var(--ink-soft); cursor:pointer; }
+  .fb-check input { accent-color:rgb(var(--color-brand)); width:15px; height:15px; }
+  .fb-submit { margin-top:16px; width:100%; background:var(--change); color:rgb(var(--color-ink-on-fill)); border:0; border-radius:12px; padding:12px; font-family:inherit; font-size:13.5px; font-weight:800; cursor:pointer; transition:filter .2s ease; }
+  .fb-submit:hover { filter:brightness(1.06); }
+  .fb-done { display:none; text-align:center; padding:16px 4px 8px; }
+  .fb-done .ok { font-size:30px; }
+  .fb-done p { font-size:13.5px; color:var(--ink-soft); font-weight:700; margin-top:6px; }
+  .fb-panel.sent .fb-form { display:none; }
+  .fb-panel.sent .fb-done { display:block; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior:auto; }
+    .knob::after { animation:none; }
+    .rail-fill, .knob, .bfill, .cell, .tile, .rxplus { transition:none; }
+    .tile.open .detail, .railx.open .rxdetail, .fb-panel.open { animation:none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">🎨</div>
+        <div><b>PICASSO</b><small>The operating position · AIMomentum</small></div>
+      </div>
+      <div class="top-actions">
+        <span class="pill-mock">Concept for reaction</span>
+        <button class="theme-btn" id="themeBtn" aria-label="Toggle theme"><span id="themeIcon">🌙</span><span id="themeLabel">Dark</span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow"><span class="dot"></span>The next iteration of AI Momentum</span>
+
+      <div class="wordmark">
+        <div class="glyph" style="--letter:var(--pulse)"><span class="ch">P</span><span class="lbl">AI<b>Pulse</b></span></div>
+        <div class="glyph" style="--letter:var(--ignite)"><span class="ch">I</span><span class="lbl">AI<b>Ignite</b></span></div>
+        <div class="glyph" style="--letter:var(--change)"><span class="ch">C</span><span class="lbl">AI<b>Change</b></span></div>
+        <div class="glyph" style="--letter:var(--accelerate)"><span class="ch">A</span><span class="lbl">AI<b>Accelerate</b></span></div>
+        <div class="glyph" style="--letter:var(--scale)"><span class="ch">S</span><span class="lbl">AI<b>Scale + Operate</b></span></div>
+        <div class="glyph" style="--letter:var(--sherpa)"><span class="ch">S</span><span class="lbl">AI<b>Sherpa</b></span></div>
+        <div class="glyph" style="--letter:var(--operate)"><span class="ch">O</span><span class="lbl">AI<b>Orchestrate</b></span></div>
+      </div>
+
+      <h1>From discovering AI, <span class="grad">to operating it at scale.</span></h1>
+      <p class="sub"><b>PICASSO is not a new framework. It is what AI Momentum learnt.</b> The proven phases hold. We have expanded them to build the capability, governance, operating model and behaviours needed to sustain AI across the enterprise, and an AIM Hub that turns all of it into repeatable delivery.</p>
+
+      <div class="hero-note"><span></span>Seven elements. A Governance canvas beneath. A Change thread through. An AIM Hub building the assets behind it.</div>
+    </div>
+  </section>
+
+  <!-- WHY WE ARE HERE / WHAT WE LEARNT -->
+  <section class="section wrap">
+    <div class="sec-head">
+      <div class="sec-tag">Why we are here</div>
+      <h2>AI Momentum taught us. <span class="grad-ink">PICASSO is what we learnt.</span></h2>
+      <p>Every engagement is a run. Each run throws off evidence about what customers actually need next. That evidence is what turned AI Momentum into PICASSO. Here is the signal we read from the field, and the pattern we are choosing to get ahead of.</p>
+    </div>
+
+    <div class="why2">
+      <div class="whyc signal">
+        <div class="k">The signal</div>
+        <h3>Customer maturity is outrunning the proposition.</h3>
+        <p>Clients increasingly arrive past discovery. They have already done envisioning, ideation and use case work before they reach us. Their question has moved from "what should we pursue" to "how do we operationalise AI across the organisation, safely, and make it stick."</p>
+        <p>Where the strategic vision runs ahead of the packaged delivery, field teams build local, bespoke solutions to meet demand. That is the gap we are closing.</p>
+      </div>
+      <div class="whyc learnt">
+        <div class="k">What we learnt</div>
+        <h3>The next unlock is operational capability.</h3>
+        <p>The same asks keep surfacing across engagements. Not more discovery outputs, but reusable operational assets: how to run, govern, adopt, measure and sustain AI once the first proof is in.</p>
+        <div class="themes">
+          <span class="theme">Operating models</span>
+          <span class="theme">Governance + decision rights</span>
+          <span class="theme">Adoption + champions</span>
+          <span class="theme">Management reporting</span>
+          <span class="theme">Value realisation</span>
+          <span class="theme">Implementation readiness</span>
+          <span class="theme">Scaling beyond pilots</span>
+          <span class="theme">Lifecycle + ownership</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="loop">
+      <div class="lstage" style="--letter:var(--pulse)"><div class="ln">01</div><h4>Field signal</h4><p>What customers actually ask for in live engagements, captured, not guessed.</p></div>
+      <div class="lstage" style="--letter:var(--ignite)"><div class="ln">02</div><h4>Pattern</h4><p>The recurring themes, named and prioritised across the portfolio.</p></div>
+      <div class="lstage" style="--letter:var(--change)"><div class="ln">03</div><h4>Codify</h4><p>The AIM Hub turns the pattern into reusable assets, methods and accountabilities.</p></div>
+      <div class="lstage" style="--letter:var(--accelerate)"><div class="ln">04</div><h4>Deliver</h4><p>Field teams apply the same proven assets instead of reinventing per engagement.</p></div>
+      <div class="lstage" style="--letter:var(--scale)"><div class="ln">05</div><h4>Evidence</h4><p>Every delivery proves what works and surfaces what to sharpen next.</p></div>
+      <div class="lstage" style="--letter:var(--operate)"><div class="ln">06</div><h4>Iterate</h4><p>The framework improves. PICASSO is the current cut, and the loop keeps running.</p></div>
+    </div>
+
+    <div class="loop-note">This is the feedback cycle. <b>AI Momentum did not stand still.</b> PICASSO is the next iteration of that learning, and the AIM Hub is what makes the loop compound rather than reset every time.</div>
+  </section>
+
+  <!-- THE SHIFT -->
+  <section class="section wrap">
+    <div class="sec-head">
+      <div class="sec-tag">The shift</div>
+      <h2>The centre of gravity moves to operationalisation.</h2>
+      <p>Discovery and prioritisation stay. They are simply no longer the whole job. PICASSO expands the framework to the part mature clients are now asking for, and that our delivery has to make repeatable.</p>
+    </div>
+
+    <div class="shift">
+      <div class="col from">
+        <div class="k">Where we were strong</div>
+        <h3>Discover and prioritise.</h3>
+        <p>Identify, prioritise and deliver AI opportunities. Envisioning, ideation and use case discovery. Vital work, and increasingly a starting point mature clients have already passed before they reach us.</p>
+      </div>
+      <div class="arrow">➜</div>
+      <div class="col to">
+        <div class="k">Where we are heading</div>
+        <h3>Operationalise and sustain.</h3>
+        <p>Build the governance, operating models, human capability and execution discipline to run AI at scale. Reusable operational assets over additional discovery outputs, so value holds long after the first proof.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRAMEWORK: FLIP TILES -->
+  <section class="section wrap">
+    <div class="sec-head wide">
+      <div class="sec-tag">The framework</div>
+      <h2>One word. Five phases, two threads, a canvas.</h2>
+      <p>PICASSO reads as one word, but it works on three levels. Five phases you move through in sequence: Pulse, Ignite, Accelerate, Scale and Operate, Orchestrate. Two craft threads that run through every phase, marked below: Change, the human thread, and Sherpa, the delivery thread. And Governance, the canvas beneath all of it. Adoption and embedded delivery were never a single step, so we stopped drawing them as one. Tap any tile for the detail.</p>
+    </div>
+
+    <div class="frow">
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Pulse, tap to expand" style="--letter:var(--pulse)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Discover</span>
+        <span class="tname"><span class="k">P</span> · AI Pulse</span>
+        <span class="tline">Readiness, opportunity and value, now ingesting discovery a client has already done.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol">
+            <span class="role">Readiness + value · the entry point</span>
+            <span class="dp">Assesses readiness, opportunity and where value can be created. For mature clients, Pulse now ingests and structures the envisioning and discovery they have already produced, so we start from their priorities rather than repeat work they have done.</span>
+            <span class="dp"><b>Pulse data is the source of truth.</b> It drives cohort allocation, sets the maturity and readiness baseline, and gives the AIM Hub the inputs it needs to generate the delivery agenda, methods and assets for every later phase.</span>
+          </span>
+          <span class="side">
+            <span class="sh">Outcomes</span>
+            <span class="outs"><span class="out">Ingests existing discovery</span><span class="out">Cohort allocation</span><span class="out">Readiness baseline</span><span class="out">Feeds the Hub</span></span>
+          </span>
+        </span>
+      </button>
+
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Ignite, tap to expand" style="--letter:var(--ignite)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Prove</span>
+        <span class="tname"><span class="k">I</span> · AI Ignite</span>
+        <span class="tline">Strategy to proof. Tangible value fast, momentum for broader adoption.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol">
+            <span class="role">Strategy to proof · the first win</span>
+            <span class="dp">Moves from strategy to proof. Turns the highest-value opportunities from Pulse into something real your team can use in weeks, demonstrating tangible value quickly.</span>
+            <span class="dp"><b>Momentum is the point.</b> A first win people can feel builds belief faster than any business case, and creates the pull broader adoption needs.</span>
+          </span>
+          <span class="side">
+            <span class="sh">Outcomes</span>
+            <span class="outs"><span class="out">First proof</span><span class="out">Tangible value</span><span class="out">Early momentum</span></span>
+          </span>
+        </span>
+      </button>
+
+      <button class="tile thread" type="button" aria-expanded="false" aria-label="AI Change, a craft thread, tap to expand" style="--letter:var(--change)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Craft thread</span>
+        <span class="tname"><span class="k">C</span> · AI Change</span>
+        <span class="threadline">The human thread</span>
+        <span class="tline">Sponsorship, champions, comms and the behaviours adoption needs. Woven through all seven.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol">
+            <span class="role">The human thread · runs through every phase</span>
+            <span class="dp">A dedicated change capability: executive sponsorship, stakeholder alignment, champion networks, communications, behavioural adoption and reinforcement. It creates the conditions cohort enablement and new solutions need to succeed.</span>
+            <span class="dp"><b>Old change management manages people through a change. Modern change management changes how people behave, by choice.</b> The human is the point, not the risk. Adoption becomes something people choose to do, not something they are told to complete. Technology never fails alone. Adoption does.</span>
+            <span class="dp">This is why Change is a thread, not a step. Pulse reads the human signal. Ignite makes change felt. Accelerate builds the habit in. Scale and Operate let norms harden. Sherpa transfers ownership. Orchestrate makes it the culture.</span>
+          </span>
+          <span class="side">
+            <span class="sh">What it rejects, and what it builds</span>
+            <span class="rxmap">
+              <span class="row"><span class="no">Resistance management</span><span class="ar">→</span><span class="yes">Agency building</span></span>
+              <span class="row"><span class="no">Training completion</span><span class="ar">→</span><span class="yes">Habit formation</span></span>
+              <span class="row"><span class="no">A comms plan at go-live</span><span class="ar">→</span><span class="yes">A behaviour system from the first Pulse</span></span>
+              <span class="row"><span class="no">A change team's workstream</span><span class="ar">→</span><span class="yes">How everyone thinks, works and operates</span></span>
+              <span class="row"><span class="no">People as the risk</span><span class="ar">→</span><span class="yes">People as the point</span></span>
+            </span>
+          </span>
+        </span>
+      </button>
+
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Accelerate, tap to expand" style="--letter:var(--accelerate)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Continue</span>
+        <span class="tname"><span class="k">A</span> · AI Accelerate</span>
+        <span class="tline">Continues Ignite month to month. Grows real capability in each cohort.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol">
+            <span class="role">Cohort enablement · month to month</span>
+            <span class="dp">Continues the Ignite motion on a month-to-month basis. Takes the cohorts already defined through Pulse and progresses their enablement journey through deeper skills, applied use cases, coaching, measurement and reinforcement.</span>
+            <span class="dp"><b>The outcome is sustained capability growth, not a one-off training event.</b> Accelerate is distinct from Change: Accelerate develops the practical capability of the cohorts, while Change builds the sponsorship, communications and behavioural conditions required for that capability to take hold.</span>
+          </span>
+          <span class="side">
+            <span class="sh">Outcomes</span>
+            <span class="outs"><span class="out">Month to month</span><span class="out">Deeper skills</span><span class="out">Applied use cases</span><span class="out">Coaching</span><span class="out">Sustained capability growth</span></span>
+          </span>
+        </span>
+      </button>
+
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Scale and Operate, tap to expand" style="--letter:var(--scale)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Build + Run</span>
+        <span class="tname"><span class="k">S</span> · AI Scale + Operate</span>
+        <span class="tline">Identify, build and run agentic solutions, with hypercare and lifecycle.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol">
+            <span class="role">Agentic solutions · build and run</span>
+            <span class="dp">Focuses on the identification, creation and ongoing management of agentic software solutions. Select the right opportunities, shape and engineer the solution, move it into production and provide structured hypercare as it stabilises.</span>
+            <span class="dp"><b>Once operational, it stays healthy.</b> Scale + Operate manages performance, ownership, lifecycle controls, benefits tracking, operational reporting and continuous improvement, so successful solutions expand safely and keep delivering measurable value.</span>
+          </span>
+          <span class="side">
+            <span class="sh">Outcomes</span>
+            <span class="outs"><span class="out">Agentic solutions</span><span class="out">Structured hypercare</span><span class="out">Lifecycle controls</span><span class="out">Benefits tracking</span><span class="out">Continuous improvement</span></span>
+          </span>
+        </span>
+      </button>
+
+      <button class="tile thread" type="button" aria-expanded="false" aria-label="AI Sherpa, a craft thread, tap to expand" style="--letter:var(--sherpa)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Craft thread</span>
+        <span class="tname"><span class="k">S</span> · AI Sherpa</span>
+        <span class="threadline">The delivery thread</span>
+        <span class="tline">Embedded practitioners translating capability into real execution, across the hard climb.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol">
+            <span class="role">Embedded delivery · the last mile</span>
+            <span class="dp">The embedded delivery capability that connects cohort enablement, organisational change and solution execution. Influenced by the Forward Deployed Engineer model, Sherpa embeds experienced practitioners alongside client teams to apply cohort learning to real work, remove implementation blockers, coach business and technical owners, and support the build and adoption of agentic solutions.</span>
+            <span class="dp"><b>The objective is not dependency. It is independence.</b> They finish able to do it without us in the room, with ownership sitting firmly inside the client team.</span>
+          </span>
+          <span class="side">
+            <span class="sh">Outcomes</span>
+            <span class="outs"><span class="out">Embedded practitioners</span><span class="out">Faster application</span><span class="out">Blockers cleared</span><span class="out">Ownership transferred</span></span>
+          </span>
+        </span>
+      </button>
+
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Orchestrate, tap to expand" style="--letter:var(--operate)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Conduct</span>
+        <span class="tname"><span class="k">O</span> · AI Orchestrate</span>
+        <span class="tline">The enterprise operating model. Decision rights, demand, reporting.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol">
+            <span class="role">The enterprise operating model · the tie</span>
+            <span class="dp">The capability that ties everything together. Orchestrate focuses on the enterprise AI operating model: how work moves across people, AI agents, business processes, data, systems and approvals. Where ownership and decision rights sit, how demand is prioritised, how governance forums interact and how performance is reported.</span>
+            <span class="dp"><b>Increasingly, this is where mature organisations want practical guidance,</b> and where long-term value is either unlocked or constrained.</span>
+          </span>
+          <span class="side">
+            <span class="sh">Outcomes</span>
+            <span class="outs"><span class="out">Operating model</span><span class="out">Decision rights</span><span class="out">Demand + prioritisation</span><span class="out">Governance forums</span><span class="out">Performance reporting</span></span>
+          </span>
+        </span>
+      </button>
+    </div>
+
+    <!-- Expandable rails -->
+    <div class="railx canvas">
+      <button class="rxhead" type="button" aria-expanded="false">
+        <span class="rxic" aria-hidden="true">🛡️</span>
+        <span class="rxtt">
+          <span class="rxtag">The canvas beneath every phase</span>
+          <span class="rxname">AI Governance · a maturity path</span>
+          <span class="rxsum">A first-order capability that evolves as use cases move to production and scale, not a one-off design exercise. Tap to open.</span>
+        </span>
+        <span class="rxplus" aria-hidden="true">+</span>
+      </button>
+      <div class="rxdetail">
+        <div class="rxgrid">
+          <div>
+            <p class="dp"><b>Governance is the canvas beneath every phase, and a capability in its own right.</b> It covers ownership, decision rights, policy, controls, risk management, responsible AI, assurance and lifecycle oversight. It runs alongside adoption, not as a supporting topic bolted on later.</p>
+            <p class="dp">It is not a one-off design exercise. Governance evolves as use cases move from experimentation into production and as AI capabilities scale. People move fast precisely because the ground is solid, and mature clients increasingly ask how it works in practice: how ownership sits, how controls evolve, and how capability scales safely over time.</p>
+          </div>
+          <div>
+            <div class="sh">A defined maturity path</div>
+            <div class="rxladder">
+              <div class="st"><div class="n">01</div><div class="s">Ad hoc</div></div>
+              <div class="st"><div class="n">02</div><div class="s">Defined</div></div>
+              <div class="st"><div class="n">03</div><div class="s">Managed</div></div>
+              <div class="st"><div class="n">04</div><div class="s">Assured</div></div>
+              <div class="st peak"><div class="n">05</div><div class="s">Adaptive</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div><span class="sw" style="background:var(--pulse)"></span>Phase, in sequence</div>
+      <div><span class="sw craft-sw"></span>Craft thread (Change · Sherpa)</div>
+      <div><span class="sw" style="background:var(--governance)"></span>Governance canvas</div>
+    </div>
+  </section>
+
+  <!-- DELIVERY ENGINE -->
+  <section class="section wrap">
+    <div class="sec-head wide">
+      <div class="sec-tag">The delivery engine</div>
+      <h2>Change, Accelerate and Sherpa, working as one.</h2>
+      <p>Three motions people used to feel as separate. Defined together, each carries its own outcome and hands cleanly to the next, so cohort capability actually reaches real-world execution.</p>
+    </div>
+
+    <div class="frow">
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Change, tap to expand" style="--letter:var(--change)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Conditions</span>
+        <span class="tname">AI Change</span>
+        <span class="tline">Creates the organisational conditions: sponsorship, alignment, champions and the behaviours that let capability take hold.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol">
+            <span class="role">Conditions · the change craft</span>
+            <span class="dp">The thread's home. Sponsors, champions and the everyday behaviours that make new capability stick. This is where adoption becomes something people choose to do, not something they are told to complete.</span>
+            <span class="dp"><b>Old change management manages people through a change. Modern change management changes how people behave, by choice.</b> The human is the point, not the risk. We build agency, not compliance. Technology never fails alone. Adoption does.</span>
+          </span>
+          <span class="side">
+            <span class="sh">What it builds</span>
+            <span class="outs"><span class="out">Agency, not compliance</span><span class="out">Habit formation</span><span class="out">Sponsorship</span><span class="out">Champion networks</span><span class="out">Behaviour that outlasts the tool</span></span>
+          </span>
+        </span>
+      </button>
+
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Accelerate, tap to expand" style="--letter:var(--accelerate)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Capability</span>
+        <span class="tname">AI Accelerate</span>
+        <span class="tline">Continues each cohort's enablement journey. Deeper skills and applied use cases, month to month.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol">
+            <span class="role">Capability · build the habit in</span>
+            <span class="dp">Build the new behaviour into the workflow, not around it. The new way becomes the default path, not the extra step people skip under pressure.</span>
+            <span class="dp">Takes the cohorts defined at Pulse and grows real capability month to month, through deeper skills, applied use cases, coaching and reinforcement. <b>Capability compounds cohort by cohort, so it is sustained growth, not a one-off training event.</b></span>
+          </span>
+          <span class="side">
+            <span class="sh">What it builds</span>
+            <span class="outs"><span class="out">Deeper skills</span><span class="out">Applied use cases</span><span class="out">Coaching</span><span class="out">The default path</span><span class="out">Sustained growth</span></span>
+          </span>
+        </span>
+      </button>
+
+      <button class="tile" type="button" aria-expanded="false" aria-label="AI Sherpa, tap to expand" style="--letter:var(--sherpa)">
+        <span class="corner">Click to close ✕</span>
+        <span class="badge">Execution</span>
+        <span class="tname">AI Sherpa</span>
+        <span class="tline">Translates capability into real-world execution. Embedded practitioners clear blockers and transfer ownership.</span>
+        <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+        <span class="detail">
+          <span class="dcol">
+            <span class="role">Execution · climb together</span>
+            <span class="dp">Forward-deployed engineers, embedded in your team. Not a spec thrown over the wall. Our engineers sit inside your team and do the hard climb to production alongside you: the integration, the edge cases, the last mile that decides whether AI ships or stalls.</span>
+            <span class="dp"><b>Capability transfers into your people through the hard climb. Ownership, not dependency on us.</b> They finish able to do it without us in the room.</span>
+          </span>
+          <span class="side">
+            <span class="sh">What it builds</span>
+            <span class="outs"><span class="out">Embedded practitioners</span><span class="out">Blockers cleared</span><span class="out">Owners coached</span><span class="out">Ownership transferred</span></span>
+          </span>
+        </span>
+      </button>
+    </div>
+
+    <div class="flow-note"><b>Change creates the conditions. Accelerate continues the enablement. Sherpa translates capability into execution and client ownership.</b> Three motions, one delivery engine, each with a specific outcome.</div>
+  </section>
+
+  <!-- AIM HUB, THE BACKPLANE -->
+  <section class="section wrap">
+    <div class="sec-head wide">
+      <div class="sec-tag">The engine room</div>
+      <h2>The AIM Hub is the backplane. It is how PICASSO scales.</h2>
+      <p>Framework direction alone does not close the gap. Capability only becomes repeatable when it is converted into delivery assets, methods and accountabilities field teams can use consistently. The Hub is the backplane and asset engine that does exactly that, and the place the feedback loop compounds.</p>
+    </div>
+
+    <div class="hub">
+      <div class="hub-top">
+        <div class="ic" aria-hidden="true">🛠️</div>
+        <div>
+          <h3>One backplane, feeding every phase.</h3>
+          <p>The Hub codifies what works into reusable assets, then makes them easy for teams to discover, apply and refine. As assets are created, tested and improved through delivery, <b>bespoke reinvention falls away and customer outcomes become consistent and repeatable.</b> Pulse data drives the whole thing: it allocates cohorts and gives the Hub the inputs to generate each phase's delivery agenda, methods and assets.</p>
+        </div>
+      </div>
+
+      <div class="hub-h">How it runs, end to end</div>
+      <div class="hub-pipe">
+        <div class="pstep"><div class="pnum" aria-hidden="true">1</div><div class="pn">Input</div><div class="pt">Pulse data</div><div class="pd">Readiness, priorities and maturity baseline from every client.</div></div>
+        <div class="pstep"><div class="pnum" aria-hidden="true">2</div><div class="pn">Allocate</div><div class="pt">Cohorts</div><div class="pd">People grouped by readiness so enablement fits where they are.</div></div>
+        <div class="pstep"><div class="pnum" aria-hidden="true">3</div><div class="pn">Generate</div><div class="pt">Phase agendas</div><div class="pd">Delivery agendas, methods and assets built per phase, per cohort.</div></div>
+        <div class="pstep"><div class="pnum" aria-hidden="true">4</div><div class="pn">Deliver</div><div class="pt">In the field</div><div class="pd">Teams apply proven assets rather than starting from a blank page.</div></div>
+        <div class="pstep"><div class="pnum" aria-hidden="true">5</div><div class="pn">Learn</div><div class="pt">Evidence back</div><div class="pd">What worked flows back in and sharpens the asset for next time.</div></div>
+      </div>
+
+      <div class="hub-h">The reusable asset library it codifies</div>
+      <div class="frow assets4">
+        <button class="tile" type="button" aria-expanded="false" aria-label="Operating model patterns, tap to expand" style="--letter:var(--operate)">
+          <span class="corner">Click to close ✕</span><span class="badge">Reusable</span>
+          <span class="tname">Operating model patterns</span>
+          <span class="tline">Blueprints for how work, agents, data and approvals move across the enterprise.</span>
+          <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+          <span class="detail">
+            <span class="dcol"><span class="role">Reusable · applied at Orchestrate</span>
+              <span class="dp">Reference designs for the enterprise AI operating model: how work flows across people, agents, processes, data, systems and approvals, where decision rights and ownership sit, how demand is prioritised and how governance forums interact.</span>
+              <span class="dp"><b>Teams adapt the pattern instead of inventing the model.</b> Applied at Orchestrate and tuned per client.</span></span>
+            <span class="side"><span class="sh">What's inside</span><span class="outs"><span class="out">Decision rights map</span><span class="out">Demand intake</span><span class="out">Handoffs</span><span class="out">Escalation paths</span></span></span>
+          </span>
+        </button>
+
+        <button class="tile" type="button" aria-expanded="false" aria-label="Governance and decision-rights artefacts, tap to expand" style="--letter:var(--governance)">
+          <span class="corner">Click to close ✕</span><span class="badge">Reusable</span>
+          <span class="tname">Governance and decision-rights artefacts</span>
+          <span class="tline">Policy, controls and ownership models that scale from pilot to production.</span>
+          <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+          <span class="detail">
+            <span class="dcol"><span class="role">Reusable · rides the Governance canvas</span>
+              <span class="dp">Policy templates, control libraries, responsible-AI checklists, assurance and lifecycle-oversight patterns, and decision-rights maps.</span>
+              <span class="dp"><b>They tighten as maturity grows,</b> tracking the Governance path from Ad hoc to Adaptive, so controls scale as use cases move into production.</span></span>
+            <span class="side"><span class="sh">What's inside</span><span class="outs"><span class="out">Policy set</span><span class="out">Control library</span><span class="out">RACI</span><span class="out">Assurance checklist</span></span></span>
+          </span>
+        </button>
+
+        <button class="tile" type="button" aria-expanded="false" aria-label="Champion and adoption toolkits, tap to expand" style="--letter:var(--change)">
+          <span class="corner">Click to close ✕</span><span class="badge">Reusable</span>
+          <span class="tname">Champion and adoption toolkits</span>
+          <span class="tline">Stakeholder plans, champion playbooks, comms patterns and reinforcement.</span>
+          <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+          <span class="detail">
+            <span class="dcol"><span class="role">Reusable · powers the Change thread</span>
+              <span class="dp">The reusable spine of AI Change: stakeholder and sponsorship plans, champion network playbooks, communication patterns, adoption measures and reinforcement mechanisms.</span>
+              <span class="dp"><b>Deployed so adoption becomes something people choose to do,</b> not something they are told to complete.</span></span>
+            <span class="side"><span class="sh">What's inside</span><span class="outs"><span class="out">Sponsor map</span><span class="out">Champion playbook</span><span class="out">Comms kit</span><span class="out">Reinforcement</span></span></span>
+          </span>
+        </button>
+
+        <button class="tile" type="button" aria-expanded="false" aria-label="Executive reporting packs, tap to expand" style="--letter:var(--accelerate)">
+          <span class="corner">Click to close ✕</span><span class="badge">Reusable</span>
+          <span class="tname">Executive reporting packs</span>
+          <span class="tline">Board-ready views of adoption, capability, readiness, value and risk.</span>
+          <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+          <span class="detail">
+            <span class="dcol"><span class="role">Reusable · fed by the maturity model</span>
+              <span class="dp">Pre-built executive and board views that turn the maturity model and delivery evidence into a story leaders can act on: adoption and capability growth, implementation readiness, realised value, risk and the actions required to sustain progress.</span></span>
+            <span class="side"><span class="sh">What's inside</span><span class="outs"><span class="out">Exec dashboard</span><span class="out">Board pack</span><span class="out">KPI view</span><span class="out">Risk view</span></span></span>
+          </span>
+        </button>
+
+        <button class="tile" type="button" aria-expanded="false" aria-label="Value realisation frameworks, tap to expand" style="--letter:var(--pulse)">
+          <span class="corner">Click to close ✕</span><span class="badge">Reusable</span>
+          <span class="tname">Value realisation frameworks</span>
+          <span class="tline">Benefits definition, KPI ownership and tracking through to realised value.</span>
+          <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+          <span class="detail">
+            <span class="dcol"><span class="role">Reusable · proof, not activity</span>
+              <span class="dp">Benefits definition and mapping, KPI design with named owners, and tracking from baseline to realised value.</span>
+              <span class="dp"><b>Ties operational indicators to business outcomes,</b> so we can prove whether decision-making improved and value scaled, not just whether the tool was used.</span></span>
+            <span class="side"><span class="sh">What's inside</span><span class="outs"><span class="out">Benefits map</span><span class="out">KPI tree</span><span class="out">Tracking model</span></span></span>
+          </span>
+        </button>
+
+        <button class="tile" type="button" aria-expanded="false" aria-label="Readiness assessments, tap to expand" style="--letter:var(--ignite)">
+          <span class="corner">Click to close ✕</span><span class="badge">Reusable</span>
+          <span class="tname">Readiness assessments</span>
+          <span class="tline">Technology, data, process, governance, risk and ownership checks.</span>
+          <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+          <span class="detail">
+            <span class="dcol"><span class="role">Reusable · gate to production</span>
+              <span class="dp">Structured readiness checks across technology, data, process, governance, risk and business ownership.</span>
+              <span class="dp"><b>Run before a solution moves to production,</b> so the controls, engineering disciplines, decision rights and accountable owners are in place first.</span></span>
+            <span class="side"><span class="sh">What's inside</span><span class="outs"><span class="out">Readiness checklist</span><span class="out">Gap analysis</span><span class="out">Go / no-go</span></span></span>
+          </span>
+        </button>
+
+        <button class="tile" type="button" aria-expanded="false" aria-label="Lifecycle management approaches, tap to expand" style="--letter:var(--scale)">
+          <span class="corner">Click to close ✕</span><span class="badge">Reusable</span>
+          <span class="tname">Lifecycle management approaches</span>
+          <span class="tline">Hypercare, monitoring, drift and continuous improvement once live.</span>
+          <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+          <span class="detail">
+            <span class="dcol"><span class="role">Reusable · keeps value healthy</span>
+              <span class="dp">How agentic solutions are kept healthy after go-live: structured hypercare, performance monitoring, drift detection, benefits tracking and continuous improvement.</span>
+              <span class="dp"><b>Keeps value compounding and controls current</b> as the solution and the frontier move.</span></span>
+            <span class="side"><span class="sh">What's inside</span><span class="outs"><span class="out">Hypercare plan</span><span class="out">Monitoring</span><span class="out">Drift watch</span><span class="out">Improvement loop</span></span></span>
+          </span>
+        </button>
+
+        <button class="tile" type="button" aria-expanded="false" aria-label="Pulse-generated delivery agendas, tap to expand" style="--letter:var(--change)">
+          <span class="corner">Click to close ✕</span><span class="badge">Driven by Pulse</span>
+          <span class="tname">Pulse-generated delivery agendas</span>
+          <span class="tline">Per-cohort, per-phase plans generated straight from Pulse data.</span>
+          <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
+          <span class="detail">
+            <span class="dcol"><span class="role">The connective tissue</span>
+              <span class="dp">Pulse data allocates cohorts and generates the delivery agenda, methods and assets for each phase, per cohort.</span>
+              <span class="dp"><b>This is how the Hub personalises delivery to where each group actually sits,</b> without starting from a blank page.</span></span>
+            <span class="side"><span class="sh">What's inside</span><span class="outs"><span class="out">Cohort map</span><span class="out">Phase agenda</span><span class="out">Method pack</span></span></span>
+          </span>
+        </button>
+      </div>
+
+      <div class="hub-why">
+        <div class="hwc"><h4>Repeatable, not bespoke</h4><p>Field teams deliver the same promise consistently, without reinventing governance, adoption or reporting per engagement.</p></div>
+        <div class="hwc"><h4>Compounding, not resetting</h4><p>Every delivery improves the asset. The next engagement starts stronger than the last, so quality climbs over time.</p></div>
+        <div class="hwc"><h4>Consistent outcomes</h4><p>The same quality bar, whoever delivers and wherever they are, from the first Pulse to a running enterprise capability.</p></div>
+      </div>
+
+      <div class="hub-line">PICASSO gives us the structure. <b>The AIM Hub is the backplane that turns it into repeatable delivery, and the loop that keeps it learning.</b></div>
+    </div>
+  </section>
+
+  <!-- MATURITY CONSOLE -->
+  <section class="section wrap">
+    <div class="sec-head wide">
+      <div class="sec-tag">Measuring what matters</div>
+      <h2>Beyond tool adoption, towards organisational outcomes.</h2>
+      <p>The maturity model reads three dimensions at once and connects them to operational and business outcomes. Move the levers to where a client sits. It can feed an executive reporting view of adoption, capability growth, implementation readiness, realised value and the actions required to sustain progress.</p>
+    </div>
+
+    <div class="console">
+      <div class="card">
+        <div class="axes">
+          <div class="axes-top">
+            <span class="lede">Behaviour is the shift. Agency is the capability. Depth is the spread.</span>
+            <span class="hint">Tap a stage to set it</span>
+          </div>
+          <div id="axesMount"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="sig">
+          <div class="sig-idx">
+            <div class="mcap">Maturity index</div>
+            <div class="row"><span class="num" id="idxNum">0</span><span class="den">/ 100</span><span class="band2" id="idxBand">·</span></div>
+            <div class="mfoot">Prompts, logins and training completion are supporting signals, not the definition of success.</div>
+          </div>
+          <div class="sig-read" id="sigRead"></div>
+          <div class="meters" id="metersMount"></div>
+          <div class="next"><div class="mcap">Your next move</div><div class="mv" id="nextMove"></div><div class="hy" id="nextHow"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="measure-line">We are interested in whether decision-making improves, behaviours change, capability grows and value scales. <b>That is what operationalised AI actually looks like.</b></p>
+    <p class="sr-only" id="srStatus" aria-live="polite"></p>
+  </section>
+
+  <!-- PARADIGM -->
+  <section class="section wrap">
+    <div class="sec-head wide">
+      <div class="sec-tag">The paradigm to resolve</div>
+      <h2>Proposition and delivery have to mature together.</h2>
+      <p>This is the tension the shift exposes, and the reason PICASSO and the AIM Hub matter now. Get one ahead of the other and we feel it in the field. The work is to hold them in step.</p>
+    </div>
+
+    <div class="para">
+      <div class="pcard sell">
+        <div class="pk">The proposition</div>
+        <h3>Strong enough to sell the future state.</h3>
+        <p>Our story has to match the operating capability mature clients are already asking for, positioned with confidence.</p>
+        <ul>
+          <li>Governance, operating models and decision rights</li>
+          <li>Adoption, value realisation and executive reporting</li>
+          <li>Scaling and lifecycle beyond the first pilot</li>
+        </ul>
+      </div>
+      <div class="pcard deliver">
+        <div class="pk">The delivery system</div>
+        <h3>Mature enough to fulfil it consistently.</h3>
+        <p>The AIM Hub assets, methods and accountabilities have to be repeatable, so field teams deliver without reinventing per engagement.</p>
+        <ul>
+          <li>Reusable assets for every phase and capability</li>
+          <li>Clear ownership and accountabilities in delivery</li>
+          <li>Evidence flowing back to sharpen the next run</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="para-next">
+      <div class="nk">The next step</div>
+      <p>Align <b>what we position, what we can deliver today, and what we must build next.</b> That alignment is the work, and the Hub is where we do it.</p>
+    </div>
+  </section>
+
+  <footer class="wrap foot">
+    <div>PICASSO · the operating position for <b>AI Momentum</b>, built on the AIM Hub. Concept for reaction.</div>
+    <div>Not wired into the app. No framework changes made.</div>
+  </footer>
+
+  <!-- Feedback widget -->
+  <button class="fb-btn" id="fbBtn" aria-haspopup="dialog" aria-expanded="false"><span class="fbi" aria-hidden="true">💬</span> Share feedback</button>
+  <div class="fb-panel" id="fbPanel" role="dialog" aria-label="Share feedback on PICASSO">
+    <button class="fb-close" id="fbClose" aria-label="Close feedback">✕</button>
+    <div class="fb-form">
+      <h4>Quick feedback on PICASSO</h4>
+      <div class="fbsub">A few taps. No essay required.</div>
+
+      <label class="fb-lbl" for="fbWho">Who are you</label>
+      <select class="fb-sel" id="fbWho">
+        <option value="">Select…</option>
+        <option>Lee</option><option>Simon</option><option>Nick</option><option>Edmund</option><option>Other</option>
+      </select>
+
+      <span class="fb-lbl">Overall</span>
+      <div class="fb-stars" id="fbStars" role="radiogroup" aria-label="Overall rating">
+        <button type="button" class="fb-star" data-v="1" aria-label="1 star">★</button>
+        <button type="button" class="fb-star" data-v="2" aria-label="2 stars">★</button>
+        <button type="button" class="fb-star" data-v="3" aria-label="3 stars">★</button>
+        <button type="button" class="fb-star" data-v="4" aria-label="4 stars">★</button>
+        <button type="button" class="fb-star" data-v="5" aria-label="5 stars">★</button>
+      </div>
+
+      <span class="fb-lbl">What landed (tick any)</span>
+      <div class="fb-checks" id="fbChecks">
+        <label class="fb-check"><input type="checkbox" value="Why we are here"> Why we are here</label>
+        <label class="fb-check"><input type="checkbox" value="The framework"> The framework</label>
+        <label class="fb-check"><input type="checkbox" value="Change as a thread"> Change as a thread</label>
+        <label class="fb-check"><input type="checkbox" value="Delivery engine"> Delivery engine</label>
+        <label class="fb-check"><input type="checkbox" value="AIM Hub"> AIM Hub</label>
+        <label class="fb-check"><input type="checkbox" value="Maturity model"> Maturity model</label>
+        <label class="fb-check"><input type="checkbox" value="Proposition vs delivery"> Proposition vs delivery</label>
+        <label class="fb-check"><input type="checkbox" value="The name PICASSO"> The name PICASSO</label>
+      </div>
+
+      <label class="fb-lbl" for="fbNote">Anything to add (optional)</label>
+      <textarea class="fb-note" id="fbNote" placeholder="One line is plenty…"></textarea>
+
+      <button class="fb-submit" id="fbSubmit">Send feedback</button>
+    </div>
+    <div class="fb-done"><div class="ok" aria-hidden="true">✅</div><p>Thanks. That is logged.</p></div>
+  </div>
+
+<script>
+  /* Interactive maturity console */
+  (function () {
+    var AXES = [
+      { key:'behaviour', name:'Behaviour', sub:'the shift', desc:'How people actually work.', color:'--color-brand',
+        stages:['Aware','Willing','Practising','Habitual','Cultural'],
+        moves:['give them a first win they can feel','build the habit into the daily workflow','make the new way the default and retire the old one','let peers set the norm, not the mandate','hold and protect it, watch for drift'], sel:2 },
+      { key:'agency', name:'Agency', sub:'the capability', desc:'Confidence and capability working with AI.', color:'--color-phase-3',
+        stages:['Assisted','Confident','Fluent','Leading'],
+        moves:['let them run it unaided on low-stakes work','have them build and reuse their own skills','put them in charge of what gets built and stopped','hold and protect it, watch for drift'], sel:2 },
+      { key:'depth', name:'Depth', sub:'the spread', desc:'How far capability has spread across the organisation.', color:'--color-phase-5',
+        stages:['Individual','Team','Function','Enterprise','Ecosystem'],
+        moves:['codify what one person proved for the whole team','make it the standard way of working across the function','carry it across business units with shared guardrails','extend the behaviour to partners and customers','hold and protect it, watch for drift'], sel:1 }
+    ];
+    var mount = document.getElementById('axesMount');
+    if (!mount) return;
+    function norm(a){ return a.sel / (a.stages.length - 1); }
+    function buildAxis(a, ai) {
+      var wrap = document.createElement('div'); wrap.className='axrow';
+      wrap.style.setProperty('--ax','var('+a.color+')'); if (ai>0) wrap.style.marginTop='24px';
+      var head=document.createElement('div'); head.className='axhead';
+      head.innerHTML='<span class="name">'+a.name+' <span class="sub">· '+a.sub+'</span></span><span class="desc">'+a.desc+'</span><span class="lvl" data-lvl></span>';
+      wrap.appendChild(head);
+      var track=document.createElement('div'); track.className='track';
+      var rail=document.createElement('div'); rail.className='rail';
+      var fill=document.createElement('div'); fill.className='rail-fill'; rail.appendChild(fill); track.appendChild(rail);
+      var knob=document.createElement('div'); knob.className='knob'; track.appendChild(knob);
+      var cells=document.createElement('div'); cells.className='cells';
+      cells.setAttribute('role','radiogroup'); cells.setAttribute('aria-label', a.name+' maturity level');
+      cells.style.setProperty('--n', a.stages.length);
+      a.stages.forEach(function(s,i){
+        var b=document.createElement('button'); b.className='cell'; b.type='button';
+        b.setAttribute('role','radio'); b.setAttribute('aria-label', s+', level '+(i+1)+' of '+a.stages.length);
+        b.innerHTML='<span class="n" aria-hidden="true">'+String(i+1).padStart(2,'0')+'</span><span class="nm">'+s+'</span>';
+        b.addEventListener('click', function(){ a.sel=i; update(); b.focus(); });
+        cells.appendChild(b);
+      });
+      cells.addEventListener('keydown', function(e){
+        var last=a.stages.length-1, ns=a.sel;
+        if (e.key==='ArrowRight'||e.key==='ArrowDown') ns=Math.min(last,a.sel+1);
+        else if (e.key==='ArrowLeft'||e.key==='ArrowUp') ns=Math.max(0,a.sel-1);
+        else if (e.key==='Home') ns=0; else if (e.key==='End') ns=last; else return;
+        e.preventDefault(); a.sel=ns; update(); cells.children[ns].focus();
+      });
+      track.appendChild(cells); wrap.appendChild(track);
+      a._el={fill:fill,knob:knob,cells:cells,lvl:head.querySelector('[data-lvl]')};
+      return wrap;
+    }
+    AXES.forEach(function(a,i){ mount.appendChild(buildAxis(a,i)); });
+    var idxNum=document.getElementById('idxNum'), idxBand=document.getElementById('idxBand'),
+        sigRead=document.getElementById('sigRead'), metersMount=document.getElementById('metersMount'),
+        nextMove=document.getElementById('nextMove'), nextHow=document.getElementById('nextHow');
+    AXES.forEach(function(a){
+      var m=document.createElement('div'); m.className='meter'; m.style.setProperty('--ax','var('+a.color+')');
+      m.innerHTML='<div class="mtop"><span class="mlab">'+a.name+'</span><span class="mval" data-mv></span></div><div class="bar"><div class="bfill" data-bf></div></div>';
+      metersMount.appendChild(m); a._meter={val:m.querySelector('[data-mv]'),fill:m.querySelector('[data-bf]')};
+    });
+    function bandFor(x){ if(x>=80)return'Embedded'; if(x>=55)return'Taking hold'; if(x>=30)return'Early motion'; return'Standing start'; }
+    function update(){
+      var total=0;
+      AXES.forEach(function(a){
+        var n=norm(a); total+=n; var pct=(n*100).toFixed(1)+'%';
+        a._el.fill.style.width=pct; a._el.knob.style.left=pct; a._el.lvl.textContent=a.stages[a.sel];
+        Array.prototype.forEach.call(a._el.cells.children, function(c,i){
+          c.classList.remove('done','cur'); if(i<a.sel)c.classList.add('done'); if(i===a.sel)c.classList.add('cur');
+          c.setAttribute('aria-checked', i===a.sel?'true':'false'); c.tabIndex = i===a.sel?0:-1;
+        });
+        a._meter.fill.style.width=pct; a._meter.val.textContent=a.stages[a.sel];
+      });
+      var idx=Math.round((total/AXES.length)*100);
+      idxNum.textContent=idx; idxBand.textContent=bandFor(idx);
+      var sorted=AXES.slice().sort(function(x,y){return norm(x)-norm(y);});
+      var weak=sorted[0], strong=sorted[sorted.length-1];
+      sigRead.innerHTML='<b>'+strong.name+'</b> is the strength. <b>'+weak.name+'</b> is the lever. The distance between them is where the next quarter of work sits.';
+      if (weak.sel>=weak.stages.length-1){ nextMove.innerHTML='Every axis is maxed. <b>Protect it.</b>'; nextHow.textContent='Guard against drift and keep the behaviour compounding.'; }
+      else { nextMove.innerHTML='Advance <b>'+weak.name+'</b>: '+weak.stages[weak.sel]+' → '+weak.stages[weak.sel+1]; nextHow.textContent='How: '+weak.moves[weak.sel]+'.'; }
+      var sr=document.getElementById('srStatus');
+      if (sr) sr.textContent='Maturity index '+idx+' of 100, '+bandFor(idx)+'. '+AXES.map(function(a){return a.name+' '+a.stages[a.sel];}).join(', ')+'.';
+    }
+    update();
+  })();
+
+  /* Expandable tiles: one open at a time per row, click again to collapse */
+  (function () {
+    var rows = document.querySelectorAll('.frow');
+    Array.prototype.forEach.call(rows, function (row) {
+      var tiles = row.querySelectorAll('.tile');
+      Array.prototype.forEach.call(tiles, function (t) {
+        t.addEventListener('click', function () {
+          var wasOpen = t.classList.contains('open');
+          Array.prototype.forEach.call(tiles, function (x) { x.classList.remove('open'); x.setAttribute('aria-expanded','false'); });
+          if (!wasOpen) { t.classList.add('open'); t.setAttribute('aria-expanded','true'); }
+        });
+      });
+    });
+  })();
+
+  /* Expandable rails: Change thread + Governance canvas */
+  (function () {
+    var heads = document.querySelectorAll('.railx .rxhead');
+    Array.prototype.forEach.call(heads, function (h) {
+      h.addEventListener('click', function () {
+        var r = h.closest('.railx');
+        var on = r.classList.toggle('open');
+        h.setAttribute('aria-expanded', on ? 'true' : 'false');
+      });
+    });
+  })();
+
+  /* Feedback widget: captures structured rows, posts to your endpoint */
+  (function () {
+    /* ====== ONE LINE TO SET ======
+       Paste your form endpoint below. Examples:
+       Formspree:      https://formspree.io/f/xxxxxxxx
+       Google Apps Script web app: https://script.google.com/macros/s/AKfy.../exec
+    */
+    var FEEDBACK_ENDPOINT = "";
+    /* ============================== */
+
+    var btn = document.getElementById('fbBtn'), panel = document.getElementById('fbPanel'),
+        closeBtn = document.getElementById('fbClose'), stars = document.getElementById('fbStars'),
+        submit = document.getElementById('fbSubmit');
+    if (!btn) return;
+    var rating = 0;
+    function toggle(open) { panel.classList.toggle('open', open); btn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+    btn.addEventListener('click', function () { toggle(!panel.classList.contains('open')); });
+    closeBtn.addEventListener('click', function () { toggle(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') toggle(false); });
+
+    Array.prototype.forEach.call(stars.querySelectorAll('.fb-star'), function (s) {
+      s.addEventListener('click', function () {
+        rating = +s.dataset.v;
+        Array.prototype.forEach.call(stars.querySelectorAll('.fb-star'), function (x) { x.classList.toggle('on', +x.dataset.v <= rating); });
+      });
+    });
+
+    submit.addEventListener('click', function () {
+      var landed = [];
+      Array.prototype.forEach.call(document.querySelectorAll('#fbChecks input:checked'), function (c) { landed.push(c.value); });
+      var data = new FormData();
+      data.append('reviewer', document.getElementById('fbWho').value || 'Unspecified');
+      data.append('rating', rating ? rating + ' / 5' : '');
+      data.append('landed', landed.join(', '));
+      data.append('note', document.getElementById('fbNote').value || '');
+      data.append('page', 'PICASSO operating position');
+      data.append('submittedAt', new Date().toISOString());
+
+      if (!FEEDBACK_ENDPOINT) {
+        alert('Feedback endpoint is not set yet. Add your form URL in the one marked line inside the page code, then reupload.');
+        return;
+      }
+      submit.textContent = 'Sending…'; submit.disabled = true;
+      fetch(FEEDBACK_ENDPOINT, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+        .then(function (r) { if (!r.ok) throw new Error('bad'); panel.classList.add('sent'); })
+        .catch(function () { submit.textContent = 'Send feedback'; submit.disabled = false; alert('Could not send. Check the endpoint URL.'); });
+    });
+  })();
+
+  /* Theme toggle */
+  (function () {
+    var root=document.documentElement, btn=document.getElementById('themeBtn'),
+        ic=document.getElementById('themeIcon'), lb=document.getElementById('themeLabel');
+    function isLight(){ if(root.classList.contains('light'))return true; if(root.classList.contains('dark'))return false;
+      try{ return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches; }catch(e){ return false; } }
+    function sync(){ var l=isLight(); ic.textContent=l?'☀️':'🌙'; lb.textContent=l?'Light':'Dark'; }
+    sync();
+    btn.addEventListener('click', function(){ var l=isLight(); root.classList.remove('light','dark'); root.classList.add(l?'dark':'light'); sync(); });
+  })();
+</script>
+</body>
+</html>
