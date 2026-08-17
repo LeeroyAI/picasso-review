@@ -158,6 +158,12 @@
   .tile .thint .fi { color:var(--letter); font-size:11px; }
   .tile .corner { position:absolute; top:14px; right:16px; font-size:8.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-mute); display:none; }
   .tile .detail { display:none; }
+  .tile.thread { border-top:3px dashed var(--letter); background:linear-gradient(180deg, color-mix(in srgb, var(--letter) 9%, var(--panel)), var(--panel) 44%); }
+  .tile.thread .badge { background:color-mix(in srgb, var(--letter) 18%, transparent); }
+  .tile .threadline { display:inline-flex; align-items:center; gap:7px; font-size:8.5px; font-weight:800; letter-spacing:.11em; text-transform:uppercase; color:var(--letter); margin:-3px 0 9px; }
+  .tile .threadline::before { content:""; width:30px; height:3px; border-radius:3px; background:repeating-linear-gradient(90deg, var(--letter) 0 5px, transparent 5px 9px); }
+  .tile.open .threadline { display:none; }
+  .tile.open .detail .side { display:flex; flex-direction:column; gap:14px; }
   .tile.open { flex-basis:100%; background:color-mix(in srgb, var(--letter) 6%, var(--panel)); box-shadow:0 20px 44px color-mix(in srgb, var(--letter) 20%, transparent); padding:26px 30px 28px; }
   .tile.open .tline, .tile.open .thint { display:none; }
   .tile.open .corner { display:block; }
@@ -470,8 +476,8 @@
   <section class="section wrap">
     <div class="sec-head wide">
       <div class="sec-tag">The framework</div>
-      <h2>Seven elements. Tap any tile to open the full picture.</h2>
-      <p>The proven phases hold, each now defined by what it produces for the client. Two structural rails hold it together, and both open for detail: a Change thread running through every phase, and a Governance canvas beneath all of them.</p>
+      <h2>One word. Five phases, two threads, a canvas.</h2>
+      <p>PICASSO reads as one word, but it works on three levels. Five phases you move through in sequence: Pulse, Ignite, Accelerate, Scale and Operate, Orchestrate. Two craft threads that run through every phase, marked below: Change, the human thread, and Sherpa, the delivery thread. And Governance, the canvas beneath all of it. Adoption and embedded delivery were never a single step, so we stopped drawing them as one. Tap any tile for the detail.</p>
     </div>
 
     <div class="frow">
@@ -513,22 +519,29 @@
         </span>
       </button>
 
-      <button class="tile" type="button" aria-expanded="false" aria-label="AI Change, tap to expand" style="--letter:var(--change)">
+      <button class="tile thread" type="button" aria-expanded="false" aria-label="AI Change, a craft thread, tap to expand" style="--letter:var(--change)">
         <span class="corner">Click to close ✕</span>
-        <span class="badge">Enable</span>
+        <span class="badge">Craft thread</span>
         <span class="tname"><span class="k">C</span> · AI Change</span>
-        <span class="tline">Sponsorship, champions, comms and the behaviours adoption needs.</span>
+        <span class="threadline">The human thread</span>
+        <span class="tline">Sponsorship, champions, comms and the behaviours adoption needs. Woven through all seven.</span>
         <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
         <span class="detail">
           <span class="dcol">
-            <span class="role">Organisational change · the human craft</span>
+            <span class="role">The human thread · runs through every phase</span>
             <span class="dp">A dedicated change capability: executive sponsorship, stakeholder alignment, champion networks, communications, behavioural adoption and reinforcement. It creates the conditions cohort enablement and new solutions need to succeed.</span>
-            <span class="dp"><b>Old change management manages people through a change. Modern change management changes how people behave, by choice.</b> The human is the point, not the risk. This is where adoption becomes something people choose to do, not something they are told to complete.</span>
-            <span class="dp">Because technology never fails alone, adoption does. Change is also the continuous thread running through every element, expanded in the rail below.</span>
+            <span class="dp"><b>Old change management manages people through a change. Modern change management changes how people behave, by choice.</b> The human is the point, not the risk. Adoption becomes something people choose to do, not something they are told to complete. Technology never fails alone. Adoption does.</span>
+            <span class="dp">This is why Change is a thread, not a step. Pulse reads the human signal. Ignite makes change felt. Accelerate builds the habit in. Scale and Operate let norms harden. Sherpa transfers ownership. Orchestrate makes it the culture.</span>
           </span>
           <span class="side">
-            <span class="sh">Outcomes</span>
-            <span class="outs"><span class="out">Active sponsorship</span><span class="out">Clear ownership</span><span class="out">Champion networks</span><span class="out">Targeted comms</span><span class="out">Sustained behaviour change</span></span>
+            <span class="sh">What it rejects, and what it builds</span>
+            <span class="rxmap">
+              <span class="row"><span class="no">Resistance management</span><span class="ar">→</span><span class="yes">Agency building</span></span>
+              <span class="row"><span class="no">Training completion</span><span class="ar">→</span><span class="yes">Habit formation</span></span>
+              <span class="row"><span class="no">A comms plan at go-live</span><span class="ar">→</span><span class="yes">A behaviour system from the first Pulse</span></span>
+              <span class="row"><span class="no">A change team's workstream</span><span class="ar">→</span><span class="yes">How everyone thinks, works and operates</span></span>
+              <span class="row"><span class="no">People as the risk</span><span class="ar">→</span><span class="yes">People as the point</span></span>
+            </span>
           </span>
         </span>
       </button>
@@ -571,11 +584,12 @@
         </span>
       </button>
 
-      <button class="tile" type="button" aria-expanded="false" aria-label="AI Sherpa, tap to expand" style="--letter:var(--sherpa)">
+      <button class="tile thread" type="button" aria-expanded="false" aria-label="AI Sherpa, a craft thread, tap to expand" style="--letter:var(--sherpa)">
         <span class="corner">Click to close ✕</span>
-        <span class="badge">Embed</span>
+        <span class="badge">Craft thread</span>
         <span class="tname"><span class="k">S</span> · AI Sherpa</span>
-        <span class="tline">Embedded practitioners translating capability into real execution.</span>
+        <span class="threadline">The delivery thread</span>
+        <span class="tline">Embedded practitioners translating capability into real execution, across the hard climb.</span>
         <span class="thint">Tap to expand <span class="fi" aria-hidden="true">⤢</span></span>
         <span class="detail">
           <span class="dcol">
@@ -611,36 +625,6 @@
     </div>
 
     <!-- Expandable rails -->
-    <div class="railx thread">
-      <button class="rxhead" type="button" aria-expanded="false">
-        <span class="rxic" aria-hidden="true">🧵</span>
-        <span class="rxtt">
-          <span class="rxtag">The thread through every phase</span>
-          <span class="rxname">AI Change · a continuous thread</span>
-          <span class="rxsum">Sustainable AI transformation is a people and behaviour challenge, not a technology deployment exercise. Tap to open.</span>
-        </span>
-        <span class="rxplus" aria-hidden="true">+</span>
-      </button>
-      <div class="rxdetail">
-        <div class="rxgrid">
-          <div>
-            <p class="dp"><b>Change is not a workstream bolted on at the end. It is the thread running under every element.</b> Old change management manages people through a change. Modern change management changes how people behave, by choice, with the human at the centre. We build agency, not compliance.</p>
-            <p class="dp">At each phase there is a behaviour moment. Pulse reads the human signal. Ignite makes change felt. Change names the craft. Accelerate builds the habit into the work. Scale + Operate lets norms harden and hold. Sherpa transfers ownership. Orchestrate makes it simply the culture. This is how a pilot becomes the way people actually work.</p>
-          </div>
-          <div>
-            <div class="sh">What it rejects, and what it builds</div>
-            <div class="rxmap">
-              <div class="row"><span class="no">Resistance management</span><span class="ar">→</span><span class="yes">Agency building</span></div>
-              <div class="row"><span class="no">Training completion</span><span class="ar">→</span><span class="yes">Habit formation</span></div>
-              <div class="row"><span class="no">A comms plan at go-live</span><span class="ar">→</span><span class="yes">A behaviour system from the first Pulse</span></div>
-              <div class="row"><span class="no">A change team's workstream</span><span class="ar">→</span><span class="yes">How everyone thinks, works and operates</span></div>
-              <div class="row"><span class="no">People as the risk</span><span class="ar">→</span><span class="yes">People as the point</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="railx canvas">
       <button class="rxhead" type="button" aria-expanded="false">
         <span class="rxic" aria-hidden="true">🛡️</span>
@@ -672,9 +656,8 @@
     </div>
 
     <div class="legend">
-      <div><span class="sw" style="background:var(--pulse)"></span>Proven phase</div>
-      <div><span class="sw craft-sw"></span>Craft layer (Change · Sherpa)</div>
-      <div><span class="sw" style="background:var(--change)"></span>Change thread</div>
+      <div><span class="sw" style="background:var(--pulse)"></span>Phase, in sequence</div>
+      <div><span class="sw craft-sw"></span>Craft thread (Change · Sherpa)</div>
       <div><span class="sw" style="background:var(--governance)"></span>Governance canvas</div>
     </div>
   </section>
