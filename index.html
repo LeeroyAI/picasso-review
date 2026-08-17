@@ -360,11 +360,38 @@
     .cells { grid-template-columns:repeat(2,1fr); }
     .hub-pipe .pstep { flex-basis:100%; }
   }
+  /* Feedback widget */
+  .fb-btn { position:fixed; right:22px; bottom:22px; z-index:80; display:inline-flex; align-items:center; gap:9px; background:linear-gradient(135deg, var(--change), var(--accelerate)); color:rgb(var(--color-ink-on-fill)); border:0; border-radius:999px; padding:12px 18px; font-family:inherit; font-size:13.5px; font-weight:800; cursor:pointer; box-shadow:0 12px 30px color-mix(in srgb, var(--change) 45%, transparent); transition:transform .18s ease; }
+  .fb-btn:hover { transform:translateY(-2px); }
+  .fb-btn .fbi { font-size:15px; }
+  .fb-panel { position:fixed; right:22px; bottom:80px; z-index:81; width:min(384px, calc(100vw - 44px)); max-height:calc(100vh - 110px); overflow:auto; background:var(--panel); border:1px solid var(--border); border-radius:20px; box-shadow:0 30px 70px rgba(0,0,0,.35); padding:20px 22px 22px; display:none; }
+  .fb-panel.open { display:block; animation:tfade .3s ease both; }
+  .fb-panel h4 { font-size:16px; font-weight:800; letter-spacing:-.01em; }
+  .fb-panel .fbsub { font-size:12px; color:var(--ink-mute); font-weight:600; margin-top:2px; margin-bottom:6px; }
+  .fb-close { position:absolute; top:14px; right:16px; background:transparent; border:0; font-size:16px; color:var(--ink-mute); cursor:pointer; font-family:inherit; }
+  .fb-lbl { font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute); margin:14px 0 7px; display:block; }
+  .fb-sel, .fb-note { width:100%; background:rgb(var(--color-input)); border:1px solid var(--border-2); border-radius:11px; padding:10px 12px; font-family:inherit; font-size:13px; color:var(--ink); }
+  .fb-note { min-height:60px; resize:vertical; }
+  .fb-stars { display:flex; gap:6px; }
+  .fb-star { background:transparent; border:0; font-size:24px; cursor:pointer; color:var(--ink-mute); line-height:1; padding:0; transition:transform .1s ease, color .15s ease; }
+  .fb-star.on { color:var(--change); }
+  .fb-star:hover { transform:scale(1.12); }
+  .fb-checks { display:grid; grid-template-columns:1fr 1fr; gap:7px 12px; }
+  .fb-check { display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:var(--ink-soft); cursor:pointer; }
+  .fb-check input { accent-color:rgb(var(--color-brand)); width:15px; height:15px; }
+  .fb-submit { margin-top:16px; width:100%; background:var(--change); color:rgb(var(--color-ink-on-fill)); border:0; border-radius:12px; padding:12px; font-family:inherit; font-size:13.5px; font-weight:800; cursor:pointer; transition:filter .2s ease; }
+  .fb-submit:hover { filter:brightness(1.06); }
+  .fb-done { display:none; text-align:center; padding:16px 4px 8px; }
+  .fb-done .ok { font-size:30px; }
+  .fb-done p { font-size:13.5px; color:var(--ink-soft); font-weight:700; margin-top:6px; }
+  .fb-panel.sent .fb-form { display:none; }
+  .fb-panel.sent .fb-done { display:block; }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior:auto; }
     .knob::after { animation:none; }
     .rail-fill, .knob, .bfill, .cell, .tile, .rxplus { transition:none; }
-    .tile.open .detail, .railx.open .rxdetail { animation:none; }
+    .tile.open .detail, .railx.open .rxdetail, .fb-panel.open { animation:none; }
   }
 </style>
 </head>
@@ -952,6 +979,49 @@
     <div>Not wired into the app. No framework changes made.</div>
   </footer>
 
+  <!-- Feedback widget -->
+  <button class="fb-btn" id="fbBtn" aria-haspopup="dialog" aria-expanded="false"><span class="fbi" aria-hidden="true">💬</span> Share feedback</button>
+  <div class="fb-panel" id="fbPanel" role="dialog" aria-label="Share feedback on PICASSO">
+    <button class="fb-close" id="fbClose" aria-label="Close feedback">✕</button>
+    <div class="fb-form">
+      <h4>Quick feedback on PICASSO</h4>
+      <div class="fbsub">A few taps. No essay required.</div>
+
+      <label class="fb-lbl" for="fbWho">Who are you</label>
+      <select class="fb-sel" id="fbWho">
+        <option value="">Select…</option>
+        <option>Lee</option><option>Simon</option><option>Nick</option><option>Edmund</option><option>Itzik</option><option>Oren</option><option>Ronnie</option><option>Jacqui</option><option>Rion</option><option>Dan</option><option>Other</option>
+      </select>
+
+      <span class="fb-lbl">Overall</span>
+      <div class="fb-stars" id="fbStars" role="radiogroup" aria-label="Overall rating">
+        <button type="button" class="fb-star" data-v="1" aria-label="1 star">★</button>
+        <button type="button" class="fb-star" data-v="2" aria-label="2 stars">★</button>
+        <button type="button" class="fb-star" data-v="3" aria-label="3 stars">★</button>
+        <button type="button" class="fb-star" data-v="4" aria-label="4 stars">★</button>
+        <button type="button" class="fb-star" data-v="5" aria-label="5 stars">★</button>
+      </div>
+
+      <span class="fb-lbl">What landed (tick any)</span>
+      <div class="fb-checks" id="fbChecks">
+        <label class="fb-check"><input type="checkbox" value="Why we are here"> Why we are here</label>
+        <label class="fb-check"><input type="checkbox" value="The framework"> The framework</label>
+        <label class="fb-check"><input type="checkbox" value="Change as a thread"> Change as a thread</label>
+        <label class="fb-check"><input type="checkbox" value="Delivery engine"> Delivery engine</label>
+        <label class="fb-check"><input type="checkbox" value="AIM Hub"> AIM Hub</label>
+        <label class="fb-check"><input type="checkbox" value="Maturity model"> Maturity model</label>
+        <label class="fb-check"><input type="checkbox" value="Proposition vs delivery"> Proposition vs delivery</label>
+        <label class="fb-check"><input type="checkbox" value="The name PICASSO"> The name PICASSO</label>
+      </div>
+
+      <label class="fb-lbl" for="fbNote">Anything to add (optional)</label>
+      <textarea class="fb-note" id="fbNote" placeholder="One line is plenty…"></textarea>
+
+      <button class="fb-submit" id="fbSubmit">Send feedback</button>
+    </div>
+    <div class="fb-done"><div class="ok" aria-hidden="true">✅</div><p>Thanks. That is logged.</p></div>
+  </div>
+
 <script>
   /* Interactive maturity console */
   (function () {
@@ -1058,6 +1128,55 @@
         var on = r.classList.toggle('open');
         h.setAttribute('aria-expanded', on ? 'true' : 'false');
       });
+    });
+  })();
+
+  /* Feedback widget: captures structured rows, posts to your endpoint */
+  (function () {
+    /* ====== ONE LINE TO SET ======
+       Paste your form endpoint below. Examples:
+       Formspree:      https://formspree.io/f/xxxxxxxx
+       Google Apps Script web app: https://script.google.com/macros/s/AKfy.../exec
+    */
+    var FEEDBACK_ENDPOINT = "https://script.google.com/macros/s/AKfycbxwFFya4ZjrnA91dlxicjdSp0iJOoMq_Ecjrp2mWjd_UOlLIX4ZIxb57p7XaWEBG0UU/exec";
+    /* ============================== */
+
+    var btn = document.getElementById('fbBtn'), panel = document.getElementById('fbPanel'),
+        closeBtn = document.getElementById('fbClose'), stars = document.getElementById('fbStars'),
+        submit = document.getElementById('fbSubmit');
+    if (!btn) return;
+    var rating = 0;
+    function toggle(open) { panel.classList.toggle('open', open); btn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+    btn.addEventListener('click', function () { toggle(!panel.classList.contains('open')); });
+    closeBtn.addEventListener('click', function () { toggle(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') toggle(false); });
+
+    Array.prototype.forEach.call(stars.querySelectorAll('.fb-star'), function (s) {
+      s.addEventListener('click', function () {
+        rating = +s.dataset.v;
+        Array.prototype.forEach.call(stars.querySelectorAll('.fb-star'), function (x) { x.classList.toggle('on', +x.dataset.v <= rating); });
+      });
+    });
+
+    submit.addEventListener('click', function () {
+      var landed = [];
+      Array.prototype.forEach.call(document.querySelectorAll('#fbChecks input:checked'), function (c) { landed.push(c.value); });
+      var data = new FormData();
+      data.append('reviewer', document.getElementById('fbWho').value || 'Unspecified');
+      data.append('rating', rating ? rating + ' / 5' : '');
+      data.append('landed', landed.join(', '));
+      data.append('note', document.getElementById('fbNote').value || '');
+      data.append('page', 'PICASSO operating position');
+      data.append('submittedAt', new Date().toISOString());
+
+      if (!FEEDBACK_ENDPOINT) {
+        alert('Feedback endpoint is not set yet. Add your form URL in the one marked line inside the page code, then reupload.');
+        return;
+      }
+      submit.textContent = 'Sending…'; submit.disabled = true;
+      fetch(FEEDBACK_ENDPOINT, { method: 'POST', mode: 'no-cors', body: data })
+        .then(function () { panel.classList.add('sent'); })
+        .catch(function () { submit.textContent = 'Send feedback'; submit.disabled = false; alert('Could not send. Check the endpoint URL.'); });
     });
   })();
 
