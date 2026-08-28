@@ -338,10 +338,12 @@
   .foot b { color:var(--ink-soft); }
   .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 
-  @media (max-width:1000px) {
-    .why2 { grid-template-columns:1fr; }
+  @media (max-width:1200px) {
     .loop { grid-template-columns:repeat(3,1fr); }
     .lstage:nth-child(3)::after, .lstage:nth-child(6)::after { display:none; }
+  }
+  @media (max-width:1000px) {
+    .why2 { grid-template-columns:1fr; }
     .assets { grid-template-columns:repeat(2,1fr); }
     .hub-why { grid-template-columns:1fr; }
     .pstep::after { display:none; }
