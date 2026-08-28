@@ -1,5 +1,7 @@
 # PICASSO
 
+_Created by **Lee Foster**, VP of AI._
+
 **The next iteration of AI Momentum.** A single-page concept asset, published for reaction.
 
 🔗 **Live:** https://leeroyai.github.io/picasso-review/
