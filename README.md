@@ -47,6 +47,7 @@ index.html                   The published asset. Self-contained. No build step.
 README.md                    This file.
 archive/change-thread.html   The 12 Aug change thread exploration, kept for reference.
 assets/PICASSO-concept.pdf   The concept PDF export.
+assets/PICASSO.mp3            The audio overview, recorded 12 Aug.
 _source/                     Local working material. Git ignored, never published.
 ```
 
@@ -92,7 +93,7 @@ git show <sha>:index.html > /tmp/old.html    # open any past version
 3. Merge to main when it is ready to be seen. Pages rebuilds automatically.
 4. Tag every cut shared with reviewers: `git tag -a review-2 -m "Second review cut"`.
 
-`_source/` holds the original iteration files, the audio overview and the internal response document. It is git ignored, so internal material never reaches the remote.
+`_source/` holds the original iteration files and the internal response document. It is git ignored, so internal material never reaches the remote.
 
 ---
 
