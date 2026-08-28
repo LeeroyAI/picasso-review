@@ -72,10 +72,13 @@
 
   /* Top bar */
   .topbar { position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); }
-  .topbar-inner { display:flex; align-items:center; justify-content:space-between; height:62px; }
+  .topbar-inner { display:flex; align-items:center; justify-content:space-between; min-height:62px; padding:10px 0; }
   .brand { display:flex; align-items:center; gap:11px; font-weight:800; letter-spacing:.02em; }
   .brand .logo { width:34px; height:34px; border-radius:9px; display:grid; place-items:center; font-size:18px; background:linear-gradient(135deg, var(--change), var(--accelerate)); box-shadow:0 6px 18px rgb(var(--color-phase-3) / .35); }
   .brand small { display:block; font-size:10px; font-weight:600; letter-spacing:.18em; color:var(--ink-mute); text-transform:uppercase; }
+  .brand .credit { display:block; margin-top:3px; font-size:11px; font-weight:500; letter-spacing:.01em; color:var(--ink-mute); text-transform:none; }
+  .brand .credit a { color:inherit; text-decoration:underline; text-decoration-color:var(--border-2); text-underline-offset:3px; transition:color .15s ease, text-decoration-color .15s ease; }
+  .brand .credit a:hover { color:var(--brand); text-decoration-color:var(--brand); }
   .brand b { font-size:16px; }
   .top-actions { display:flex; align-items:center; gap:14px; }
   .pill-mock { font-size:10.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute); border:1px solid var(--border-2); border-radius:999px; padding:5px 11px; }
@@ -439,7 +442,11 @@
     <div class="wrap topbar-inner">
       <div class="brand">
         <div class="logo" aria-hidden="true">🎨</div>
-        <div><b>PICASSO</b><small>The operating position · AIMomentum</small></div>
+        <div>
+          <b>PICASSO</b>
+          <small>The operating position · AIMomentum</small>
+          <span class="credit">Created by Lee Foster · VP of AI · <a href="https://github.com/LeeroyAI/picasso-review" target="_blank" rel="noopener">Source&nbsp;↗</a></span>
+        </div>
       </div>
       <div class="top-actions">
         <span class="pill-mock">Concept for reaction</span>
