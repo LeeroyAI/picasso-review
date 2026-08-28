@@ -393,6 +393,37 @@
     .rail-fill, .knob, .bfill, .cell, .tile, .rxplus { transition:none; }
     .tile.open .detail, .railx.open .rxdetail, .fb-panel.open { animation:none; }
   }
+
+  /* AUDIO OVERVIEW */
+  .audio-wrap { padding-top:6px; padding-bottom:6px; }
+  .audio-card { background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:18px 20px; box-shadow:var(--shadow); }
+  .audio-head { display:flex; align-items:center; gap:14px; margin-bottom:14px; }
+  .audio-badge { width:38px; height:38px; flex:none; display:grid; place-items:center; border-radius:11px; background:rgb(var(--color-brand) / .12); border:1px solid rgb(var(--color-brand) / .28); font-size:17px; }
+  .audio-titles { flex:1 1 auto; min-width:0; }
+  .audio-kicker { font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; color:var(--brand); }
+  .audio-title { font-size:15px; font-weight:600; color:var(--ink); margin-top:3px; }
+  .audio-dl { flex:none; font-size:12px; font-weight:600; color:var(--ink-soft); text-decoration:none; border:1px solid var(--border); border-radius:9px; padding:7px 12px; transition:color .18s, border-color .18s; }
+  .audio-dl:hover { color:var(--brand); border-color:var(--brand); }
+  .audio-controls { display:flex; align-items:center; gap:13px; }
+  .audio-play { flex:none; width:44px; height:44px; border-radius:50%; border:none; cursor:pointer; background:var(--brand); color:rgb(var(--color-brand-fg)); font-size:15px; line-height:1; display:grid; place-items:center; transition:background .18s, transform .18s; }
+  .audio-play:hover { background:rgb(var(--color-brand-hover)); }
+  .audio-play:active { transform:scale(.95); }
+  .audio-mini { flex:none; border:1px solid var(--border); background:transparent; color:var(--ink-soft); border-radius:9px; padding:7px 10px; font-size:11.5px; font-weight:600; cursor:pointer; font-family:inherit; transition:color .18s, border-color .18s; }
+  .audio-mini:hover { color:var(--brand); border-color:var(--brand); }
+  .audio-bar { flex:1 1 auto; height:8px; border-radius:99px; background:var(--panel-2); border:1px solid var(--border); position:relative; cursor:pointer; min-width:80px; }
+  .audio-fill { position:absolute; inset:0 auto 0 0; width:0%; border-radius:99px; background:var(--brand); }
+  .audio-knob { position:absolute; top:50%; left:0%; width:14px; height:14px; border-radius:50%; background:var(--brand); border:2px solid var(--panel); transform:translate(-50%,-50%); pointer-events:none; }
+  .audio-bar:focus-visible { outline:2px solid var(--brand); outline-offset:3px; }
+  .audio-time { flex:none; font-size:12px; font-variant-numeric:tabular-nums; color:var(--ink-mute); font-weight:500; }
+  .audio-sep { opacity:.5; margin:0 2px; }
+  @media (max-width:620px) {
+    .audio-controls { flex-wrap:wrap; }
+    .audio-bar { order:5; flex-basis:100%; }
+    .audio-dl { display:none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .audio-play, .audio-mini, .audio-dl { transition:none; }
+  }
 </style>
 </head>
 <body>
@@ -429,6 +460,32 @@
       <p class="sub"><b>PICASSO is not a new framework. It is what AI Momentum learnt.</b> The proven phases hold. We have expanded them to build the capability, governance, operating model and behaviours needed to sustain AI across the enterprise, and an AIM Hub that turns all of it into repeatable delivery.</p>
 
       <div class="hero-note"><span></span>Seven elements. A Governance canvas beneath. A Change thread through. An AIM Hub building the assets behind it.</div>
+    </div>
+  </section>
+
+
+  <!-- AUDIO OVERVIEW -->
+  <section class="wrap audio-wrap">
+    <div class="audio-card">
+      <div class="audio-head">
+        <span class="audio-badge" aria-hidden="true">🎧</span>
+        <div class="audio-titles">
+          <div class="audio-kicker">Audio overview</div>
+          <div class="audio-title">Hear the thinking behind PICASSO</div>
+        </div>
+        <a class="audio-dl" href="assets/PICASSO.mp3" download>Download</a>
+      </div>
+      <div class="audio-controls">
+        <button class="audio-play" id="auPlay" aria-label="Play the audio overview"><span id="auIcon" aria-hidden="true">▶</span></button>
+        <button class="audio-mini" id="auBack" aria-label="Rewind 15 seconds">15s</button>
+        <div class="audio-bar" id="auBar" role="slider" tabindex="0" aria-label="Seek through the audio overview" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="Start">
+          <div class="audio-fill" id="auFill"></div>
+          <div class="audio-knob" id="auKnob"></div>
+        </div>
+        <div class="audio-time"><span id="auCur">0:00</span><span class="audio-sep">/</span><span id="auDur">0:00</span></div>
+        <button class="audio-mini" id="auRate" aria-label="Playback speed, currently 1 times">1×</button>
+      </div>
+      <audio id="auEl" preload="metadata" src="assets/PICASSO.mp3"></audio>
     </div>
   </section>
 
@@ -1190,6 +1247,65 @@
     sync();
     btn.addEventListener('click', function(){ var l=isLight(); root.classList.remove('light','dark'); root.classList.add(l?'dark':'light'); sync(); });
   })();
+
+/* AUDIO OVERVIEW PLAYER */
+(function(){
+  var el=document.getElementById('auEl'); if(!el) return;
+  var play=document.getElementById('auPlay'), icon=document.getElementById('auIcon'),
+      back=document.getElementById('auBack'), bar=document.getElementById('auBar'),
+      fill=document.getElementById('auFill'), knob=document.getElementById('auKnob'),
+      cur=document.getElementById('auCur'), dur=document.getElementById('auDur'),
+      rate=document.getElementById('auRate');
+  var rates=[1,1.25,1.5,0.75], ri=0, drag=false;
+
+  function fmt(s){ if(!isFinite(s)||s<0) s=0; var m=Math.floor(s/60), r=Math.floor(s%60); return m+':'+(r<10?'0':'')+r; }
+  function pct(){ return el.duration ? (el.currentTime/el.duration)*100 : 0; }
+  function paint(){
+    var p=pct();
+    fill.style.width=p+'%'; knob.style.left=p+'%';
+    cur.textContent=fmt(el.currentTime);
+    bar.setAttribute('aria-valuenow', Math.round(p));
+    bar.setAttribute('aria-valuetext', fmt(el.currentTime)+' of '+fmt(el.duration));
+  }
+  function seekTo(clientX){
+    var r=bar.getBoundingClientRect();
+    var f=Math.min(1,Math.max(0,(clientX-r.left)/r.width));
+    if(el.duration){ el.currentTime=f*el.duration; paint(); }
+  }
+
+  play.addEventListener('click', function(){ el.paused ? el.play() : el.pause(); });
+  el.addEventListener('play', function(){ icon.textContent='‖'; play.setAttribute('aria-label','Pause the audio overview'); });
+  el.addEventListener('pause', function(){ icon.textContent='▶'; play.setAttribute('aria-label','Play the audio overview'); });
+  el.addEventListener('ended', function(){ icon.textContent='▶'; el.currentTime=0; paint(); });
+  el.addEventListener('timeupdate', function(){ if(!drag) paint(); });
+  function setDur(){ if(isFinite(el.duration) && el.duration>0){ dur.textContent=fmt(el.duration); } paint(); }
+  el.addEventListener('loadedmetadata', setDur);
+  el.addEventListener('durationchange', setDur);
+  el.addEventListener('canplay', setDur);
+  if(el.readyState>0) setDur();
+
+  back.addEventListener('click', function(){ el.currentTime=Math.max(0, el.currentTime-15); paint(); });
+  rate.addEventListener('click', function(){
+    ri=(ri+1)%rates.length; el.playbackRate=rates[ri];
+    rate.textContent=rates[ri]+'×';
+    rate.setAttribute('aria-label','Playback speed, currently '+rates[ri]+' times');
+  });
+
+  bar.addEventListener('pointerdown', function(e){ drag=true; bar.setPointerCapture(e.pointerId); seekTo(e.clientX); });
+  bar.addEventListener('pointermove', function(e){ if(drag) seekTo(e.clientX); });
+  bar.addEventListener('pointerup', function(e){ drag=false; try{ bar.releasePointerCapture(e.pointerId); }catch(_){} });
+  bar.addEventListener('keydown', function(e){
+    if(!el.duration) return;
+    var step=el.duration/20, k=e.key;
+    if(k==='ArrowRight'||k==='ArrowUp'){ el.currentTime=Math.min(el.duration, el.currentTime+step); }
+    else if(k==='ArrowLeft'||k==='ArrowDown'){ el.currentTime=Math.max(0, el.currentTime-step); }
+    else if(k==='Home'){ el.currentTime=0; }
+    else if(k==='End'){ el.currentTime=el.duration; }
+    else if(k===' '||k==='Enter'){ el.paused ? el.play() : el.pause(); }
+    else return;
+    e.preventDefault(); paint();
+  });
+})();
 </script>
 </body>
 </html>

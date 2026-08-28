@@ -101,6 +101,7 @@ git show <sha>:index.html > /tmp/old.html    # open any past version
 
 - **Light and dark.** Defaults to light. A toggle switches modes. Colours run off the Insentra web token system.
 - **Interactive.** Element tiles and delivery cards expand in place. A maturity console models the change axes.
+- **Audio overview.** A custom player under the hero streams `assets/PICASSO.mp3`, 4:29. Play, rewind 15s, seek, speed control, download. Preloads metadata only, so the 5.4MB file downloads on play, not on page load.
 - **Accessible.** Roving tabindex, ARIA roles and states, reduced-motion handling throughout.
 
 ---
