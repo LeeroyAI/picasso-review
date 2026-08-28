@@ -43,8 +43,11 @@ The Sheet is private to the owner. Only the append endpoint is public, and it ca
 ## Repo structure
 
 ```
-index.html    The entire asset. Self-contained. No build step.
-README.md     This file.
+index.html                   The published asset. Self-contained. No build step.
+README.md                    This file.
+archive/change-thread.html   The 12 Aug change thread exploration, kept for reference.
+assets/PICASSO-concept.pdf   The concept PDF export.
+_source/                     Local working material. Git ignored, never published.
 ```
 
 Everything lives in `index.html`: markup, styles, and vanilla JavaScript in one file. HTML, CSS and JS are inlined. No frameworks, no dependencies, no compile.
@@ -69,6 +72,27 @@ var FEEDBACK_ENDPOINT = "https://script.google.com/macros/s/.../exec";
 The widget posts with `mode: 'no-cors'`, so it shows "sent" without reading a response. That is expected for an Apps Script target. The row still lands.
 
 If you edit the Apps Script, **redeploy the same deployment** (Deploy, Manage deployments, edit, New version). A brand new deployment issues a new URL and breaks the wiring.
+
+---
+
+## Version control
+
+The full design lineage is in git. Twenty iterations from 28 July to 17 August are replayed as dated commits, so `git log` reads as the evolution of the concept.
+
+```bash
+git log --oneline                            # the lineage, newest first
+git log -p index.html                        # what changed, iteration by iteration
+git show <sha>:index.html > /tmp/old.html    # open any past version
+```
+
+### Working rules
+
+1. Branch for anything beyond a typo. Never edit main directly.
+2. One commit per meaningful change. Say what changed, not "update".
+3. Merge to main when it is ready to be seen. Pages rebuilds automatically.
+4. Tag every cut shared with reviewers: `git tag -a review-2 -m "Second review cut"`.
+
+`_source/` holds the original iteration files, the audio overview and the internal response document. It is git ignored, so internal material never reaches the remote.
 
 ---
 

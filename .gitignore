@@ -1,0 +1,5 @@
+# Local working material, not published
+_source/
+
+# macOS
+.DS_Store
