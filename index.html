@@ -363,9 +363,13 @@
     .hub-pipe .pstep { flex-basis:100%; }
   }
   /* Feedback widget */
-  .fb-btn { position:fixed; right:22px; bottom:22px; z-index:80; display:inline-flex; align-items:center; gap:9px; background:linear-gradient(135deg, var(--change), var(--accelerate)); color:rgb(var(--color-ink-on-fill)); border:0; border-radius:999px; padding:12px 18px; font-family:inherit; font-size:13.5px; font-weight:800; cursor:pointer; box-shadow:0 12px 30px color-mix(in srgb, var(--change) 45%, transparent); transition:transform .18s ease; }
+  .fb-btn { position:fixed; right:22px; bottom:22px; z-index:80; display:inline-flex; align-items:center; justify-content:center; gap:9px; background:linear-gradient(135deg, var(--change), var(--accelerate)); color:rgb(var(--color-ink-on-fill)); border:0; border-radius:999px; padding:12px 18px; font-family:inherit; font-size:13.5px; font-weight:800; cursor:pointer; box-shadow:0 12px 30px color-mix(in srgb, var(--change) 45%, transparent); transition:transform .18s ease; }
   .fb-btn:hover { transform:translateY(-2px); }
-  .fb-btn .fbi { font-size:15px; }
+  .fb-btn .fbi { font-size:15px; line-height:1; }
+  @media (max-width:1200px) {
+    .fb-btn { padding:14px; gap:0; width:52px; height:52px; }
+    .fb-label { display:none; }
+  }
   .fb-panel { position:fixed; right:22px; bottom:80px; z-index:81; width:min(384px, calc(100vw - 44px)); max-height:calc(100vh - 110px); overflow:auto; background:var(--panel); border:1px solid var(--border); border-radius:20px; box-shadow:0 30px 70px rgba(0,0,0,.35); padding:20px 22px 22px; display:none; }
   .fb-panel.open { display:block; animation:tfade .3s ease both; }
   .fb-panel h4 { font-size:16px; font-weight:800; letter-spacing:-.01em; }
@@ -1040,7 +1044,7 @@
   </footer>
 
   <!-- Feedback widget -->
-  <button class="fb-btn" id="fbBtn" aria-haspopup="dialog" aria-expanded="false"><span class="fbi" aria-hidden="true">💬</span> Share feedback</button>
+  <button class="fb-btn" id="fbBtn" aria-haspopup="dialog" aria-expanded="false" aria-label="Share feedback"><span class="fbi" aria-hidden="true">💬</span><span class="fb-label">Share feedback</span></button>
   <div class="fb-panel" id="fbPanel" role="dialog" aria-label="Share feedback on PICASSO">
     <button class="fb-close" id="fbClose" aria-label="Close feedback">✕</button>
     <div class="fb-form">
